@@ -58,6 +58,10 @@ class SchemeBase(BaseModel):
     application_url: Optional[str] = None
     helpline: Optional[str] = None
     guidelines_url: Optional[str] = None
+    gazette_ref: Optional[str] = None
+    open_data_api_url: Optional[str] = None
+    official_portal_domain: Optional[str] = None
+    empirical_data_json: Optional[str] = "{}"
     is_verified: bool = True
 
 class SchemeCreate(SchemeBase):
@@ -82,6 +86,7 @@ class ConvergenceRuleBase(BaseModel):
     target_group: str = "Small & Marginal Farmers"
     implementation_sop: Optional[str] = None
     possible_conflicts: Optional[str] = None
+    policy_framework_citation: Optional[str] = None
 
 class ConvergenceRuleCreate(ConvergenceRuleBase):
     pass

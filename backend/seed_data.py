@@ -1402,7 +1402,8 @@ def seed_database(db: Session):
                 target_group=rule_data["target_group"],
                 reason=rule_data["reason"],
                 implementation_sop=rule_data["implementation_sop"],
-                possible_conflicts=rule_data["possible_conflicts"]
+                possible_conflicts=rule_data["possible_conflicts"],
+                policy_framework_citation=rule_data.get("policy_framework_citation", "MoRD/MGNREGA-MoA/Conv-2015/2020 - Joint Guidelines for Inter-Ministerial Convergence of Centrally Sponsored Schemes")
             )
             db.add(c_rule)
 

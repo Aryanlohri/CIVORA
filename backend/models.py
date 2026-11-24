@@ -23,6 +23,10 @@ class Scheme(Base):
     application_url = Column(String(500), nullable=True)
     helpline = Column(String(100), nullable=True)
     guidelines_url = Column(String(500), nullable=True)
+    gazette_ref = Column(String(255), nullable=True) # Official Gazette / PIB notification citation
+    open_data_api_url = Column(String(500), nullable=True) # data.gov.in or myscheme endpoint
+    official_portal_domain = Column(String(100), nullable=True) # e.g. pmkisan.gov.in
+    empirical_data_json = Column(Text, default='{}') # Real-world telemetry (e.g. Sehore beneficiary count)
     is_verified = Column(Boolean, default=True)
     created_at = Column(DateTime, default=datetime.utcnow)
 
@@ -120,6 +124,7 @@ class ConvergenceRule(Base):
     target_group = Column(String(255), default="Small & Marginal Farmers")
     implementation_sop = Column(Text, nullable=True)
     possible_conflicts = Column(Text, nullable=True) # Warnings or duplications to guard against
+    policy_framework_citation = Column(String(500), nullable=True) # Official Ministry Convergence Directive citation
 
     scheme_1 = relationship("Scheme", foreign_keys=[scheme_1_id], back_populates="outgoing_convergences")
     scheme_2 = relationship("Scheme", foreign_keys=[scheme_2_id], back_populates="incoming_convergences")

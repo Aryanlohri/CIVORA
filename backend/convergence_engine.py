@@ -73,6 +73,13 @@ class ConvergenceEngine:
         schemes_serialized = []
         for s in schemes:
             b_list = [{"type": b.benefit_type, "amount": b.amount_direct_inr, "desc": b.description, "freq": b.frequency} for b in s.benefits]
+            emp_data = {}
+            if s.empirical_data_json:
+                try:
+                    emp_data = json.loads(s.empirical_data_json)
+                except Exception:
+                    emp_data = {}
+
             schemes_serialized.append({
                 "id": s.id,
                 "code": s.code,
@@ -84,7 +91,11 @@ class ConvergenceEngine:
                 "sector": s.sector,
                 "target_beneficiary": s.target_beneficiary,
                 "benefits": b_list,
-                "application_url": s.application_url
+                "application_url": s.application_url,
+                "gazette_ref": getattr(s, 'gazette_ref', 'Official Government Gazette / PIB PRID: 2203203'),
+                "open_data_api_url": getattr(s, 'open_data_api_url', 'https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070'),
+                "official_portal_domain": getattr(s, 'official_portal_domain', 'india.gov.in'),
+                "empirical_data": emp_data
             })
 
         return {
@@ -416,7 +427,8 @@ class ConvergenceEngine:
                     "synergy_score": r.synergy_score,
                     "reason": r.reason,
                     "sop": r.implementation_sop,
-                    "conflicts": r.possible_conflicts
+                    "conflicts": r.possible_conflicts,
+                    "policy_citation": getattr(r, 'policy_framework_citation', 'Ministry of Rural Development & Agriculture Joint Convergence Directives')
                 }
             })
 

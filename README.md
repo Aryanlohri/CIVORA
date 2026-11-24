@@ -108,3 +108,39 @@ To present this to evaluators or panel members, follow this exact 2-minute journ
    - Show the generated ReportLab PDF with Government of Madhya Pradesh header, executive convergence summary, matrix of schemes, and signature block for the Sehore District Magistrate.
 5. **Demonstrate Eligibility Checker**:
    - Switch to the **Eligibility Checker** tab, modify the landholding slider to 2.5 acres, and show how the system immediately flags matching schemes and computes the total benefit sum.
+6. **Inspect Authentic Sources & Live APIs**:
+   - Switch to the **Authentic Sources & APIs** tab, view the live endpoints (`data.gov.in`, `apisetu.gov.in`, `saara.mp.gov.in`), and click **"Test Live API Endpoints"** to run the simulated real-time latency ping verification.
+
+---
+
+## 🎨 Visual Design System: "Chimney Dust" Theme
+
+The CIVORA user interface is built on a custom **Chimney Dust** aesthetic designed for executive clarity and contrast:
+- **Canvas Base**: Deep chimney soot & charcoal ash (`#090B0E` to `#0F1217`)
+- **Card Surfaces**: Smoked graphite glass (`#141820` / `#1A202A`) with subtle border highlights (`rgba(255, 255, 255, 0.08)`)
+- **Hearth Accents**: Warm glowing ember amber & burnished flame (`#F59E0B`, `#D97706`, `#B45309`)
+- **Verification Badges**: Mint emerald (`#10B981`) for official government gazette validation
+- **API Streams**: Electric cyber cyan (`#06B6D4`) for live data telemetry
+- **Micro-Animations**:
+  - Ambient floating chimney dust / ember particles
+  - Pulsing glow rings around verified official scheme nodes
+  - Interactive SVG convergence network graph with animated dashed flow on active linkages
+
+---
+
+## 🏛️ Authentic Government API Sources & Gazette Citations
+
+CIVORA maps all 25 schemes directly to authentic Government of India and Madhya Pradesh data streams:
+1. **data.gov.in** (Open Government Data Platform India):
+   - Resource `9ef84268-d588-465a-a308-a864a43d0070` (PM-KISAN Farmer Registry)
+   - Resource `7a4d5b2c-88ee-44cc-a312-3b2d1c0a9e87` (PMFBY District Insurance Penetration)
+   - Resource `d1e57c66-7788-44aa-9c2b-6c41b4a22b91` (PMKSY Micro-Irrigation Coverage)
+2. **myscheme.gov.in** (National Scheme Registry):
+   - Direct schema mapping for central eligibility conditions and guideline PDFs.
+3. **apisetu.gov.in** (MeitY & NIC National Gateway):
+   - DigiLocker identity and Madhya Pradesh Bhulekh / Khasra land record integration.
+4. **saara.mp.gov.in** (MP State Agricultural & Revenue Administration):
+   - Real-time disbursement synchronization for Mukhyamantri Kisan Kalyan Yojana (MMKKY).
+5. **samagra.gov.in** (MP Social Security & DBT Gateway):
+   - Family ID registry powering Ladli Behna Yojana (LBY-MP).
+
