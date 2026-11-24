@@ -1,0 +1,1529 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SchemeConnect AI | Government Scheme Convergence Intelligence - SEG-6</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+              mono: ['"JetBrains Mono"', 'monospace'],
+            },
+            colors: {
+              gov: {
+                50: '#f0f7ff',
+                100: '#e0effe',
+                200: '#bae0fd',
+                300: '#7cc7fb',
+                400: '#36abf7',
+                500: '#0c8fe9',
+                600: '#0171c7',
+                700: '#025aa1',
+                800: '#064d85',
+                900: '#0b416f',
+                950: '#072a4a',
+              }
+            }
+          }
+        }
+      }
+    </script>
+
+    <!-- React 18, ReactDOM, and Babel Standalone -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+      body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        background-color: #020617;
+        color: #f8fafc;
+      }
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #0f172a;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #334155;
+        border-radius: 3px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #475569;
+      }
+      @keyframes pulseGlow {
+        0%, 100% { opacity: 0.6; transform: scale(1); }
+        50% { opacity: 1; transform: scale(1.04); }
+      }
+      .pulse-glow {
+        animation: pulseGlow 3s infinite ease-in-out;
+      }
+    </style>
+  </head>
+  <body class="bg-slate-950 text-slate-100 antialiased selection:bg-blue-600 selection:text-white min-h-screen">
+    <div id="root"></div>
+
+    <!-- Application Script written in JSX and transpiled by Babel in the browser -->
+    <script type="text/babel">
+      const { useState, useEffect, useRef } = React;
+
+      const API_BASE = 'http://localhost:8000/api';
+
+      // --- SVG ICONS ---
+      const Icon = ({ name, className = "w-4 h-4" }) => {
+        switch (name) {
+          case 'network':
+            return (
+              <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="16" y="16" width="6" height="6" rx="1" /><rect x="2" y="16" width="6" height="6" rx="1" /><rect x="9" y="2" width="6" height="6" rx="1" />
+                <path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3" /><path d="M12 12V8" />
+              </svg>
+            );
+          case 'layers':
+            return (
+              <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polygon points="12 2 2 7 12 12 22 7 12 2" /><polyline points="2 17 12 22 22 17" /><polyline points="2 12 12 17 22 12" />
+              </svg>
+            );
+          case 'search':
+            return (
+              <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+            );
+          case 'check':
+            return (
+              <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" />
+              </svg>
+            );
+          case 'pin':
+            return (
+              <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" />
+              </svg>
+            );
+          case 'settings':
+            return (
+              <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+              </svg>
+            );
+          case 'zap':
+            return (
+              <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+              </svg>
+            );
+          case 'download':
+            return (
+              <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+            );
+          case 'external':
+            return (
+              <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /><polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" />
+              </svg>
+            );
+          case 'shield':
+            return (
+              <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
+            );
+          case 'droplet':
+            return (
+              <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
+              </svg>
+            );
+          case 'sprout':
+            return (
+              <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M7 20h10" /><path d="M10 20c5.5-2.5.8-6.4 3-13" /><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z" /><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z" />
+              </svg>
+            );
+          case 'banknote':
+            return (
+              <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="6" width="20" height="12" rx="2" /><circle cx="12" cy="12" r="2" /><path d="M6 12h.01M18 12h.01" />
+              </svg>
+            );
+          default:
+            return (
+              <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10" />
+              </svg>
+            );
+        }
+      };
+
+      // --- MAIN APPLICATION ---
+      function SchemeConnectApp() {
+        const [activeTab, setActiveTab] = useState('dashboard');
+        const [apiOnline, setApiOnline] = useState(false);
+        const [summary, setSummary] = useState(null);
+        const [schemes, setSchemes] = useState([]);
+        const [selectedScheme, setSelectedScheme] = useState(null);
+        const [demoBanner, setDemoBanner] = useState(false);
+
+        // Convergence State
+        const [objectives, setObjectives] = useState([]);
+        const [selectedObjectiveKey, setSelectedObjectiveKey] = useState('farmer_development');
+        const [selectedDistrict, setSelectedDistrict] = useState('Sehore');
+        const [selectedBlock, setSelectedBlock] = useState('All Blocks');
+        const [targetPersona, setTargetPersona] = useState('Small and Marginal Farmers (< 5 acres)');
+        const [convergenceResult, setConvergenceResult] = useState(null);
+        const [loadingConvergence, setLoadingConvergence] = useState(false);
+        const [downloadingPdf, setDownloadingPdf] = useState(false);
+
+        // Eligibility State
+        const [eligibilityForm, setEligibilityForm] = useState({
+          state: 'Madhya Pradesh',
+          district: 'Sehore',
+          age: 42,
+          gender: 'Male',
+          occupation: 'Farmer',
+          landholding_acres: 2.5,
+          annual_income: 95000,
+          social_category: 'OBC',
+          has_bank_account: true,
+          has_aadhaar: true,
+          irrigation_available: false
+        });
+        const [eligibilityResult, setEligibilityResult] = useState(null);
+        const [evaluatingEligibility, setEvaluatingEligibility] = useState(false);
+
+        // Search & Filters
+        const [searchQuery, setSearchQuery] = useState('');
+        const [filterSector, setFilterSector] = useState('All');
+        const [filterLevel, setFilterLevel] = useState('All');
+        const [filterState, setFilterState] = useState('All');
+        const [filterOccupation, setFilterOccupation] = useState('All');
+        const [filterGender, setFilterGender] = useState('All');
+
+        // Admin State
+        const [adminRules, setAdminRules] = useState([]);
+        const [showAddScheme, setShowAddScheme] = useState(false);
+        const [showAddRule, setShowAddRule] = useState(false);
+
+        // Initial Data Fetch
+        useEffect(() => {
+          async function initData() {
+            try {
+              const [healthRes, summaryRes, schemesRes, objsRes] = await Promise.all([
+                fetch(`${API_BASE}/health`).then(r => r.json()).catch(() => ({ status: 'offline' })),
+                fetch(`${API_BASE}/dashboard/summary`).then(r => r.json()).catch(() => null),
+                fetch(`${API_BASE}/schemes`).then(r => r.json()).catch(() => []),
+                fetch(`${API_BASE}/convergence/objectives`).then(r => r.json()).catch(() => [])
+              ]);
+
+              if (healthRes && healthRes.status === 'ok') setApiOnline(true);
+              if (summaryRes) setSummary(summaryRes);
+              if (schemesRes) setSchemes(schemesRes);
+              if (objsRes) setObjectives(objsRes);
+
+              // Auto-run initial convergence for live demo readiness!
+              runConvergenceEngine('farmer_development', 'Sehore');
+              runEligibilityCheck();
+            } catch (err) {
+              console.error("Init data load failed:", err);
+            }
+          }
+          initData();
+        }, []);
+
+        const runConvergenceEngine = async (objKey, dist) => {
+          setLoadingConvergence(true);
+          try {
+            const res = await fetch(`${API_BASE}/convergence/calculate`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                objective_key: objKey,
+                state: 'Madhya Pradesh',
+                division: 'Bhopal',
+                district: dist,
+                target_group: targetPersona
+              })
+            });
+            const data = await res.json();
+            setConvergenceResult(data);
+          } catch (err) {
+            console.error("Convergence calculation error:", err);
+          } finally {
+            setLoadingConvergence(false);
+          }
+        };
+
+        const runEligibilityCheck = async () => {
+          setEvaluatingEligibility(true);
+          try {
+            const res = await fetch(`${API_BASE}/eligibility/check`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(eligibilityForm)
+            });
+            const data = await res.json();
+            setEligibilityResult(data);
+          } catch (err) {
+            console.error("Eligibility check error:", err);
+          } finally {
+            setEvaluatingEligibility(false);
+          }
+        };
+
+        const handleLaunchDemo = () => {
+          setActiveTab('convergence');
+          setSelectedObjectiveKey('farmer_development');
+          setSelectedDistrict('Sehore');
+          setTargetPersona('Small and Marginal Farmers (< 5 acres)');
+          setDemoBanner(true);
+          runConvergenceEngine('farmer_development', 'Sehore');
+        };
+
+        const handleDownloadPdf = async () => {
+          setDownloadingPdf(true);
+          try {
+            const res = await fetch(`${API_BASE}/convergence/export-pdf`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                objective_key: selectedObjectiveKey,
+                state: 'Madhya Pradesh',
+                division: 'Bhopal',
+                district: selectedDistrict,
+                target_group: targetPersona
+              })
+            });
+            const blob = await res.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Strategic_Convergence_Report_${selectedDistrict}_${selectedObjectiveKey}.pdf`;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            window.URL.revokeObjectURL(url);
+          } catch (err) {
+            console.error("PDF download failed:", err);
+            alert("Could not download PDF report from backend.");
+          } finally {
+            setDownloadingPdf(false);
+          }
+        };
+
+        // Filtered Schemes
+        const filteredSchemes = schemes.filter(s => {
+          if (searchQuery) {
+            const q = searchQuery.toLowerCase();
+            const matchName = s.name.toLowerCase().includes(q);
+            const matchCode = s.code.toLowerCase().includes(q);
+            const matchDesc = s.description.toLowerCase().includes(q);
+            const matchDept = s.department.toLowerCase().includes(q);
+            if (!matchName && !matchCode && !matchDesc && !matchDept) return false;
+          }
+          if (filterSector !== 'All' && s.sector !== filterSector) return false;
+          if (filterLevel !== 'All' && s.level !== filterLevel) return false;
+          if (filterState !== 'All' && s.state !== filterState && s.state !== 'All India') return false;
+          return true;
+        });
+
+        return (
+          <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
+            
+            {/* National Color Ribbon */}
+            <div className="h-1.5 w-full bg-gradient-to-r from-amber-500 via-white to-emerald-600" />
+
+            {/* Top Navigation Bar */}
+            <header className="border-b border-slate-800 bg-slate-900/90 backdrop-blur-md sticky top-0 z-50">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="flex items-center justify-between h-16">
+                  
+                  {/* Brand */}
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-800 flex items-center justify-center shadow-lg shadow-blue-500/20 border border-blue-400/30">
+                      <Icon name="network" className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="font-extrabold text-xl tracking-tight bg-gradient-to-r from-blue-400 via-indigo-200 to-emerald-400 bg-clip-text text-transparent">
+                          SchemeConnect AI
+                        </span>
+                        <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-blue-950 text-blue-400 border border-blue-800 font-mono">
+                          SEG-6
+                        </span>
+                      </div>
+                      <p className="text-[11px] text-slate-400 leading-tight">
+                        Government Scheme Intelligence & Convergence Platform
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Actions & Status */}
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={handleLaunchDemo}
+                      className="hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-semibold shadow-md shadow-emerald-950/50 border border-emerald-400/30 transition-all hover:scale-[1.02] active:scale-[0.98]"
+                    >
+                      <Icon name="zap" className="w-3.5 h-3.5 text-amber-300" />
+                      <span>⚡ Live Demo: Sehore Farmer Convergence</span>
+                    </button>
+
+                    <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium border ${
+                      apiOnline 
+                        ? 'bg-emerald-950/60 text-emerald-400 border-emerald-800/60' 
+                        : 'bg-amber-950/60 text-amber-400 border-amber-800/60'
+                    }`}>
+                      <span className={`w-2 h-2 rounded-full ${apiOnline ? 'bg-emerald-500' : 'bg-amber-500'}`} />
+                      <span>{apiOnline ? 'FastAPI Active' : 'Connecting...'}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Tabs */}
+                <div className="flex space-x-1 overflow-x-auto py-2 scrollbar-none border-t border-slate-800/60">
+                  {[
+                    { id: 'dashboard', label: 'Dashboard', icon: 'layers', badge: null },
+                    { id: 'convergence', label: 'Convergence Studio', icon: 'network', badge: 'Core MVP' },
+                    { id: 'database', label: 'Scheme Database', icon: 'search', badge: `${schemes.length} Schemes` },
+                    { id: 'eligibility', label: 'Eligibility Checker', icon: 'check', badge: null },
+                    { id: 'district', label: 'District (Sehore, MP)', icon: 'pin', badge: 'Pilot' },
+                    { id: 'admin', label: 'Admin Panel', icon: 'settings', badge: null }
+                  ].map(tab => {
+                    const isActive = activeTab === tab.id;
+                    return (
+                      <button
+                        key={tab.id}
+                        onClick={() => setActiveTab(tab.id)}
+                        className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-semibold transition-all whitespace-nowrap ${
+                          isActive
+                            ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30'
+                            : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
+                        }`}
+                      >
+                        <Icon name={tab.icon} className={`w-4 h-4 ${isActive ? 'text-white' : 'text-slate-400'}`} />
+                        <span>{tab.label}</span>
+                        {tab.badge && (
+                          <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-bold ${
+                            isActive ? 'bg-blue-800 text-blue-100' : 'bg-slate-800 text-slate-300 border border-slate-700'
+                          }`}>
+                            {tab.badge}
+                          </span>
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            </header>
+
+            {/* Demo Notification Banner */}
+            {demoBanner && (
+              <div className="bg-gradient-to-r from-emerald-950 via-teal-900 to-slate-900 border-b border-emerald-500/40 px-4 py-2 text-xs text-emerald-200 shadow-lg">
+                <div className="max-w-7xl mx-auto flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping shrink-0" />
+                    <span className="font-bold">Live Demonstration Mode:</span>
+                    <span>Agricultural Productivity & Income Convergence in Sehore District, Madhya Pradesh (SEG-6 Presentation Scenario)</span>
+                  </div>
+                  <button onClick={() => setDemoBanner(false)} className="text-emerald-400 hover:text-white font-bold ml-4">✕</button>
+                </div>
+              </div>
+            )}
+
+            {/* Main Content Body */}
+            <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+              
+              {/* TAB 1: UNIFIED DASHBOARD */}
+              {activeTab === 'dashboard' && (
+                <div className="space-y-8 animate-in fade-in duration-300">
+                  
+                  {/* Hero Showcase */}
+                  <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-blue-950 via-indigo-950 to-slate-900 border border-blue-500/30 p-8 shadow-2xl">
+                    <div className="relative z-10 max-w-4xl">
+                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 border border-blue-400/30 text-xs font-semibold mb-3">
+                        <span className="w-2 h-2 rounded-full bg-blue-400 animate-ping" />
+                        <span>SEG-6 Final Deliverable • SchemeConnect AI</span>
+                      </div>
+                      <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
+                        Centralized Scheme Intelligence & <br />
+                        <span className="bg-gradient-to-r from-blue-400 via-teal-300 to-emerald-400 bg-clip-text text-transparent">
+                          Strategic Convergence Mapping Tool
+                        </span>
+                      </h1>
+                      <p className="mt-3 text-slate-300 text-sm sm:text-base leading-relaxed max-w-3xl">
+                        Eliminates fragmented scheme silos by bridging ministries, evaluating citizen eligibility,
+                        and mapping how multiple schemes (PM-KISAN, PMKSY, PMFBY, Soil Health Card) combine to achieve unified development outcomes.
+                      </p>
+
+                      <div className="mt-6 flex flex-wrap items-center gap-4">
+                        <button
+                          onClick={handleLaunchDemo}
+                          className="px-6 py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-bold text-sm shadow-lg shadow-emerald-950/50 flex items-center gap-2 transition-all hover:scale-[1.02] border border-emerald-300/30"
+                        >
+                          <Icon name="zap" className="w-4 h-4 text-amber-300" />
+                          <span>Launch Sehore Agri-Convergence Demo</span>
+                        </button>
+                        <button
+                          onClick={() => setActiveTab('convergence')}
+                          className="px-5 py-3 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 text-slate-200 font-semibold text-sm border border-slate-700 flex items-center gap-2"
+                        >
+                          <Icon name="network" className="w-4 h-4 text-blue-400" />
+                          <span>Open Convergence Studio</span>
+                        </button>
+                        <button
+                          onClick={() => setActiveTab('database')}
+                          className="px-5 py-3 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 text-slate-200 font-semibold text-sm border border-slate-700 flex items-center gap-2"
+                        >
+                          <span>Explore 25 Verified Schemes</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 4 Metric Cards */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div className="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-lg">
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Active Verified Schemes</span>
+                      <div className="text-3xl font-extrabold text-white mt-1">25 Schemes</div>
+                      <p className="text-xs text-blue-400 mt-1 font-semibold">Central + MP State Gazetted</p>
+                    </div>
+
+                    <div className="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-lg">
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Convergence Links</span>
+                      <div className="text-3xl font-extrabold text-emerald-400 mt-1">13+ Rules</div>
+                      <p className="text-xs text-slate-400 mt-1">Co-funding, complementary & sequential</p>
+                    </div>
+
+                    <div className="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-lg">
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Pilot District Readiness</span>
+                      <div className="text-3xl font-extrabold text-indigo-400 mt-1">94.5%</div>
+                      <p className="text-xs text-slate-400 mt-1">Sehore District, Madhya Pradesh</p>
+                    </div>
+
+                    <div className="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-lg">
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Development Objectives</span>
+                      <div className="text-3xl font-extrabold text-purple-400 mt-1">4 Objectives</div>
+                      <p className="text-xs text-slate-400 mt-1">Farmer, Women, Habitat & Artisan</p>
+                    </div>
+                  </div>
+
+                  {/* Sector & Department Grids */}
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-lg">
+                      <h3 className="text-sm font-bold text-white uppercase tracking-wider mb-4 flex items-center gap-2">
+                        <Icon name="layers" className="w-4 h-4 text-blue-400" />
+                        <span>Sector-Wise Scheme Allocation</span>
+                      </h3>
+                      <div className="space-y-3 text-xs">
+                        {[
+                          { sector: 'Agriculture & Allied', count: 11, pct: 44 },
+                          { sector: 'Rural Development', count: 4, pct: 16 },
+                          { sector: 'Women & Child Development', count: 3, pct: 12 },
+                          { sector: 'Financial Inclusion & MSME', count: 4, pct: 16 },
+                          { sector: 'Health & Social Security', count: 1, pct: 4 },
+                          { sector: 'Water & Sanitation (JJM)', count: 1, pct: 4 },
+                          { sector: 'Skill & Employment', count: 1, pct: 4 }
+                        ].map((s, idx) => (
+                          <div key={idx} className="space-y-1">
+                            <div className="flex justify-between">
+                              <span className="text-slate-300 font-medium">{s.sector}</span>
+                              <span className="text-slate-400 font-mono">{s.count} schemes ({s.pct}%)</span>
+                            </div>
+                            <div className="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                              <div className="h-full bg-blue-500 rounded-full" style={{ width: `${s.pct}%` }} />
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-lg">
+                      <h3 className="text-sm font-bold text-white uppercase tracking-wider mb-4 flex items-center gap-2">
+                        <Icon name="network" className="w-4 h-4 text-emerald-400" />
+                        <span>Core Participating Nodal Departments</span>
+                      </h3>
+                      <div className="space-y-2.5 text-xs">
+                        {[
+                          { name: 'Department of Agriculture & Farmers Welfare', count: 8 },
+                          { name: 'Ministry of Rural Development', count: 4 },
+                          { name: 'Ministry of Micro, Small and Medium Enterprises', count: 3 },
+                          { name: 'Department of Revenue & Farmers Welfare (M.P.)', count: 1 },
+                          { name: 'Women & Child Development Department (M.P.)', count: 1 },
+                          { name: 'Ministry of Jal Shakti (Har Ghar Jal)', count: 1 },
+                          { name: 'Ministry of New & Renewable Energy (PM-KUSUM)', count: 1 }
+                        ].map((d, idx) => (
+                          <div key={idx} className="flex items-center justify-between p-2 rounded-xl bg-slate-950/60 border border-slate-800/80">
+                            <span className="text-slate-200 font-medium truncate max-w-[280px]">{d.name}</span>
+                            <span className="px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-300 border border-emerald-800 font-mono font-bold">
+                              {d.count} Schemes
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Team Banner */}
+                  <div className="bg-slate-900/60 border border-slate-800/80 p-6 rounded-2xl shadow-lg">
+                    <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">
+                      Project SEG-6 Team & Module Distribution
+                    </h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 text-xs">
+                      <div className="bg-slate-950/60 border border-slate-800 p-3 rounded-xl">
+                        <div className="font-bold text-white">Aryan Lohri</div>
+                        <div className="text-blue-400 text-[11px]">Frontend Development</div>
+                        <p className="text-slate-400 text-[11px] mt-1">Dashboard & search UI</p>
+                      </div>
+                      <div className="bg-slate-950/60 border border-slate-800 p-3 rounded-xl">
+                        <div className="font-bold text-white">Abhiraj Kumar</div>
+                        <div className="text-blue-400 text-[11px]">Backend Development</div>
+                        <p className="text-slate-400 text-[11px] mt-1">FastAPI & API schemas</p>
+                      </div>
+                      <div className="bg-slate-950/60 border border-emerald-800/60 p-3 rounded-xl bg-emerald-950/10">
+                        <div className="font-bold text-emerald-400">Milan Kohli</div>
+                        <div className="text-emerald-300 text-[11px]">ML / Data Science</div>
+                        <p className="text-slate-400 text-[11px] mt-1">Convergence logic & synergy</p>
+                      </div>
+                      <div className="bg-slate-950/60 border border-slate-800 p-3 rounded-xl">
+                        <div className="font-bold text-white">Kamal Gangwar</div>
+                        <div className="text-blue-400 text-[11px]">Database & Collection</div>
+                        <p className="text-slate-400 text-[11px] mt-1">Scheme dataset & cleaning</p>
+                      </div>
+                      <div className="bg-slate-950/60 border border-slate-800 p-3 rounded-xl">
+                        <div className="font-bold text-white">Arsalan</div>
+                        <div className="text-blue-400 text-[11px]">Visualization & Integration</div>
+                        <p className="text-slate-400 text-[11px] mt-1">Network graphs & PDF reports</p>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              )}
+
+              {/* TAB 2: CONVERGENCE STUDIO (THE MAIN DIFFERENTIATOR!) */}
+              {activeTab === 'convergence' && (
+                <div className="space-y-8 animate-in fade-in duration-300">
+                  
+                  {/* Studio Header */}
+                  <div className="bg-slate-900 border border-slate-800 p-6 rounded-3xl shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6">
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800 uppercase tracking-wider font-mono">
+                          Core Innovation • Module 4
+                        </span>
+                        <span className="text-xs text-slate-400">Rule-Based Convergence Engine</span>
+                      </div>
+                      <h2 className="text-2xl sm:text-3xl font-extrabold text-white mt-1.5 tracking-tight">
+                        Scheme Convergence Studio
+                      </h2>
+                      <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-2xl leading-relaxed">
+                        Goes beyond individual scheme search by evaluating target group overlap, calculating multi-pillar benefits,
+                        detecting conflicting rules, and generating an interconnected implementation graph for district administrators.
+                      </p>
+                    </div>
+
+                    <button
+                      onClick={handleDownloadPdf}
+                      disabled={downloadingPdf || !convergenceResult}
+                      className="px-5 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-bold shadow-lg shadow-blue-900/40 flex items-center justify-center gap-2 transition-all hover:scale-[1.02] border border-blue-400/30 shrink-0 disabled:opacity-50"
+                    >
+                      <Icon name="download" className="w-4 h-4" />
+                      <span>{downloadingPdf ? 'Generating PDF...' : 'Download Official PDF Dossier'}</span>
+                    </button>
+                  </div>
+
+                  {/* Objective & Location Controls */}
+                  <div className="bg-slate-900/80 border border-slate-800 p-6 rounded-2xl shadow-lg space-y-5">
+                    <div>
+                      <label className="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-2 mb-2.5">
+                        <span className="w-5 h-5 rounded-full bg-blue-600 text-white flex items-center justify-center text-[11px]">1</span>
+                        <span>Select Strategic Development Objective</span>
+                      </label>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                        {[
+                          { key: 'farmer_development', title: 'Farmer Development & Income', desc: 'PM-KISAN + MMKKY + PMKSY + PMFBY + Soil Health Card', badge: 'Live Demo' },
+                          { key: 'women_empowerment', title: 'Women Empowerment & SHGs', desc: 'Ladli Behna + Lakhpati Didi + Mudra + Ayushman', badge: 'Livelihoods' },
+                          { key: 'rural_livelihoods', title: 'Rural Habitat & Employment', desc: 'MGNREGA + PMAY-G + Jal Jeevan + PKVY Organic', badge: 'Habitat' },
+                          { key: 'artisan_support', title: 'Artisan & MSME Modernization', desc: 'PM Vishwakarma + Mudra + MP Udyam Kranti', badge: 'Enterprise' }
+                        ].map(item => (
+                          <button
+                            key={item.key}
+                            onClick={() => {
+                              setSelectedObjectiveKey(item.key);
+                              runConvergenceEngine(item.key, selectedDistrict);
+                            }}
+                            className={`p-4 rounded-xl text-left border transition-all ${
+                              selectedObjectiveKey === item.key
+                                ? 'bg-blue-950/60 border-blue-500 shadow-md text-white ring-1 ring-blue-500'
+                                : 'bg-slate-950/50 border-slate-800 text-slate-400 hover:border-slate-700 hover:text-slate-200'
+                            }`}
+                          >
+                            <div className="flex items-center justify-between mb-1">
+                              <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${
+                                selectedObjectiveKey === item.key ? 'bg-blue-800 text-blue-200' : 'bg-slate-800 text-slate-400'
+                              }`}>
+                                {item.badge}
+                              </span>
+                              {selectedObjectiveKey === item.key && <Icon name="check" className="w-4 h-4 text-emerald-400" />}
+                            </div>
+                            <div className="font-bold text-xs text-slate-100">{item.title}</div>
+                            <p className="text-[11px] text-slate-400 mt-1 line-clamp-2">{item.desc}</p>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-slate-800/80 text-xs">
+                      <div>
+                        <label className="text-slate-400 font-medium block mb-1">Location Hierarchy</label>
+                        <div className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 font-semibold">
+                          <span className="text-slate-400">Madhya Pradesh</span>
+                          <span>›</span>
+                          <span className="text-slate-400">Bhopal</span>
+                          <span>›</span>
+                          <span className="text-emerald-400">Sehore</span>
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="text-slate-400 font-medium block mb-1">Block-Level Focus (Sehore)</label>
+                        <select
+                          value={selectedBlock}
+                          onChange={e => setSelectedBlock(e.target.value)}
+                          className="w-full p-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 font-semibold"
+                        >
+                          <option value="All Blocks">All Blocks (District Saturation)</option>
+                          <option value="Sehore">Sehore Block</option>
+                          <option value="Ashta">Ashta Block (High Agrarian)</option>
+                          <option value="Ichhawar">Ichhawar Block</option>
+                          <option value="Budhni">Budhni Block</option>
+                          <option value="Bherunda">Nasrullaganj (Bherunda)</option>
+                        </select>
+                      </div>
+
+                      <div>
+                        <label className="text-slate-400 font-medium block mb-1">Target Persona</label>
+                        <input
+                          type="text"
+                          value={targetPersona}
+                          onChange={e => setTargetPersona(e.target.value)}
+                          className="w-full p-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 font-semibold"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Convergence Output */}
+                  {convergenceResult && (
+                    <div className="space-y-6">
+                      
+                      {/* Scorecards */}
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div className="bg-gradient-to-br from-emerald-950/60 to-slate-900 border border-emerald-500/40 p-5 rounded-2xl shadow-lg flex items-center gap-4">
+                          <div className="w-14 h-14 rounded-2xl bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center shrink-0 text-emerald-400 font-extrabold text-xl">
+                            {convergenceResult.convergence_synergy_score}%
+                          </div>
+                          <div>
+                            <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-wider">Synergy Score</span>
+                            <div className="text-lg font-extrabold text-white">Optimal Multi-Scheme Stack</div>
+                            <p className="text-[11px] text-emerald-300">Synchronized Liquidity + Assets + Risk</p>
+                          </div>
+                        </div>
+
+                        <div className="bg-gradient-to-br from-blue-950/60 to-slate-900 border border-blue-500/40 p-5 rounded-2xl shadow-lg flex items-center gap-4">
+                          <div className="w-14 h-14 rounded-2xl bg-blue-500/20 border border-blue-400/40 flex items-center justify-center shrink-0 text-blue-400 font-extrabold text-base font-mono">
+                            ₹
+                          </div>
+                          <div>
+                            <span className="text-[10px] font-bold text-blue-400 uppercase tracking-wider">Est. Combined Value / Household</span>
+                            <div className="text-xl font-extrabold text-white font-mono">₹{convergenceResult.estimated_annual_combined_value_inr.toLocaleString()}</div>
+                            <p className="text-[11px] text-blue-300">Direct Cash + Subsidized Assets</p>
+                          </div>
+                        </div>
+
+                        <div className="bg-gradient-to-br from-purple-950/60 to-slate-900 border border-purple-500/40 p-5 rounded-2xl shadow-lg flex items-center gap-4">
+                          <div className="w-14 h-14 rounded-2xl bg-purple-500/20 border border-purple-400/40 flex items-center justify-center shrink-0 text-purple-400 font-extrabold text-xl">
+                            {convergenceResult.total_schemes_count}
+                          </div>
+                          <div>
+                            <span className="text-[10px] font-bold text-purple-400 uppercase tracking-wider">Flagship Schemes</span>
+                            <div className="text-lg font-extrabold text-white">4 Strategic Pillars</div>
+                            <p className="text-[11px] text-purple-300">Central & MP State Synchronized</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Interactive Visual Network Graph */}
+                      <div className="bg-slate-950/80 rounded-2xl border border-slate-800 overflow-hidden shadow-2xl">
+                        <div className="px-5 py-3 border-b border-slate-800 bg-slate-900 flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <Icon name="network" className="w-4 h-4 text-blue-400" />
+                            <span className="text-xs font-bold text-slate-200 uppercase tracking-wider">
+                              Visual Scheme Convergence Graph ({convergenceResult.graph.nodes.length} Nodes • {convergenceResult.graph.edges.length} Links)
+                            </span>
+                          </div>
+                          <span className="text-[11px] text-slate-400">Click any scheme node to view details</span>
+                        </div>
+
+                        {/* Interactive SVG Diagram */}
+                        <div className="w-full h-[480px] bg-slate-950 relative flex items-center justify-center p-4">
+                          <svg viewBox="0 0 1200 580" className="w-full h-full">
+                            {/* Render Edges */}
+                            {convergenceResult.graph.edges.map(edge => {
+                              const sNode = convergenceResult.graph.nodes.find(n => n.id === edge.source);
+                              const tNode = convergenceResult.graph.nodes.find(n => n.id === edge.target);
+                              if (!sNode || !tNode) return null;
+
+                              const isPillar = edge.type === 'pillarLink';
+                              const color = edge.data?.relationship === 'Co-funding' ? '#10B981' : (edge.data?.relationship === 'Complementary' ? '#3B82F6' : (edge.data?.relationship === 'Risk-Mitigation' ? '#F59E0B' : '#8B5CF6'));
+                              
+                              const midX = (sNode.position.x + tNode.position.x) / 2;
+                              const midY = (sNode.position.y + tNode.position.y) / 2;
+
+                              return (
+                                <g key={edge.id}>
+                                  <line
+                                    x1={sNode.position.x}
+                                    y1={sNode.position.y}
+                                    x2={tNode.position.x}
+                                    y2={tNode.position.y}
+                                    stroke={isPillar ? '#334155' : color}
+                                    strokeWidth={isPillar ? 1.5 : 2.5}
+                                    strokeDasharray={isPillar ? "4 4" : "none"}
+                                    opacity={isPillar ? 0.6 : 0.9}
+                                  />
+                                  {!isPillar && (
+                                    <g transform={`translate(${midX}, ${midY})`}>
+                                      <rect x="-38" y="-10" width="76" height="20" rx="10" fill="#020617" stroke={color} strokeWidth="1" />
+                                      <text textAnchor="middle" y="4" fill={color} fontSize="9" fontWeight="bold">
+                                        {edge.label}
+                                      </text>
+                                    </g>
+                                  )}
+                                </g>
+                              );
+                            })}
+
+                            {/* Render Nodes */}
+                            {convergenceResult.graph.nodes.map(node => {
+                              const isPillar = node.type === 'pillarNode';
+                              if (isPillar) {
+                                return (
+                                  <g key={node.id} transform={`translate(${node.position.x}, ${node.position.y})`}>
+                                    <rect x="-75" y="-20" width="150" height="40" rx="10" fill="#1e293b" stroke={node.data.color} strokeWidth="2" />
+                                    <text textAnchor="middle" y="4" fill="#ffffff" fontSize="10" fontWeight="700">
+                                      {node.data.label}
+                                    </text>
+                                  </g>
+                                );
+                              }
+
+                              const color = node.data.color || '#3B82F6';
+                              return (
+                                <g 
+                                  key={node.id} 
+                                  transform={`translate(${node.position.x}, ${node.position.y})`}
+                                  className="cursor-pointer"
+                                  onClick={() => setSelectedScheme(schemes.find(s => s.code === node.data.code))}
+                                >
+                                  <circle r="36" fill="#0f172a" stroke={color} strokeWidth="3" />
+                                  <text textAnchor="middle" y="-2" fill="#ffffff" fontSize="10.5" fontWeight="800">
+                                    {node.data.code}
+                                  </text>
+                                  <text textAnchor="middle" y="12" fill={color} fontSize="8" fontWeight="600">
+                                    {node.data.level}
+                                  </text>
+                                </g>
+                              );
+                            })}
+                          </svg>
+                        </div>
+
+                        {/* Legend */}
+                        <div className="px-5 py-2.5 bg-slate-900 border-t border-slate-800 flex flex-wrap items-center justify-between text-xs text-slate-400 gap-2">
+                          <div className="flex items-center gap-4 flex-wrap">
+                            <span className="font-semibold text-slate-300">Legend:</span>
+                            <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-emerald-500" /> Co-funding (Direct Cash Stack)</span>
+                            <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-blue-500" /> Complementary (Liquidity to Assets)</span>
+                            <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-amber-500" /> Risk Shielding</span>
+                            <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-purple-500" /> Sequential</span>
+                          </div>
+                          <span>Click scheme node to view verified dossier</span>
+                        </div>
+                      </div>
+
+                      {/* 4 Pillars Grid */}
+                      <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl">
+                        <h3 className="text-sm font-bold text-white uppercase tracking-wider mb-4 flex items-center gap-2">
+                          <Icon name="check" className="w-4 h-4 text-emerald-400" />
+                          <span>4-Pillar Functional Benefit Convergence Matrix</span>
+                        </h3>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                          {convergenceResult.complementary_benefits.map((pillar, idx) => (
+                            <div key={idx} className="bg-slate-950/70 border border-slate-800 p-4 rounded-xl flex flex-col justify-between">
+                              <div>
+                                <div className="flex items-center justify-between mb-2">
+                                  <span className="text-[10px] font-bold px-2 py-0.5 rounded font-mono" style={{ backgroundColor: `${pillar.color}20`, color: pillar.color }}>
+                                    Pillar {idx + 1}
+                                  </span>
+                                  <span className="text-xs font-bold text-white font-mono">
+                                    ₹{pillar.combined_value_inr.toLocaleString()}
+                                  </span>
+                                </div>
+                                <h4 className="text-xs font-extrabold text-slate-100">{pillar.pillar_id.toUpperCase()}</h4>
+                                <p className="text-[11px] text-slate-400 mt-1 leading-relaxed">{pillar.description}</p>
+                              </div>
+
+                              <div className="mt-4 pt-3 border-t border-slate-800/80">
+                                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
+                                  Included Schemes:
+                                </span>
+                                <div className="flex flex-wrap gap-1">
+                                  {pillar.schemes.map((s, sIdx) => (
+                                    <span key={sIdx} className="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-slate-200 font-mono font-medium border border-slate-700">
+                                      {s.scheme_code}
+                                    </span>
+                                  ))}
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Common Eligibility & Safeguards */}
+                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        
+                        {/* Common Intersecting Eligibility */}
+                        <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl">
+                          <h3 className="text-xs font-bold text-slate-300 uppercase tracking-wider mb-3 flex items-center gap-2">
+                            <Icon name="check" className="w-4 h-4 text-blue-400" />
+                            <span>Common Intersecting Eligibility (Single-Window Camp)</span>
+                          </h3>
+
+                          <div className="space-y-2.5 text-xs bg-slate-950/60 p-4 rounded-xl border border-slate-800">
+                            <div className="flex justify-between py-1 border-b border-slate-800">
+                              <span className="text-slate-400">Harmonized Age Range:</span>
+                              <span className="text-slate-200 font-bold">{convergenceResult.common_eligibility.age_bracket}</span>
+                            </div>
+                            <div className="flex justify-between py-1 border-b border-slate-800">
+                              <span className="text-slate-400">Recommended Income Ceiling:</span>
+                              <span className="text-slate-200 font-bold">Up to ₹{convergenceResult.common_eligibility.recommended_income_ceiling_inr.toLocaleString()}</span>
+                            </div>
+                            <div className="flex justify-between py-1 border-b border-slate-800">
+                              <span className="text-slate-400">Max Landholding Limit:</span>
+                              <span className="text-slate-200 font-bold">Up to {convergenceResult.common_eligibility.max_landholding_acres} Acres (Small & Marginal)</span>
+                            </div>
+                            <div>
+                              <span className="text-slate-400 block mb-1">Universal Single-Window Documents:</span>
+                              <div className="flex flex-wrap gap-1.5">
+                                {convergenceResult.common_eligibility.common_documents.map((doc, dIdx) => (
+                                  <span key={dIdx} className="text-[11px] px-2 py-0.5 rounded bg-blue-950/80 text-blue-300 border border-blue-800/60 font-medium">
+                                    ✓ {doc}
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Duplication & Conflict Detection */}
+                        <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl">
+                          <h3 className="text-xs font-bold text-slate-300 uppercase tracking-wider mb-3 flex items-center gap-2">
+                            <Icon name="shield" className="w-4 h-4 text-amber-400" />
+                            <span>Duplication Warnings & Conflict Safeguards</span>
+                          </h3>
+
+                          <div className="space-y-3">
+                            {convergenceResult.duplications_and_conflicts.map((conf, cIdx) => (
+                              <div key={cIdx} className="bg-amber-950/20 border border-amber-800/40 p-3.5 rounded-xl text-xs">
+                                <div className="flex items-center justify-between mb-1">
+                                  <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-900/60 text-amber-200">
+                                    {conf.severity}
+                                  </span>
+                                  <span className="text-[11px] text-slate-400 font-mono">
+                                    {conf.schemes_involved?.join(' + ')}
+                                  </span>
+                                </div>
+                                <div className="font-bold text-amber-200 mt-1">{conf.title}</div>
+                                <p className="text-slate-300 mt-1 text-[11px]">{conf.details}</p>
+                                <div className="mt-2 text-[11px] text-emerald-300 bg-slate-950/60 p-2 rounded border border-slate-800">
+                                  <b>Safeguard:</b> {conf.safeguard_action}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                      </div>
+
+                      {/* Joint SOP */}
+                      <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl">
+                        <h3 className="text-xs font-bold text-slate-300 uppercase tracking-wider mb-3 flex items-center gap-2">
+                          <Icon name="zap" className="w-4 h-4 text-emerald-400" />
+                          <span>Standard Operating Procedure (SOP) for Sehore District Administration</span>
+                        </h3>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                          {convergenceResult.joint_implementation_sop.map((step, idx) => (
+                            <div key={idx} className="bg-slate-950/60 border border-slate-800 p-4 rounded-xl flex flex-col justify-between">
+                              <div>
+                                <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-950 text-blue-300 border border-blue-800 font-mono">
+                                  {step.timeline}
+                                </span>
+                                <h4 className="text-xs font-bold text-white mt-2">{step.phase}</h4>
+                                <p className="text-[11px] text-slate-400 mt-1"><b>Lead:</b> {step.nodal_agency}</p>
+                                
+                                <ul className="mt-3 space-y-1.5 text-[11px] text-slate-300">
+                                  {step.actions.map((act, aIdx) => (
+                                    <li key={aIdx} className="flex items-start gap-1.5">
+                                      <span className="text-emerald-400 mt-0.5">•</span>
+                                      <span>{act}</span>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                    </div>
+                  )}
+
+                </div>
+              )}
+
+              {/* TAB 3: SCHEME DATABASE & SEARCH/FILTER */}
+              {activeTab === 'database' && (
+                <div className="space-y-6 animate-in fade-in duration-300">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                      <h2 className="text-2xl font-extrabold text-white tracking-tight">
+                        Government Scheme Database & Explorer
+                      </h2>
+                      <p className="text-xs text-slate-400 mt-1">
+                        Browse, search and filter 25+ verified Central and Madhya Pradesh State flagship schemes
+                      </p>
+                    </div>
+                    <span className="text-xs px-3 py-1.5 rounded-xl bg-blue-950 text-blue-300 border border-blue-800 font-mono font-bold">
+                      {filteredSchemes.length} Schemes Available
+                    </span>
+                  </div>
+
+                  {/* Filter Bar */}
+                  <div className="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-xl space-y-4">
+                    <div className="relative">
+                      <input
+                        type="text"
+                        value={searchQuery}
+                        onChange={e => setSearchQuery(e.target.value)}
+                        placeholder="Search by scheme name, code (e.g. PM-KISAN, PMFBY, Ladli Behna), ministry, or keyword..."
+                        className="w-full pl-4 pr-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 placeholder-slate-500 text-xs sm:text-sm focus:outline-none focus:border-blue-500"
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
+                      <div>
+                        <label className="text-slate-400 block mb-1">Sector</label>
+                        <select
+                          value={filterSector}
+                          onChange={e => setFilterSector(e.target.value)}
+                          className="w-full p-2 rounded-lg bg-slate-950 border border-slate-800 text-slate-200"
+                        >
+                          <option value="All">All Sectors</option>
+                          <option value="Agriculture">Agriculture</option>
+                          <option value="Rural Development">Rural Development</option>
+                          <option value="Women & Child">Women & Child</option>
+                          <option value="Financial Inclusion & MSME">Financial Inclusion & MSME</option>
+                          <option value="Health">Health</option>
+                        </select>
+                      </div>
+
+                      <div>
+                        <label className="text-slate-400 block mb-1">Scheme Level</label>
+                        <select
+                          value={filterLevel}
+                          onChange={e => setFilterLevel(e.target.value)}
+                          className="w-full p-2 rounded-lg bg-slate-950 border border-slate-800 text-slate-200"
+                        >
+                          <option value="All">All Levels</option>
+                          <option value="Central">Central Sector</option>
+                          <option value="State">State Government</option>
+                          <option value="Centrally Sponsored">Centrally Sponsored</option>
+                        </select>
+                      </div>
+
+                      <div>
+                        <label className="text-slate-400 block mb-1">State Scope</label>
+                        <select
+                          value={filterState}
+                          onChange={e => setFilterState(e.target.value)}
+                          className="w-full p-2 rounded-lg bg-slate-950 border border-slate-800 text-slate-200"
+                        >
+                          <option value="All">All Jurisdictions</option>
+                          <option value="Madhya Pradesh">Madhya Pradesh Specific</option>
+                          <option value="All India">Pan-India</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Scheme Cards Grid */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                    {filteredSchemes.map(s => {
+                      const benefit = s.benefits && s.benefits[0];
+                      return (
+                        <div key={s.id} className="bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-2xl p-5 shadow-lg flex flex-col justify-between transition-all">
+                          <div>
+                            <div className="flex items-center justify-between mb-2">
+                              <span className={`text-[10px] font-bold px-2 py-0.5 rounded uppercase ${
+                                s.level === 'Central' ? 'bg-blue-950 text-blue-400 border border-blue-800' : 'bg-amber-950 text-amber-400 border border-amber-800'
+                              }`}>
+                                {s.level}
+                              </span>
+                              <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-mono">
+                                {s.code}
+                              </span>
+                              <span className="text-[10px] text-emerald-400 font-medium ml-auto">
+                                {s.sector}
+                              </span>
+                            </div>
+
+                            <h3 className="text-base font-bold text-white line-clamp-1">{s.name}</h3>
+                            {s.hindi_name && (
+                              <p className="text-xs text-blue-300 font-medium mt-0.5 line-clamp-1">{s.hindi_name}</p>
+                            )}
+                            <p className="text-[11px] text-slate-400 mt-1 line-clamp-1">{s.department}</p>
+                            <p className="text-xs text-slate-300 mt-3 line-clamp-2 leading-relaxed">{s.description}</p>
+
+                            {benefit && (
+                              <div className="mt-3 bg-slate-950 p-2.5 rounded-xl border border-slate-800 text-xs">
+                                <div className="flex justify-between text-[11px]">
+                                  <span className="text-emerald-400 font-bold">{benefit.benefit_type}</span>
+                                  <span className="text-slate-400">{benefit.frequency}</span>
+                                </div>
+                                {benefit.amount_direct_inr > 0 && (
+                                  <div className="text-sm font-extrabold text-white mt-0.5 font-mono">
+                                    ₹{benefit.amount_direct_inr.toLocaleString()}
+                                  </div>
+                                )}
+                              </div>
+                            )}
+                          </div>
+
+                          <div className="mt-4 pt-3 border-t border-slate-800 flex items-center gap-2">
+                            <button
+                              onClick={() => setSelectedScheme(s)}
+                              className="flex-1 py-1.5 px-3 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold text-center"
+                            >
+                              Inspect Details
+                            </button>
+                            {s.application_url && (
+                              <a
+                                href={s.application_url}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300"
+                              >
+                                <Icon name="external" className="w-3.5 h-3.5" />
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* TAB 4: ELIGIBILITY CHECKER */}
+              {activeTab === 'eligibility' && (
+                <div className="space-y-8 animate-in fade-in duration-300">
+                  <div>
+                    <h2 className="text-2xl font-extrabold text-white tracking-tight">
+                      Beneficiary Eligibility Diagnostic Checker
+                    </h2>
+                    <p className="text-xs text-slate-400 mt-1">
+                      Enter beneficiary demographics, landholding, and income profile to evaluate rule matches across all 25 schemes
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    {/* Form */}
+                    <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl space-y-4">
+                      <h3 className="text-xs font-bold text-slate-300 uppercase tracking-wider pb-2 border-b border-slate-800">
+                        Beneficiary Profile Input
+                      </h3>
+
+                      <div className="space-y-3 text-xs">
+                        <div className="grid grid-cols-2 gap-2">
+                          <div>
+                            <label className="text-slate-400 block mb-1">State</label>
+                            <select
+                              value={eligibilityForm.state}
+                              onChange={e => setEligibilityForm({ ...eligibilityForm, state: e.target.value })}
+                              className="w-full p-2 rounded-lg bg-slate-950 border border-slate-800 text-slate-200"
+                            >
+                              <option value="Madhya Pradesh">Madhya Pradesh</option>
+                              <option value="All India">Other</option>
+                            </select>
+                          </div>
+                          <div>
+                            <label className="text-slate-400 block mb-1">District</label>
+                            <select
+                              value={eligibilityForm.district}
+                              onChange={e => setEligibilityForm({ ...eligibilityForm, district: e.target.value })}
+                              className="w-full p-2 rounded-lg bg-slate-950 border border-slate-800 text-slate-200 font-semibold"
+                            >
+                              <option value="Sehore">Sehore (Pilot)</option>
+                              <option value="Bhopal">Bhopal</option>
+                              <option value="Raisen">Raisen</option>
+                              <option value="Vidisha">Vidisha</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-2">
+                          <div>
+                            <label className="text-slate-400 block mb-1">Age (Years)</label>
+                            <input
+                              type="number"
+                              value={eligibilityForm.age}
+                              onChange={e => setEligibilityForm({ ...eligibilityForm, age: parseInt(e.target.value) || 18 })}
+                              className="w-full p-2 rounded-lg bg-slate-950 border border-slate-800 text-slate-200"
+                            />
+                          </div>
+                          <div>
+                            <label className="text-slate-400 block mb-1">Gender</label>
+                            <select
+                              value={eligibilityForm.gender}
+                              onChange={e => setEligibilityForm({ ...eligibilityForm, gender: e.target.value })}
+                              className="w-full p-2 rounded-lg bg-slate-950 border border-slate-800 text-slate-200"
+                            >
+                              <option value="Male">Male</option>
+                              <option value="Female">Female</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div>
+                          <label className="text-slate-400 block mb-1">Occupation</label>
+                          <select
+                            value={eligibilityForm.occupation}
+                            onChange={e => setEligibilityForm({ ...eligibilityForm, occupation: e.target.value })}
+                            className="w-full p-2 rounded-lg bg-slate-950 border border-slate-800 text-slate-200 font-semibold"
+                          >
+                            <option value="Farmer">Farmer (Landholding)</option>
+                            <option value="Agricultural Laborer">Agricultural Laborer</option>
+                            <option value="Artisan">Artisan / Craftsman</option>
+                            <option value="Self-Employed">Self-Employed / Vendor</option>
+                            <option value="Unemployed">Rural Youth / Unemployed</option>
+                          </select>
+                        </div>
+
+                        <div>
+                          <div className="flex justify-between mb-1">
+                            <label className="text-slate-400">Landholding (Acres)</label>
+                            <span className="text-blue-400 font-mono font-bold">{eligibilityForm.landholding_acres} ac</span>
+                          </div>
+                          <input
+                            type="range"
+                            min="0"
+                            max="15"
+                            step="0.5"
+                            value={eligibilityForm.landholding_acres}
+                            onChange={e => setEligibilityForm({ ...eligibilityForm, landholding_acres: parseFloat(e.target.value) })}
+                            className="w-full accent-blue-600"
+                          />
+                        </div>
+
+                        <div>
+                          <div className="flex justify-between mb-1">
+                            <label className="text-slate-400">Annual Income</label>
+                            <span className="text-emerald-400 font-mono font-bold">₹{eligibilityForm.annual_income.toLocaleString()}</span>
+                          </div>
+                          <input
+                            type="range"
+                            min="30000"
+                            max="500000"
+                            step="10000"
+                            value={eligibilityForm.annual_income}
+                            onChange={e => setEligibilityForm({ ...eligibilityForm, annual_income: parseFloat(e.target.value) })}
+                            className="w-full accent-emerald-600"
+                          />
+                        </div>
+
+                        <button
+                          onClick={runEligibilityCheck}
+                          disabled={evaluatingEligibility}
+                          className="w-full py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-lg shadow-blue-900/50 transition-colors mt-4"
+                        >
+                          <Icon name="check" className="w-4 h-4" />
+                          <span>{evaluatingEligibility ? 'Evaluating...' : 'Check Eligible Schemes'}</span>
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Results */}
+                    <div className="lg:col-span-2 space-y-4">
+                      {eligibilityResult && (
+                        <>
+                          <div className="grid grid-cols-3 gap-3">
+                            <div className="bg-slate-900 border border-slate-800 p-4 rounded-xl">
+                              <span className="text-[10px] text-slate-400 font-bold uppercase">Evaluated</span>
+                              <div className="text-2xl font-extrabold text-white mt-1">{eligibilityResult.summary.total_schemes_evaluated}</div>
+                            </div>
+                            <div className="bg-emerald-950/40 border border-emerald-800/60 p-4 rounded-xl">
+                              <span className="text-[10px] text-emerald-400 font-bold uppercase">Fully Eligible</span>
+                              <div className="text-2xl font-extrabold text-emerald-300 mt-1">{eligibilityResult.summary.fully_eligible_count}</div>
+                            </div>
+                            <div className="bg-blue-950/40 border border-blue-800/60 p-4 rounded-xl">
+                              <span className="text-[10px] text-blue-400 font-bold uppercase">Total Benefit</span>
+                              <div className="text-2xl font-extrabold text-blue-300 mt-1 font-mono">₹{eligibilityResult.summary.total_potential_benefit_inr.toLocaleString()}</div>
+                            </div>
+                          </div>
+
+                          <div className="space-y-3">
+                            {eligibilityResult.recommendations.map(rec => (
+                              <div key={rec.scheme_id} className={`p-4 rounded-xl border ${rec.status === 'Eligible' ? 'bg-slate-900/90 border-emerald-500/50' : 'bg-slate-900/40 border-slate-800'}`}>
+                                <div className="flex items-start justify-between">
+                                  <div>
+                                    <span className="text-[10px] font-bold px-2 py-0.5 rounded font-mono bg-slate-800 text-slate-300">{rec.code}</span>
+                                    <h4 className="text-sm font-bold text-white mt-1">{rec.name}</h4>
+                                  </div>
+                                  <div className="text-right">
+                                    <span className={`text-xs font-bold px-2.5 py-0.5 rounded-full ${rec.status === 'Eligible' ? 'bg-emerald-950 text-emerald-300 border border-emerald-700' : 'bg-slate-800 text-slate-400'}`}>
+                                      {rec.match_score}% Match
+                                    </span>
+                                    {rec.potential_benefit_inr > 0 && (
+                                      <div className="text-xs font-bold text-emerald-400 font-mono mt-1">₹{rec.potential_benefit_inr.toLocaleString()}</div>
+                                    )}
+                                  </div>
+                                </div>
+                                <p className="text-xs text-slate-300 mt-2 bg-slate-950 p-2 rounded-lg border border-slate-800">{rec.benefit_description}</p>
+                              </div>
+                            ))}
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* TAB 5: DISTRICT DASHBOARD (SEHORE, MP) */}
+              {activeTab === 'district' && (
+                <div className="space-y-8 animate-in fade-in duration-300">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                      <h2 className="text-2xl font-extrabold text-white tracking-tight flex items-center gap-2">
+                        <Icon name="pin" className="w-6 h-6 text-emerald-400" />
+                        <span>Sehore District Convergence Dashboard</span>
+                      </h2>
+                      <p className="text-xs text-slate-400 mt-0.5">Madhya Pradesh • Bhopal Division • Administrative Command Center</p>
+                    </div>
+
+                    <button
+                      onClick={handleLaunchDemo}
+                      className="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center gap-2"
+                    >
+                      <Icon name="zap" className="w-4 h-4 text-amber-300" />
+                      <span>Launch Sehore Agri-Convergence Demo</span>
+                    </button>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div className="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-lg">
+                      <span className="text-[10px] font-bold text-slate-400 uppercase">Farming Families</span>
+                      <div className="text-2xl font-extrabold text-white mt-1">138,400</div>
+                      <p className="text-[11px] text-slate-400 mt-1">Active cultivators in Sehore</p>
+                    </div>
+                    <div className="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-lg">
+                      <span className="text-[10px] font-bold text-slate-400 uppercase">Small & Marginal Farmers</span>
+                      <div className="text-2xl font-extrabold text-emerald-400 mt-1">76.8%</div>
+                      <p className="text-[11px] text-slate-400 mt-1">Landholding &lt; 5.0 acres</p>
+                    </div>
+                    <div className="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-lg">
+                      <span className="text-[10px] font-bold text-slate-400 uppercase">Convergence Readiness</span>
+                      <div className="text-2xl font-extrabold text-blue-400 mt-1">94.5%</div>
+                      <p className="text-[11px] text-slate-400 mt-1">Department coordination grade</p>
+                    </div>
+                    <div className="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-lg">
+                      <span className="text-[10px] font-bold text-slate-400 uppercase">Active Schemes</span>
+                      <div className="text-2xl font-extrabold text-purple-400 mt-1">25 Schemes</div>
+                      <p className="text-[11px] text-slate-400 mt-1">Central & MP State combined</p>
+                    </div>
+                  </div>
+
+                  {/* Saturation Indicators */}
+                  <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl">
+                    <h3 className="text-xs font-bold text-slate-300 uppercase tracking-wider mb-4">
+                      Scheme Saturation vs. Convergence Opportunities in Sehore
+                    </h3>
+                    <div className="space-y-4">
+                      {[
+                        { name: 'Direct Cash Transfer (PM-KISAN + MMKKY)', coverage: 94, status: 'Near Universal' },
+                        { name: 'Soil Health Card Profiling (SHC)', coverage: 85, status: 'High Saturation' },
+                        { name: 'Crop Insurance Underwriting (PMFBY)', coverage: 78, status: 'Substantial' },
+                        { name: 'Micro-Irrigation (PMKSY Drip & Sprinkler)', coverage: 46, status: 'Prime Convergence Gap' },
+                        { name: 'Solar Agriculture Pumps (PM-KUSUM)', coverage: 29, status: 'High Growth Opportunity' }
+                      ].map((item, idx) => (
+                        <div key={idx} className="space-y-1.5 text-xs">
+                          <div className="flex justify-between">
+                            <span className="text-slate-200 font-semibold">{item.name}</span>
+                            <span className="text-slate-400 font-mono font-bold">{item.coverage}% ({item.status})</span>
+                          </div>
+                          <div className="w-full h-2.5 bg-slate-950 rounded-full overflow-hidden border border-slate-800">
+                            <div className={`h-full rounded-full ${item.coverage > 75 ? 'bg-emerald-500' : 'bg-blue-500'}`} style={{ width: `${item.coverage}%` }} />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* TAB 6: ADMIN PANEL */}
+              {activeTab === 'admin' && (
+                <div className="space-y-8 animate-in fade-in duration-300">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                      <h2 className="text-2xl font-extrabold text-white tracking-tight flex items-center gap-2">
+                        <Icon name="settings" className="w-6 h-6 text-blue-400" />
+                        <span>Admin Control Panel & Policy Engine</span>
+                      </h2>
+                      <p className="text-xs text-slate-400 mt-0.5">Manage scheme database, create convergence linkages, and audit integrity</p>
+                    </div>
+
+                    <button
+                      onClick={async () => {
+                        if (confirm("Reset database to verified 25 flagship schemes?")) {
+                          await fetch(`${API_BASE}/admin/reset-demo`, { method: 'POST' });
+                          alert("Database re-seeded successfully!");
+                          window.location.reload();
+                        }
+                      }}
+                      className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold"
+                    >
+                      Reset to Official Baseline DB
+                    </button>
+                  </div>
+
+                  <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl">
+                    <h3 className="text-xs font-bold text-slate-300 uppercase tracking-wider mb-4">
+                      Active Schemes in Database ({schemes.length})
+                    </h3>
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-left text-xs">
+                        <thead>
+                          <tr className="border-b border-slate-800 text-slate-400">
+                            <th className="pb-3 font-semibold">Code</th>
+                            <th className="pb-3 font-semibold">Name</th>
+                            <th className="pb-3 font-semibold">Department</th>
+                            <th className="pb-3 font-semibold">Level</th>
+                            <th className="pb-3 font-semibold">Sector</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-slate-800/60">
+                          {schemes.map(s => (
+                            <tr key={s.id} className="hover:bg-slate-950/40">
+                              <td className="py-2.5 font-bold font-mono text-blue-400">{s.code}</td>
+                              <td className="py-2.5 text-slate-200 font-medium">{s.name}</td>
+                              <td className="py-2.5 text-slate-400 max-w-xs truncate">{s.department}</td>
+                              <td className="py-2.5 text-slate-300">{s.level}</td>
+                              <td className="py-2.5 text-emerald-400">{s.sector}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+            </main>
+
+            {/* Scheme Details Modal */}
+            {selectedScheme && (
+              <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-in fade-in duration-200">
+                <div className="bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-6 shadow-2xl space-y-4">
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-950 text-blue-400 border border-blue-800 uppercase font-mono">{selectedScheme.code}</span>
+                        <span className="text-[10px] text-emerald-400 font-semibold">{selectedScheme.sector}</span>
+                      </div>
+                      <h2 className="text-xl font-bold text-white mt-1">{selectedScheme.name}</h2>
+                      {selectedScheme.hindi_name && (
+                        <p className="text-sm text-blue-300">{selectedScheme.hindi_name}</p>
+                      )}
+                    </div>
+                    <button onClick={() => setSelectedScheme(null)} className="text-slate-400 hover:text-white font-bold p-1">✕</button>
+                  </div>
+
+                  <p className="text-xs text-slate-300 bg-slate-950 p-3 rounded-xl border border-slate-800 leading-relaxed">
+                    {selectedScheme.description}
+                  </p>
+
+                  <div className="text-xs bg-slate-950/60 p-3 rounded-xl border border-slate-800 space-y-1">
+                    <p><b>Ministry:</b> {selectedScheme.ministry}</p>
+                    <p><b>Department:</b> {selectedScheme.department}</p>
+                    <p><b>Target Beneficiary:</b> {selectedScheme.target_beneficiary}</p>
+                  </div>
+
+                  <div className="flex justify-end gap-2 pt-2 border-t border-slate-800">
+                    {selectedScheme.application_url && (
+                      <a href={selectedScheme.application_url} target="_blank" rel="noreferrer" className="px-4 py-2 rounded-lg bg-blue-600 text-white text-xs font-semibold">
+                        Visit Official Portal
+                      </a>
+                    )}
+                    <button onClick={() => setSelectedScheme(null)} className="px-4 py-2 rounded-lg bg-slate-800 text-slate-200 text-xs font-semibold">
+                      Close
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Footer */}
+            <footer className="border-t border-slate-900 bg-slate-950 py-6 mt-12 text-slate-500 text-xs">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-blue-500" />
+                  <span className="font-bold text-slate-400">SchemeConnect AI • SEG-6 Final Deliverable</span>
+                </div>
+                <div className="text-slate-500">
+                  Team SEG-6: Aryan Lohri, Abhiraj Kumar, Milan Kohli, Kamal Gangwar, Arsalan
+                </div>
+              </div>
+            </footer>
+
+          </div>
+        );
+      }
+
+      ReactDOM.createRoot(document.getElementById('root')).render(<SchemeConnectApp />);
+    </script>
+  </body>
+</html>
