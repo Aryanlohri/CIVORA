@@ -290,7 +290,19 @@ def check_eligibility(req: EligibilityCheckRequest, db: Session = Depends(get_db
             "fully_eligible_count": eligible_count,
             "total_potential_benefit_inr": total_benefit
         },
-        "recommendations": results
+        "recommendations": results,
+        "total_eligible_schemes": eligible_count,
+        "total_estimated_annual_benefits_inr": total_benefit,
+        "eligible_schemes": [
+            {
+                "scheme_id": r["scheme_id"],
+                "scheme_code": r["code"],
+                "scheme_name": r["name"],
+                "benefit_summary": r["benefit_description"],
+                **r
+            }
+            for r in results if r["status"] == "Eligible"
+        ]
     }
 
 # ==========================================
@@ -437,10 +449,7 @@ def list_districts(db: Session = Depends(get_db)):
 # ==========================================
 @app.get("/api/sources/authentic-apis")
 def get_authentic_api_sources():
-    return {
-        "status": "connected",
-        "last_sync_timestamp": "2024-11-24T12:00:00+05:30",
-        "primary_portals": [
+    registries = [
             {
                 "id": "data-gov-in",
                 "name": "Open Government Data (OGD) Platform India",
@@ -535,27 +544,35 @@ def get_authentic_api_sources():
                     }
                 ]
             }
-        ],
-        "official_convergence_policy_mandates": [
-            {
-                "directive": "Joint Guidelines for Convergence of Centrally Sponsored Schemes",
-                "issuing_authority": "Ministry of Rural Development & Ministry of Agriculture and Farmers Welfare (GoI)",
-                "gazette_id": "MoRD/MGNREGA-MoA/Conv-2015/2020",
-                "core_mandate": "Directs mandatory pooling of MGNREGA water harvesting assets with PMKSY micro-irrigation and Sub-Mission on Agricultural Mechanization."
-            },
-            {
-                "directive": "PMKSY National Operational Guidelines - Chapter 8: Inter-Ministerial Convergence",
-                "issuing_authority": "National Steering Committee chaired by Vice Chairman NITI Aayog",
-                "gazette_id": "PMKSY/NITI-GoI/Sec8-Conv",
-                "core_mandate": "Establishes unified command for Water Resources (Jal Shakti), Agriculture (Micro-Irrigation), and Rural Development (Watershed)."
-            },
-            {
-                "directive": "Madhya Pradesh Kisan Samanway Protocol & SAARA DBT Integration",
-                "issuing_authority": "Revenue & Agriculture Department, Government of Madhya Pradesh",
-                "gazette_id": "MP-Govt-Order F-11-24/2020/27-1",
-                "core_mandate": "Legally binds PM-KISAN database with MP Mukhyamantri Kisan Kalyan Yojana for joint Rs. 12,000/yr disbursement."
-            }
         ]
+
+    policy_mandates = [
+        {
+            "directive": "Joint Guidelines for Convergence of Centrally Sponsored Schemes",
+            "issuing_authority": "Ministry of Rural Development & Ministry of Agriculture and Farmers Welfare (GoI)",
+            "gazette_id": "MoRD/MGNREGA-MoA/Conv-2015/2020",
+            "core_mandate": "Directs mandatory pooling of MGNREGA water harvesting assets with PMKSY micro-irrigation and Sub-Mission on Agricultural Mechanization."
+        },
+        {
+            "directive": "PMKSY National Operational Guidelines - Chapter 8: Inter-Ministerial Convergence",
+            "issuing_authority": "National Steering Committee chaired by Vice Chairman NITI Aayog",
+            "gazette_id": "PMKSY/NITI-GoI/Sec8-Conv",
+            "core_mandate": "Establishes unified command for Water Resources (Jal Shakti), Agriculture (Micro-Irrigation), and Rural Development (Watershed)."
+        },
+        {
+            "directive": "Madhya Pradesh Kisan Samanway Protocol & SAARA DBT Integration",
+            "issuing_authority": "Revenue & Agriculture Department, Government of Madhya Pradesh",
+            "gazette_id": "MP-Govt-Order F-11-24/2020/27-1",
+            "core_mandate": "Legally binds PM-KISAN database with MP Mukhyamantri Kisan Kalyan Yojana for joint Rs. 12,000/yr disbursement."
+        }
+    ]
+
+    return {
+        "status": "connected",
+        "last_sync_timestamp": "2024-11-24T12:00:00+05:30",
+        "primary_portals": registries,
+        "official_api_registries": registries,
+        "official_convergence_policy_mandates": policy_mandates
     }
 
 # ==========================================
