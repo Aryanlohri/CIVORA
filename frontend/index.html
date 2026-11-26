@@ -3,12 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CIVORA | SchemeConnect AI - SEG-6 Government Scheme Convergence Intelligence</title>
+    <title>CIVORA | SchemeConnect AI - Strategic Government Scheme Convergence Platform</title>
     
-    <!-- Google Fonts -->
+    <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -17,37 +17,59 @@
         theme: {
           extend: {
             fontFamily: {
-              sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-              mono: ['"JetBrains Mono"', 'monospace'],
+              sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
+              mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
             },
             colors: {
-              // Chimney Dust Theme Palette
-              ash: {
-                950: '#090B0E', // Deep Chimney Soot / Black Carbon
-                900: '#0F1217', // Smoked Ash Charcoal
-                850: '#141820', // Smoked Graphite (Card Surface)
-                800: '#1A202A', // Elevated Ash Surface
-                700: '#262F3D', // Charcoal Border
-                600: '#3D4A5C', // Smoked Slate
-                500: '#64748B', // Ash Pewter
-                400: '#94A3B8', // Mist Gray
-                300: '#CBD5E1', // Pearl Ash
-                100: '#F1F5F9', // Chalk White
-                50:  '#F8FAFC', // Pure Bone
+              // Exact 5-Color Palette:
+              // Milk: #FBF7F4 | Oat: #E5DED2 | Taupe: #A39382 | Mocha: #685D54 | Charcoal: #232323
+              bg: '#232323',
+              surface: {
+                DEFAULT: '#2B2A29',
+                hover: '#323130',
               },
-              ember: {
-                50:  '#FFFBEB',
-                100: '#FEF3C7',
-                200: '#FDE68A',
-                300: '#FCD34D',
-                400: '#FBBF24',
-                500: '#F59E0B', // Core Warm Hearth Ember
-                600: '#D97706', // Burnished Ember Amber
-                700: '#B45309', // Deep Hearth Flame
-                800: '#92400E', // Smoldering Coal
-                900: '#78350F', // Dark Mahogany Ember
-                950: '#451A03',
-              }
+              elevated: {
+                DEFAULT: '#383634',
+                hover: '#403E3C',
+              },
+              border: {
+                DEFAULT: 'rgba(104, 93, 84, 0.45)',
+                subtle: 'rgba(251, 247, 244, 0.05)',
+                strong: '#685D54',
+                accent: 'rgba(163, 147, 130, 0.45)',
+              },
+              'text-main': '#FBF7F4',
+              'text-2': '#E5DED2',
+              'text-muted': '#A39382',
+              mocha: '#685D54',
+              taupe: '#A39382',
+              oat: '#E5DED2',
+              milk: '#FBF7F4',
+              charcoal: '#232323',
+              accent: {
+                DEFAULT: '#E5DED2',
+                taupe: '#A39382',
+                soft: 'rgba(229, 222, 210, 0.12)',
+                hover: '#FBF7F4',
+                hairline: 'rgba(163, 147, 130, 0.35)',
+              },
+              sand: {
+                DEFAULT: '#E5DED2',
+                soft: 'rgba(229, 222, 210, 0.12)',
+              },
+              success: {
+                DEFAULT: '#6FCF97',
+                soft: 'rgba(111, 207, 151, 0.12)',
+              },
+            },
+            borderRadius: {
+              card: '14px',
+              control: '10px',
+              tag: '6px',
+            },
+            letterSpacing: {
+              heading: '-0.02em',
+              label: '0.08em',
             }
           }
         }
@@ -60,77 +82,144 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <style>
-      body {
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        background-color: #090B0E;
-        color: #F8FAFC;
-        overflow-x: hidden;
+      /* Design Tokens: Milk (#FBF7F4), Oat (#E5DED2), Taupe (#A39382), Mocha (#685D54), Charcoal (#232323) */
+      :root {
+        --milk: #FBF7F4;
+        --oat: #E5DED2;
+        --taupe: #A39382;
+        --mocha: #685D54;
+        --charcoal: #232323;
+
+        --bg: #232323;
+        --surface: #2B2A29;
+        --surface-hover: #323130;
+        --elevated: #383634;
+        --elevated-hover: #403E3C;
+        
+        --border: rgba(104, 93, 84, 0.45);
+        --border-subtle: rgba(251, 247, 244, 0.05);
+        --border-strong: #685D54;
+        --border-accent: rgba(163, 147, 130, 0.45);
+        
+        --text: #FBF7F4;
+        --text-2: #E5DED2;
+        --text-muted: #A39382;
+        
+        --accent: #E5DED2;
+        --accent-taupe: #A39382;
+        --accent-soft: rgba(229, 222, 210, 0.12);
+        --accent-hover: #FBF7F4;
+        --accent-hairline: rgba(163, 147, 130, 0.35);
+        
+        --success: #6FCF97;
+        --success-soft: rgba(111, 207, 151, 0.12);
+        
+        --radius: 14px;
+        --radius-sm: 10px;
+        --radius-xs: 6px;
+        
+        --card-gradient: linear-gradient(180deg, #2B2A29 0%, #232323 100%);
+        --card-highlight: inset 0 1px 0 rgba(251, 247, 244, 0.06);
+        --card-highlight-hover: inset 0 1px 0 rgba(251, 247, 244, 0.10);
+        --hero-glow: radial-gradient(600px at 20% 0%, rgba(163, 147, 130, 0.09), transparent);
+        
+        --transition-fast: 150ms cubic-bezier(0.16, 1, 0.3, 1);
+        --transition-base: 200ms cubic-bezier(0.16, 1, 0.3, 1);
       }
+
+      body {
+        font-family: 'Plus Jakarta Sans', Inter, sans-serif;
+        background-color: var(--bg);
+        color: var(--text);
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      /* Custom Subtle Scrollbar */
       ::-webkit-scrollbar {
         width: 6px;
         height: 6px;
       }
       ::-webkit-scrollbar-track {
-        background: #0F1217;
+        background: var(--bg);
       }
       ::-webkit-scrollbar-thumb {
-        background: #262F3D;
+        background: var(--mocha);
         border-radius: 3px;
       }
       ::-webkit-scrollbar-thumb:hover {
-        background: #D97706;
+        background: var(--taupe);
       }
-      
-      /* Subtle Ambient Hearth Glow in Background */
-      .hearth-radial-glow {
-        background: radial-gradient(circle at 50% -20%, rgba(245, 158, 11, 0.08) 0%, rgba(15, 18, 23, 0) 65%);
+      .scrollbar-none::-webkit-scrollbar {
+        display: none;
+      }
+      .scrollbar-none {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      /* Institutional Cards with Subtle Vertical Gradient & 1px Inner Highlight */
+      .card-institutional {
+        background: var(--card-gradient);
+        border: 1px solid var(--border);
+        box-shadow: var(--card-highlight);
+        border-radius: var(--radius);
+        transition: transform var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
+      }
+      .card-institutional-hover:hover {
+        transform: translateY(-1.5px);
+        border-color: rgba(163, 147, 130, 0.40);
+        box-shadow: var(--card-highlight-hover), 0 8px 24px rgba(0, 0, 0, 0.45);
+      }
+
+      /* Selected Objective Card: 1px accent border at ~40% opacity with a soft glow, no thick bright outline */
+      .card-objective-selected {
+        background: var(--card-gradient);
+        border: 1px solid var(--border-accent) !important;
+        box-shadow: var(--card-highlight), 0 0 20px rgba(163, 147, 130, 0.12) !important;
+        border-radius: var(--radius);
       }
 
       /* Animated SVG dash flow */
       @keyframes dashflow {
         to {
-          stroke-dashoffset: -40;
+          stroke-dashoffset: -32;
         }
       }
       .edge-animated-flow {
         stroke-dasharray: 6, 6;
-        animation: dashflow 1.5s linear infinite;
+        animation: dashflow 1.8s linear infinite;
       }
 
-      /* Pulsing Glow Ring */
-      @keyframes emberPulse {
-        0%, 100% {
-          box-shadow: 0 0 15px rgba(245, 158, 11, 0.2), inset 0 0 15px rgba(245, 158, 11, 0.1);
-        }
-        50% {
-          box-shadow: 0 0 25px rgba(245, 158, 11, 0.4), inset 0 0 20px rgba(245, 158, 11, 0.2);
-        }
+      /* Skeleton Shimmer Loading */
+      @keyframes shimmer {
+        0% { background-position: -200% 0; }
+        100% { background-position: 200% 0; }
       }
-      .ember-pulse {
-        animation: emberPulse 3s infinite ease-in-out;
+      .skeleton-box {
+        background: linear-gradient(90deg, #2B2A29 25%, #383634 50%, #2B2A29 75%);
+        background-size: 200% 100%;
+        animation: shimmer 1.8s infinite ease-in-out;
+        border-radius: var(--radius-sm);
       }
 
-      /* Chimney Dust particles */
-      @keyframes floatParticle {
-        0% { transform: translateY(0px) rotate(0deg); opacity: 0.15; }
-        50% { transform: translateY(-25px) rotate(180deg); opacity: 0.35; }
-        100% { transform: translateY(0px) rotate(360deg); opacity: 0.15; }
-      }
-      .dust-particle {
-        position: absolute;
-        pointer-events: none;
-        border-radius: 50%;
-        animation: floatParticle 8s infinite ease-in-out;
+      /* Accessibility: Reduced Motion */
+      @media (prefers-reduced-motion: reduce) {
+        *, ::before, ::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+          transform: none !important;
+        }
+        .edge-animated-flow {
+          animation: none !important;
+        }
       }
     </style>
   </head>
-  <body class="bg-ash-950 text-ash-50 antialiased selection:bg-ember-600 selection:text-white min-h-screen hearth-radial-glow relative">
-    
-    <!-- Ambient Floating Dust Particles -->
-    <div class="dust-particle w-1.5 h-1.5 bg-ember-500/30 top-24 left-[10%]" style="animation-duration: 9s;"></div>
-    <div class="dust-particle w-2 h-2 bg-ember-400/20 top-48 left-[85%]" style="animation-duration: 12s;"></div>
-    <div class="dust-particle w-1 h-1 bg-ash-400/20 top-[600px] left-[30%]" style="animation-duration: 7s;"></div>
-    <div class="dust-particle w-2.5 h-2.5 bg-ember-600/15 top-[900px] left-[75%]" style="animation-duration: 14s;"></div>
+  <body class="bg-[#232323] text-[#FBF7F4] antialiased min-h-screen relative selection:bg-[#E5DED2]/25 selection:text-[#FBF7F4]">
 
     <div id="root"></div>
 
@@ -140,103 +229,141 @@
 
       const API_BASE = 'http://localhost:8000/api';
 
-      // --- SVG ICONS ---
+      // --- LUCIDE ICONS (Consistent 1.5px stroke width and 16px geometry) ---
       const Icon = ({ name, className = "w-4 h-4" }) => {
+        const strokeProps = {
+          fill: "none",
+          stroke: "currentColor",
+          strokeWidth: "1.5",
+          strokeLinecap: "round",
+          strokeLinejoin: "round",
+          className: className,
+          viewBox: "0 0 24 24"
+        };
+
         switch (name) {
           case 'network':
             return (
-              <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="16" y="16" width="6" height="6" rx="1" /><rect x="2" y="16" width="6" height="6" rx="1" /><rect x="9" y="2" width="6" height="6" rx="1" />
-                <path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3" /><path d="M12 12V8" />
+              <svg {...strokeProps}>
+                <rect x="16" y="16" width="6" height="6" rx="1.5" />
+                <rect x="2" y="16" width="6" height="6" rx="1.5" />
+                <rect x="9" y="2" width="6" height="6" rx="1.5" />
+                <path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3" />
+                <path d="M12 12V8" />
               </svg>
             );
           case 'layers':
             return (
-              <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <polygon points="12 2 2 7 12 12 22 7 12 2" /><polyline points="2 17 12 22 22 17" /><polyline points="2 12 12 17 22 12" />
+              <svg {...strokeProps}>
+                <polygon points="12 2 2 7 12 12 22 7 12 2" />
+                <polyline points="2 17 12 22 22 17" />
+                <polyline points="2 12 12 17 22 12" />
               </svg>
             );
           case 'search':
             return (
-              <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
+              <svg {...strokeProps}>
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
               </svg>
             );
           case 'check':
             return (
-              <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" />
+              <svg {...strokeProps}>
+                <polyline points="20 6 9 17 4 12" />
               </svg>
             );
           case 'pin':
             return (
-              <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" />
+              <svg {...strokeProps}>
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                <circle cx="12" cy="10" r="3" />
               </svg>
             );
           case 'settings':
             return (
-              <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+              <svg {...strokeProps}>
+                <circle cx="12" cy="12" r="3" />
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
               </svg>
             );
           case 'zap':
             return (
-              <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg {...strokeProps}>
                 <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
               </svg>
             );
           case 'download':
             return (
-              <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" />
-              </svg>
-            );
-          case 'external':
-            return (
-              <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /><polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" />
+              <svg {...strokeProps}>
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
               </svg>
             );
           case 'shield':
             return (
-              <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg {...strokeProps}>
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
               </svg>
             );
           case 'database':
             return (
-              <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg {...strokeProps}>
                 <ellipse cx="12" cy="5" rx="9" ry="3" />
                 <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
                 <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
               </svg>
             );
-          case 'api':
-            return (
-              <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M4 14a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2z" />
-                <path d="M6 6h.01M6 10h.01M10 6h.01M14 6h.01M18 6h.01" />
-              </svg>
-            );
-          case 'flame':
-            return (
-              <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 3.5z" />
-              </svg>
-            );
           default:
             return (
-              <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg {...strokeProps}>
                 <circle cx="12" cy="12" r="10" />
               </svg>
             );
         }
       };
 
-      // --- MAIN APPLICATION ---
+      // --- SMOOTH COUNT-UP ANIMATION COMPONENT FOR KEY METRICS ---
+      const AnimatedNumber = ({ value, prefix = '', suffix = '', decimals = 0, duration = 750 }) => {
+        const [current, setCurrent] = useState(0);
+
+        useEffect(() => {
+          let startTime = null;
+          const target = typeof value === 'number' ? value : parseFloat(String(value).replace(/[^0-9.-]+/g, '')) || 0;
+          const startVal = current;
+
+          const step = (timestamp) => {
+            if (!startTime) startTime = timestamp;
+            const progress = Math.min((timestamp - startTime) / duration, 1);
+            const ease = 1 - Math.pow(1 - progress, 3);
+            const nextVal = startVal + (target - startVal) * ease;
+            setCurrent(nextVal);
+
+            if (progress < 1) {
+              requestAnimationFrame(step);
+            }
+          };
+
+          requestAnimationFrame(step);
+        }, [value]);
+
+        const formatted = current.toLocaleString(undefined, {
+          minimumFractionDigits: decimals,
+          maximumFractionDigits: decimals
+        });
+
+        return <span>{prefix}{formatted}{suffix}</span>;
+      };
+
+      // --- SKELETON LOADER FOR ASYNC CONTENT ---
+      const SkeletonCard = ({ height = "h-28" }) => (
+        <div className={`w-full ${height} skeleton-box border border-[rgba(104,93,84,0.3)] rounded-[14px]`}></div>
+      );
+
+      // --- MAIN APPLICATION COMPONENT ---
       function SchemeConnectApp() {
-        const [activeTab, setActiveTab] = useState('convergence'); // Start on the Core Differentiator!
+        const [activeTab, setActiveTab] = useState('convergence');
         const [apiOnline, setApiOnline] = useState(false);
         const [summary, setSummary] = useState(null);
         const [schemes, setSchemes] = useState([]);
@@ -381,7 +508,6 @@
           }
         };
 
-        // Live API Ping Simulation to verify endpoints
         const testApiConnectivity = async () => {
           setTestingPing(true);
           const endpoints = [
@@ -402,7 +528,6 @@
           setTestingPing(false);
         };
 
-        // Filtered Schemes
         const filteredSchemes = schemes.filter(s => {
           if (searchQuery) {
             const q = searchQuery.toLowerCase();
@@ -419,39 +544,44 @@
         });
 
         return (
-          <div className="min-h-screen bg-ash-950 text-ash-50 flex flex-col font-sans">
+          <div className="min-h-screen bg-[#232323] text-[#FBF7F4] flex flex-col font-sans">
             
-            {/* Top National Hearth Accent Strip */}
-            <div className="h-1.5 w-full bg-gradient-to-r from-ember-600 via-amber-400 to-emerald-500 shadow-sm" />
+            {/* 1px Taupe Accent Hairline at ~35% Opacity (Taupe #A39382) */}
+            <div className="h-[1px] w-full bg-[#A39382]/35"></div>
 
-            {/* Top Navigation Bar in Smoked Graphite */}
-            <header className="border-b border-ash-700/70 bg-ash-900/90 backdrop-blur-xl sticky top-0 z-50">
+            {/* Institutional Top Navigation Bar (Charcoal #232323, Mocha #685D54) */}
+            <header className="border-b border-[rgba(104,93,84,0.45)] bg-[#232323]/95 backdrop-blur-md sticky top-0 z-50">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                {/* Brand & Top Action Bar */}
                 <div className="flex items-center justify-between h-16">
                   
                   {/* Brand - CIVORA / SchemeConnect AI */}
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-ember-600 via-amber-600 to-ash-850 flex items-center justify-center shadow-lg shadow-ember-950/60 border border-ember-500/30">
-                      <Icon name="flame" className="w-5 h-5 text-ember-100" />
+                    <div className="w-9 h-9 rounded-[10px] bg-[#383634] border border-[#685D54]/70 flex items-center justify-center text-[#E5DED2] shrink-0">
+                      <Icon name="network" className="w-4 h-4" />
                     </div>
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="font-extrabold text-xl tracking-tight text-white flex items-center gap-1.5">
-                          <span>CIVORA</span>
-                          <span className="text-ember-400 font-mono text-sm">• SchemeConnect AI</span>
+                        <span className="font-semibold text-lg tracking-[-0.02em] text-[#FBF7F4]">
+                          CIVORA
                         </span>
-                        <span className="text-[10px] font-extrabold px-1.5 py-0.5 rounded bg-ember-950 text-ember-400 border border-ember-700/80 font-mono">
+                        <span className="text-xs text-[#A39382] font-normal hidden sm:inline">
+                          • SchemeConnect AI
+                        </span>
+                        <span className="text-[10px] px-1.5 py-0.5 rounded-[4px] bg-[#383634] text-[#E5DED2] border border-[rgba(104,93,84,0.45)] font-mono">
                           SEG-6
                         </span>
                       </div>
-                      <p className="text-[11px] text-ash-400 leading-tight">
-                        Government Scheme Database & Strategic Convergence Intelligence
+                      <p className="text-[11px] text-[#A39382] leading-none mt-0.5">
+                        Centralized Scheme Intelligence & Strategic Convergence
                       </p>
                     </div>
                   </div>
 
                   {/* Actions & Status */}
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-4">
+                    {/* Ghost Button: Sehore Farmer Live Convergence */}
                     <button
                       onClick={() => {
                         setActiveTab('convergence');
@@ -461,32 +591,29 @@
                         setDemoBanner(true);
                         runConvergenceEngine('farmer_development', 'Sehore');
                       }}
-                      className="hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-ember-600 to-amber-600 hover:from-ember-500 hover:to-amber-500 text-white text-xs font-bold shadow-md shadow-ember-950/50 border border-ember-400/40 transition-all hover:scale-[1.02] active:scale-[0.98]"
+                      className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[10px] border border-[#A39382]/70 text-[#E5DED2] bg-transparent hover:bg-[#E5DED2]/10 hover:border-[#E5DED2] text-xs font-medium transition-all"
                     >
-                      <Icon name="zap" className="w-3.5 h-3.5 text-yellow-200" />
-                      <span>⚡ Sehore Farmer Live Convergence</span>
+                      <Icon name="zap" className="w-3.5 h-3.5 text-[#E5DED2]" />
+                      <span>Sehore Farmer Live Convergence</span>
                     </button>
 
-                    <div className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold border ${
-                      apiOnline 
-                        ? 'bg-emerald-950/60 text-emerald-400 border-emerald-700/60' 
-                        : 'bg-amber-950/60 text-amber-400 border-amber-700/60'
-                    }`}>
-                      <span className={`w-2 h-2 rounded-full ${apiOnline ? 'bg-emerald-400' : 'bg-amber-400'} animate-pulse`} />
-                      <span className="font-mono">{apiOnline ? 'FastAPI Online (Port 8000)' : 'Connecting...'}</span>
+                    {/* Status Indicator: Small Dot + Text, No Pill Border */}
+                    <div className="flex items-center gap-2 text-xs font-mono text-[#E5DED2]">
+                      <span className={`w-2 h-2 rounded-full ${apiOnline ? 'bg-[#6FCF97]' : 'bg-[#A39382]'} animate-pulse`} />
+                      <span>{apiOnline ? 'FastAPI Online (Port 8000)' : 'Connecting...'}</span>
                     </div>
                   </div>
                 </div>
 
-                {/* Chimney Dust Navigation Tabs */}
-                <div className="flex space-x-1 overflow-x-auto py-2.5 scrollbar-none border-t border-ash-700/50">
+                {/* Underline-Style Navigation Tabs (Oat #E5DED2 Underline on Active State, Scrollbar Hidden) */}
+                <div className="flex space-x-6 overflow-x-auto scrollbar-none border-t border-[rgba(104,93,84,0.45)]">
                   {[
                     { id: 'convergence', label: 'Convergence Studio', icon: 'network', badge: 'Core MVP' },
                     { id: 'dashboard', label: 'Executive Dashboard', icon: 'layers', badge: null },
-                    { id: 'database', label: 'Scheme Database', icon: 'search', badge: `${schemes.length} Schemes` },
+                    { id: 'database', label: 'Scheme Database', icon: 'search', badge: `${schemes.length || 25}` },
                     { id: 'sources', label: 'Authentic Sources & APIs', icon: 'database', badge: 'Verified' },
                     { id: 'eligibility', label: 'Eligibility Checker', icon: 'check', badge: null },
-                    { id: 'district', label: 'District Pilot (Sehore)', icon: 'pin', badge: 'MP' },
+                    { id: 'district', label: 'District Pilot (Sehore)', icon: 'pin', badge: null },
                     { id: 'admin', label: 'Admin Panel', icon: 'settings', badge: null }
                   ].map(tab => {
                     const isActive = activeTab === tab.id;
@@ -494,18 +621,16 @@
                       <button
                         key={tab.id}
                         onClick={() => setActiveTab(tab.id)}
-                        className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
+                        className={`flex items-center gap-2 pb-3 pt-3 text-xs whitespace-nowrap transition-colors border-b-2 -mb-[1px] ${
                           isActive
-                            ? 'bg-gradient-to-r from-ember-600 to-amber-600 text-white shadow-lg shadow-ember-900/40 border border-ember-400/30'
-                            : 'text-ash-400 hover:text-ash-100 hover:bg-ash-800/80 border border-transparent'
+                            ? 'border-[#E5DED2] text-[#FBF7F4] font-semibold'
+                            : 'border-transparent text-[#A39382] hover:text-[#E5DED2] font-normal'
                         }`}
                       >
-                        <Icon name={tab.icon} className={`w-4 h-4 ${isActive ? 'text-white' : 'text-ash-400'}`} />
+                        <Icon name={tab.icon} className={`w-3.5 h-3.5 ${isActive ? 'text-[#E5DED2]' : 'text-[#A39382]'}`} />
                         <span>{tab.label}</span>
                         {tab.badge && (
-                          <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-extrabold ${
-                            isActive ? 'bg-amber-900/80 text-amber-100 border border-amber-400/40' : 'bg-ash-800 text-ash-300 border border-ash-700'
-                          }`}>
+                          <span className="text-[11px] text-[#A39382] font-normal ml-0.5">
                             {tab.badge}
                           </span>
                         )}
@@ -513,67 +638,81 @@
                     );
                   })}
                 </div>
+
               </div>
             </header>
 
-            {/* Demonstration Banner in Warm Charcoal */}
+            {/* Quiet Institutional Demo Scenario Banner */}
             {demoBanner && (
-              <div className="bg-gradient-to-r from-ash-900 via-ember-950/70 to-ash-900 border-b border-ember-600/30 px-4 py-2 text-xs text-ember-200 shadow-md">
+              <div className="bg-[#2B2A29] border-b border-[rgba(104,93,84,0.45)] px-4 py-2 text-xs text-[#E5DED2]">
                 <div className="max-w-7xl mx-auto flex items-center justify-between">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <span className="w-2 h-2 rounded-full bg-ember-400 animate-ping shrink-0" />
-                    <span className="font-extrabold text-amber-300">SEG-6 Official Demonstration Scenario:</span>
-                    <span className="text-ash-200">Integrated Agricultural Convergence in Sehore District, Madhya Pradesh (Small & Marginal Farmers)</span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#E5DED2] shrink-0" />
+                    <span className="font-semibold text-[#FBF7F4]">Official Demonstration Scenario:</span>
+                    <span className="text-[#E5DED2]">Agricultural Productivity & Income Convergence • Sehore District, Madhya Pradesh</span>
                   </div>
-                  <button onClick={() => setDemoBanner(false)} className="text-ember-400 hover:text-white font-bold ml-4">✕</button>
+                  <button 
+                    onClick={() => setDemoBanner(false)} 
+                    className="text-[#A39382] hover:text-[#FBF7F4] font-medium text-xs ml-4"
+                    aria-label="Dismiss banner"
+                  >
+                    ✕
+                  </button>
                 </div>
               </div>
             )}
 
-            {/* Main Application Canvas */}
-            <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full space-y-8">
+            {/* Main Application Canvas (8px Spacing Grid, 32-48px Section Gaps) */}
+            <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-1 w-full space-y-10">
               
-              {/* TAB 1: CONVERGENCE STUDIO (THE PRIMARY DIFFERENTIATOR) */}
+              {/* TAB 1: CONVERGENCE STUDIO */}
               {activeTab === 'convergence' && (
-                <div className="space-y-8">
+                <div className="space-y-10">
                   
-                  {/* Studio Hero in Smoked Graphite Glass */}
-                  <div className="bg-ash-850/90 border border-ash-700/80 p-6 sm:p-8 rounded-3xl shadow-2xl backdrop-blur-md flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden">
-                    <div className="absolute -top-12 -right-12 w-48 h-48 bg-ember-500/10 rounded-full blur-3xl pointer-events-none" />
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-[11px] font-extrabold px-2.5 py-0.5 rounded-full bg-ember-950 text-ember-400 border border-ember-600/50 uppercase tracking-wider font-mono">
-                          ★ Core SEG-6 Innovation • Module 4
-                        </span>
-                        <span className="text-xs text-ash-400">Rule-Based Multi-Scheme Synergy Engine</span>
+                  {/* Hero Section with Faint Radial Glow & 1px Inner Highlight */}
+                  <div className="relative rounded-[14px] p-6 sm:p-8 card-institutional overflow-hidden">
+                    <div 
+                      className="absolute inset-0 pointer-events-none" 
+                      style={{ background: 'radial-gradient(600px at 20% 0%, rgba(163,147,130,0.09), transparent)' }}
+                    />
+                    
+                    <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                      <div className="max-w-3xl">
+                        <div className="flex items-center gap-2 mb-2">
+                          <span className="text-xs uppercase tracking-[0.08em] text-[#A39382] font-medium">
+                            STRATEGIC CONVERGENCE ENGINE
+                          </span>
+                          <span className="text-[#A39382]">•</span>
+                          <span className="text-xs text-[#E5DED2]">Multi-Pillar Synergy Mapping</span>
+                        </div>
+                        <h1 className="text-2xl sm:text-3xl font-semibold tracking-[-0.02em] text-[#FBF7F4]">
+                          Scheme Convergence Studio
+                        </h1>
+                        <p className="text-[15px] text-[#E5DED2] leading-relaxed mt-2">
+                          Calculates how Central and State welfare programs bundle across four core pillars (Liquidity, Irrigation Assets, Risk Shields, and Soil Health), identifies policy frictions, and outputs an actionable convergence dossier for district authorities.
+                        </p>
                       </div>
-                      <h2 className="text-2xl sm:text-3xl font-extrabold text-white mt-2 tracking-tight">
-                        Scheme Convergence Studio
-                      </h2>
-                      <p className="text-xs sm:text-sm text-ash-300 mt-1.5 max-w-2xl leading-relaxed">
-                        Unlike basic scheme discovery portals like myScheme, CIVORA calculates how multiple Central & State schemes 
-                        combine across 4 pillars (Liquidity, Irrigation, Crop Risk, Soil), resolves conflicting rules, and outputs 
-                        an actionable convergence dossier for district administrators.
-                      </p>
-                    </div>
 
-                    <button
-                      onClick={handleDownloadPdf}
-                      disabled={downloadingPdf || !convergenceResult}
-                      className="px-5 py-3.5 rounded-xl bg-gradient-to-r from-ember-600 to-amber-600 hover:from-ember-500 hover:to-amber-500 text-white text-xs font-extrabold shadow-xl shadow-ember-950/60 flex items-center justify-center gap-2.5 transition-all hover:scale-[1.02] border border-amber-400/40 shrink-0 disabled:opacity-50"
-                    >
-                      <Icon name="download" className="w-4 h-4 text-white" />
-                      <span>{downloadingPdf ? 'Compiling PDF Dossier...' : 'Download Official PDF Report'}</span>
-                    </button>
+                      {/* Exactly ONE solid-filled button per screen (Oat #E5DED2 on Charcoal #232323) */}
+                      <button
+                        onClick={handleDownloadPdf}
+                        disabled={downloadingPdf || !convergenceResult}
+                        className="px-4 py-2.5 rounded-[10px] bg-[#E5DED2] hover:bg-[#FBF7F4] text-[#232323] text-xs font-semibold shadow-sm flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5 active:translate-y-0 shrink-0 disabled:opacity-50"
+                      >
+                        <Icon name="download" className="w-4 h-4 text-[#232323]" />
+                        <span>{downloadingPdf ? 'Compiling Dossier...' : 'Download Official PDF Report'}</span>
+                      </button>
+                    </div>
                   </div>
 
-                  {/* Objective & Location Controls in Smoked Ash */}
-                  <div className="bg-ash-850/80 border border-ash-700/80 p-6 rounded-2xl shadow-xl space-y-5">
+                  {/* Objective & Location Controls */}
+                  <div className="card-institutional p-6 space-y-6">
+                    
+                    {/* Objective Selection */}
                     <div>
-                      <label className="text-xs font-extrabold text-amber-300 uppercase tracking-wider flex items-center gap-2 mb-3">
-                        <span className="w-5 h-5 rounded-full bg-ember-600 text-white flex items-center justify-center text-[11px] font-bold">1</span>
-                        <span>Select Strategic Development Objective</span>
-                      </label>
+                      <span className="text-xs uppercase tracking-[0.08em] text-[#A39382] font-medium block mb-3">
+                        SELECT STRATEGIC DEVELOPMENT OBJECTIVE
+                      </span>
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                         {[
@@ -590,46 +729,60 @@
                                 setSelectedObjectiveKey(item.key);
                                 runConvergenceEngine(item.key, selectedDistrict);
                               }}
-                              className={`p-4 rounded-xl text-left border transition-all ${
+                              className={`p-4 rounded-[14px] text-left transition-all relative ${
                                 isSelected
-                                  ? 'bg-ash-900 border-ember-500 text-white ring-1 ring-ember-500/80 shadow-lg shadow-ember-950/50'
-                                  : 'bg-ash-900/60 border-ash-700/70 text-ash-400 hover:border-ash-600 hover:text-ash-100'
+                                  ? 'card-objective-selected'
+                                  : 'card-institutional card-institutional-hover'
                               }`}
                             >
-                              <div className="flex items-center justify-between mb-1.5">
-                                <span className={`text-[10px] font-extrabold px-2 py-0.5 rounded font-mono ${
-                                  isSelected ? 'bg-ember-950 text-ember-300 border border-ember-600/60' : 'bg-ash-800 text-ash-400 border border-ash-700'
-                                }`}>
+                              <div className="flex items-center justify-between mb-2">
+                                <span className="text-[10px] px-2 py-0.5 rounded-[6px] bg-[#383634] text-[#A39382] border border-[rgba(104,93,84,0.45)] font-mono">
                                   {item.badge}
                                 </span>
-                                {isSelected && <Icon name="check" className="w-4 h-4 text-emerald-400" />}
+                                {isSelected && (
+                                  <span className="text-[#E5DED2]">
+                                    <Icon name="check" className="w-3.5 h-3.5" />
+                                  </span>
+                                )}
                               </div>
-                              <div className="font-bold text-xs text-ash-100">{item.title}</div>
-                              <p className="text-[11px] text-ash-400 mt-1 line-clamp-2 leading-relaxed">{item.desc}</p>
+                              <div className="font-semibold text-xs text-[#FBF7F4] tracking-[-0.01em]">
+                                {item.title}
+                              </div>
+                              <p className="text-[11px] text-[#E5DED2] mt-1.5 line-clamp-2 leading-relaxed">
+                                {item.desc}
+                              </p>
                             </button>
                           );
                         })}
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-ash-700/70 text-xs">
+                    {/* Three Filter Fields: Same Height (40px), Border, Radius (10px), and Label Style */}
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-[rgba(104,93,84,0.45)]">
+                      
+                      {/* Filter 1: Location Hierarchy */}
                       <div>
-                        <label className="text-ash-400 font-semibold block mb-1">Administrative Location Hierarchy</label>
-                        <div className="flex items-center gap-2 p-2.5 rounded-xl bg-ash-900 border border-ash-700 text-ash-100 font-bold">
-                          <span className="text-ash-400">Madhya Pradesh</span>
-                          <span className="text-ember-500">›</span>
-                          <span className="text-ash-400">Bhopal</span>
-                          <span className="text-ember-500">›</span>
-                          <span className="text-emerald-400 font-extrabold">Sehore District</span>
+                        <label className="text-xs uppercase tracking-[0.08em] text-[#A39382] font-medium block mb-1.5">
+                          ADMINISTRATIVE LOCATION HIERARCHY
+                        </label>
+                        <div className="h-10 px-3 rounded-[10px] bg-[#383634] border border-[rgba(104,93,84,0.45)] flex items-center gap-1.5 text-xs text-[#E5DED2]">
+                          <span>Madhya Pradesh</span>
+                          <span className="text-[#A39382]">›</span>
+                          <span>Bhopal</span>
+                          <span className="text-[#A39382]">›</span>
+                          <span className="text-[#FBF7F4] font-medium">Sehore District</span>
                         </div>
                       </div>
 
+                      {/* Filter 2: Block-Level Focus */}
                       <div>
-                        <label className="text-ash-400 font-semibold block mb-1">Block-Level Saturation Focus</label>
+                        <label className="text-xs uppercase tracking-[0.08em] text-[#A39382] font-medium block mb-1.5">
+                          BLOCK-LEVEL SATURATION FOCUS
+                        </label>
                         <select
                           value={selectedBlock}
                           onChange={e => setSelectedBlock(e.target.value)}
-                          className="w-full p-2.5 rounded-xl bg-ash-900 border border-ash-700 text-ash-100 font-semibold focus:border-ember-500 focus:outline-none"
+                          className="w-full h-10 px-3 rounded-[10px] bg-[#383634] border border-[rgba(104,93,84,0.45)] text-[#FBF7F4] text-xs font-medium focus:border-[#E5DED2]/60 focus:outline-none transition-colors"
                         >
                           <option value="All Blocks">All 5 Blocks (District Saturation)</option>
                           <option value="Sehore">Sehore Block</option>
@@ -640,104 +793,130 @@
                         </select>
                       </div>
 
+                      {/* Filter 3: Target Persona */}
                       <div>
-                        <label className="text-ash-400 font-semibold block mb-1">Target Beneficiary Persona</label>
+                        <label className="text-xs uppercase tracking-[0.08em] text-[#A39382] font-medium block mb-1.5">
+                          TARGET BENEFICIARY PERSONA
+                        </label>
                         <input
                           type="text"
                           value={targetPersona}
                           onChange={e => setTargetPersona(e.target.value)}
-                          className="w-full p-2.5 rounded-xl bg-ash-900 border border-ash-700 text-ash-100 font-semibold focus:border-ember-500 focus:outline-none"
+                          className="w-full h-10 px-3 rounded-[10px] bg-[#383634] border border-[rgba(104,93,84,0.45)] text-[#FBF7F4] text-xs font-medium focus:border-[#E5DED2]/60 focus:outline-none transition-colors"
                         />
                       </div>
+
                     </div>
                   </div>
 
-                  {/* Convergence Calculation Output */}
-                  {convergenceResult && (
+                  {/* Async Skeleton State */}
+                  {loadingConvergence && (
                     <div className="space-y-6">
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <SkeletonCard height="h-28" />
+                        <SkeletonCard height="h-28" />
+                        <SkeletonCard height="h-28" />
+                      </div>
+                      <SkeletonCard height="h-96" />
+                    </div>
+                  )}
+
+                  {/* Convergence Calculation Output */}
+                  {!loadingConvergence && convergenceResult && (
+                    <div className="space-y-8">
                       
-                      {/* Metric Scorecards in Chimney Dust Smoked Graphite */}
+                      {/* Metric Scorecards: Key figures in Milk (#FBF7F4) and Oat (#E5DED2) */}
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         
-                        {/* Synergy Meter */}
-                        <div className="bg-ash-850 border border-ember-500/40 p-5 rounded-2xl shadow-xl flex items-center gap-4 relative overflow-hidden">
-                          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-ember-600/20 to-ash-900 border border-ember-500/50 flex flex-col items-center justify-center shrink-0 text-amber-300 font-extrabold">
-                            <span className="text-xl font-mono">{convergenceResult.convergence_synergy_score}%</span>
-                            <span className="text-[9px] text-ember-400 uppercase tracking-tight">Synergy</span>
+                        {/* Metric 1: Synergy Efficiency Index */}
+                        <div className="card-institutional p-5 flex items-center gap-4">
+                          <div className="w-14 h-14 rounded-[10px] bg-[#383634] border border-[rgba(104,93,84,0.45)] flex flex-col items-center justify-center shrink-0">
+                            <span className="text-lg font-mono font-semibold text-[#E5DED2]">
+                              <AnimatedNumber value={convergenceResult.convergence_synergy_score} suffix="%" decimals={1} />
+                            </span>
+                            <span className="text-[9px] uppercase tracking-wider text-[#A39382]">INDEX</span>
                           </div>
                           <div>
-                            <span className="text-[10px] font-extrabold text-amber-400 uppercase tracking-wider">Synergy Efficiency Index</span>
-                            <div className="text-lg font-extrabold text-white">Optimal Multi-Scheme Stack</div>
-                            <p className="text-[11px] text-ash-300">Synchronized Liquidity + Assets + Risk Coverage</p>
+                            <span className="text-[11px] uppercase tracking-[0.08em] text-[#A39382] font-medium block">
+                              SYNERGY EFFICIENCY INDEX
+                            </span>
+                            <div className="text-base font-semibold text-[#FBF7F4] mt-0.5">
+                              Optimal Multi-Scheme Stack
+                            </div>
+                            <p className="text-xs text-[#E5DED2] mt-0.5">Synchronized Liquidity + Assets + Risk Coverage</p>
                           </div>
                         </div>
 
-                        {/* Combined Value */}
-                        <div className="bg-ash-850 border border-ash-700/80 p-5 rounded-2xl shadow-xl flex items-center gap-4">
-                          <div className="w-16 h-16 rounded-2xl bg-ash-900 border border-ash-700 flex items-center justify-center shrink-0 text-emerald-400 font-extrabold text-2xl font-mono">
+                        {/* Metric 2: Combined Annual Package */}
+                        <div className="card-institutional p-5 flex items-center gap-4">
+                          <div className="w-14 h-14 rounded-[10px] bg-[#383634] border border-[rgba(104,93,84,0.45)] flex items-center justify-center shrink-0 text-[#E5DED2] font-mono text-xl font-semibold">
                             ₹
                           </div>
                           <div>
-                            <span className="text-[10px] font-extrabold text-emerald-400 uppercase tracking-wider">Combined Annual Package / Household</span>
-                            <div className="text-2xl font-extrabold text-white font-mono">
-                              ₹{convergenceResult.estimated_annual_combined_value_inr.toLocaleString()}
+                            <span className="text-[11px] uppercase tracking-[0.08em] text-[#A39382] font-medium block">
+                              COMBINED ANNUAL PACKAGE / HOUSEHOLD
+                            </span>
+                            <div className="text-xl font-semibold font-mono text-[#FBF7F4] mt-0.5">
+                              <AnimatedNumber value={convergenceResult.estimated_annual_combined_value_inr} prefix="₹" />
                             </div>
-                            <p className="text-[11px] text-ash-300">Direct Cash Transfer + Capital Asset Subsidies</p>
+                            <p className="text-xs text-[#E5DED2] mt-0.5">Direct Cash Transfer + Asset Subsidies</p>
                           </div>
                         </div>
 
-                        {/* Flagship Count */}
-                        <div className="bg-ash-850 border border-ash-700/80 p-5 rounded-2xl shadow-xl flex items-center gap-4">
-                          <div className="w-16 h-16 rounded-2xl bg-ash-900 border border-ash-700 flex items-center justify-center shrink-0 text-cyan-400 font-extrabold text-2xl font-mono">
-                            {convergenceResult.total_schemes_count}
+                        {/* Metric 3: Flagship Schemes Unified */}
+                        <div className="card-institutional p-5 flex items-center gap-4">
+                          <div className="w-14 h-14 rounded-[10px] bg-[#383634] border border-[rgba(104,93,84,0.45)] flex items-center justify-center shrink-0 text-[#FBF7F4] font-mono text-xl font-semibold">
+                            <AnimatedNumber value={convergenceResult.total_schemes_count} />
                           </div>
                           <div>
-                            <span className="text-[10px] font-extrabold text-cyan-400 uppercase tracking-wider">Flagship Schemes Unified</span>
-                            <div className="text-lg font-extrabold text-white">4 Strategic Development Pillars</div>
-                            <p className="text-[11px] text-ash-300">Central & Madhya Pradesh State Synchronized</p>
+                            <span className="text-[11px] uppercase tracking-[0.08em] text-[#A39382] font-medium block">
+                              FLAGSHIP SCHEMES UNIFIED
+                            </span>
+                            <div className="text-base font-semibold text-[#FBF7F4] mt-0.5">
+                              4 Strategic Development Pillars
+                            </div>
+                            <p className="text-xs text-[#E5DED2] mt-0.5">Central & Madhya Pradesh State Synchronized</p>
                           </div>
                         </div>
+
                       </div>
 
                       {/* Interactive Visual Network Graph */}
-                      <div className="bg-ash-850 rounded-2xl border border-ash-700 overflow-hidden shadow-2xl">
-                        <div className="px-6 py-4 border-b border-ash-700 bg-ash-900 flex flex-wrap items-center justify-between gap-3">
-                          <div className="flex items-center gap-2.5">
-                            <Icon name="network" className="w-4 h-4 text-ember-400" />
-                            <span className="text-xs font-extrabold text-ash-100 uppercase tracking-wider">
-                              Visual Convergence Network Graph ({convergenceResult.graph.nodes.length} Nodes • {convergenceResult.graph.edges.length} Active Linkages)
-                            </span>
-                          </div>
+                      <div className="card-institutional overflow-hidden">
+                        <div className="px-6 py-4 border-b border-[rgba(104,93,84,0.45)] bg-[#2B2A29] flex flex-wrap items-center justify-between gap-3">
                           <div className="flex items-center gap-2">
-                            <span className="text-[11px] text-ash-400 bg-ash-950 px-2.5 py-1 rounded-md border border-ash-800">
-                              💡 Click scheme node or link badge to view details & policy citation
+                            <Icon name="network" className="w-4 h-4 text-[#E5DED2]" />
+                            <span className="text-xs font-semibold text-[#FBF7F4] tracking-[-0.01em]">
+                              Convergence Network Topology ({convergenceResult.graph.nodes.length} Nodes • {convergenceResult.graph.edges.length} Active Linkages)
                             </span>
                           </div>
+                          <span className="text-xs text-[#A39382]">
+                            Click any node or relationship link to view operational directive
+                          </span>
                         </div>
 
-                        {/* Interactive SVG Diagram */}
-                        <div className="w-full h-[500px] bg-ash-950 relative flex items-center justify-center p-4 overflow-hidden">
+                        {/* SVG Visualizer Canvas */}
+                        <div className="w-full h-[480px] bg-[#232323] relative flex items-center justify-center p-4 overflow-hidden">
                           <svg viewBox="0 0 1200 580" className="w-full h-full select-none">
                             <defs>
-                              <linearGradient id="edgeGradientCoFunding" x1="0%" y1="0%" x2="100%" y2="0%">
-                                <stop offset="0%" stopColor="#10B981" />
-                                <stop offset="100%" stopColor="#F59E0B" />
+                              <linearGradient id="edgeGradientOat" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stopColor="#E5DED2" />
+                                <stop offset="100%" stopColor="#A39382" />
                               </linearGradient>
                             </defs>
 
-                            {/* Render Edges */}
+                            {/* Render Linkages */}
                             {convergenceResult.graph.edges.map(edge => {
                               const sNode = convergenceResult.graph.nodes.find(n => n.id === edge.source);
                               const tNode = convergenceResult.graph.nodes.find(n => n.id === edge.target);
                               if (!sNode || !tNode) return null;
 
                               const isPillar = edge.type === 'pillarLink';
-                              let edgeColor = '#475569';
-                              if (edge.data?.relationship === 'Co-funding') edgeColor = '#10B981';
-                              else if (edge.data?.relationship === 'Complementary') edgeColor = '#F59E0B';
-                              else if (edge.data?.relationship === 'Risk-Mitigation') edgeColor = '#EC4899';
-                              else if (edge.data?.relationship === 'Sequential') edgeColor = '#8B5CF6';
-                              else if (edge.data?.relationship === 'Input-Output') edgeColor = '#06B6D4';
+                              let edgeColor = '#685D54';
+                              if (edge.data?.relationship === 'Co-funding') edgeColor = '#E5DED2';
+                              else if (edge.data?.relationship === 'Complementary') edgeColor = '#A39382';
+                              else if (edge.data?.relationship === 'Risk-Mitigation') edgeColor = '#C2B6A6';
+                              else if (edge.data?.relationship === 'Sequential') edgeColor = '#807266';
 
                               const midX = (sNode.position.x + tNode.position.x) / 2;
                               const midY = (sNode.position.y + tNode.position.y) / 2;
@@ -749,15 +928,15 @@
                                     y1={sNode.position.y}
                                     x2={tNode.position.x}
                                     y2={tNode.position.y}
-                                    stroke={isPillar ? '#262F3D' : edgeColor}
-                                    strokeWidth={isPillar ? 1.5 : 3.0}
+                                    stroke={isPillar ? '#383634' : edgeColor}
+                                    strokeWidth={isPillar ? 1.5 : 2.5}
                                     strokeDasharray={isPillar ? "4 4" : "none"}
-                                    opacity={isPillar ? 0.7 : 0.95}
+                                    opacity={isPillar ? 0.6 : 0.9}
                                   />
                                   {!isPillar && (
                                     <g transform={`translate(${midX}, ${midY})`}>
-                                      <rect x="-44" y="-11" width="88" height="22" rx="11" fill="#090B0E" stroke={edgeColor} strokeWidth="1.5" />
-                                      <text textAnchor="middle" y="4" fill={edgeColor} fontSize="9.5" fontWeight="800" fontFamily="sans-serif">
+                                      <rect x="-42" y="-10" width="84" height="20" rx="6" fill="#2B2A29" stroke={edgeColor} strokeWidth="1" />
+                                      <text textAnchor="middle" y="4" fill={edgeColor} fontSize="9" fontWeight="600" fontFamily="sans-serif">
                                         {edge.label}
                                       </text>
                                     </g>
@@ -772,8 +951,8 @@
                               if (isPillar) {
                                 return (
                                   <g key={node.id} transform={`translate(${node.position.x}, ${node.position.y})`}>
-                                    <rect x="-85" y="-22" width="170" height="44" rx="12" fill="#141820" stroke={node.data.color} strokeWidth="2" />
-                                    <text textAnchor="middle" y="5" fill="#FFFFFF" fontSize="11" fontWeight="800">
+                                    <rect x="-85" y="-20" width="170" height="40" rx="8" fill="#2B2A29" stroke="#685D54" strokeWidth="1.5" />
+                                    <text textAnchor="middle" y="5" fill="#FBF7F4" fontSize="11" fontWeight="600">
                                       {node.data.label}
                                     </text>
                                   </g>
@@ -781,19 +960,18 @@
                               }
 
                               const schemeObj = schemes.find(s => s.code === node.data.code);
-                              const color = node.data.color || '#F59E0B';
                               return (
                                 <g 
                                   key={node.id} 
                                   transform={`translate(${node.position.x}, ${node.position.y})`}
-                                  className="cursor-pointer hover:scale-110 transition-transform duration-200"
+                                  className="cursor-pointer hover:scale-105 transition-transform duration-150"
                                   onClick={() => setSelectedScheme(schemeObj || node.data)}
                                 >
-                                  <circle r="40" fill="#141820" stroke={color} strokeWidth="3" />
-                                  <text textAnchor="middle" y="-4" fill="#FFFFFF" fontSize="11" fontWeight="800">
+                                  <circle r="38" fill="#383634" stroke="#A39382" strokeWidth="2" />
+                                  <text textAnchor="middle" y="-3" fill="#FBF7F4" fontSize="11" fontWeight="600">
                                     {node.data.code}
                                   </text>
-                                  <text textAnchor="middle" y="14" fill={color} fontSize="8.5" fontWeight="700">
+                                  <text textAnchor="middle" y="14" fill="#E5DED2" fontSize="8.5" fontWeight="500">
                                     {node.data.level}
                                   </text>
                                 </g>
@@ -802,49 +980,58 @@
                           </svg>
                         </div>
 
-                        {/* Legend */}
-                        <div className="px-6 py-3 bg-ash-900 border-t border-ash-700 flex flex-wrap items-center justify-between text-xs text-ash-400 gap-3">
-                          <div className="flex items-center gap-5 flex-wrap font-semibold">
-                            <span className="text-ash-200 font-bold">Relationship Types:</span>
-                            <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-emerald-500" /> Co-funding (Direct Cash Top-Up)</span>
-                            <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-amber-500" /> Complementary (Liquidity to Assets)</span>
-                            <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-pink-500" /> Risk Shielding</span>
-                            <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-purple-500" /> Sequential Graduation</span>
+                        {/* Network Graph Legend */}
+                        <div className="px-6 py-3 bg-[#2B2A29] border-t border-[rgba(104,93,84,0.45)] flex flex-wrap items-center justify-between text-xs text-[#E5DED2] gap-3">
+                          <div className="flex items-center gap-5 flex-wrap">
+                            <span className="text-[#FBF7F4] font-medium">Linkage Types:</span>
+                            <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-[#E5DED2]" /> Co-funding</span>
+                            <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-[#A39382]" /> Complementary</span>
+                            <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-[#C2B6A6]" /> Risk Shielding</span>
+                            <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-[#685D54]" /> Sequential</span>
                           </div>
-                          <span className="text-amber-400 font-bold">Empirical Sehore Ground Data Integrated</span>
+                          <span className="text-[#A39382] font-mono text-[11px]">Empirical Ground Telemetry Integrated</span>
                         </div>
                       </div>
 
-                      {/* 4 Pillars Matrix in Smoked Graphite */}
-                      <div className="bg-ash-850 border border-ash-700 p-6 sm:p-8 rounded-2xl shadow-xl">
-                        <h3 className="text-sm font-extrabold text-white uppercase tracking-wider mb-5 flex items-center gap-2">
-                          <Icon name="check" className="w-4 h-4 text-emerald-400" />
-                          <span>4-Pillar Functional Benefit Convergence Matrix</span>
-                        </h3>
+                      {/* 4-Pillar Functional Benefit Convergence Matrix */}
+                      <div className="card-institutional p-6 sm:p-8 space-y-5">
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <span className="text-xs uppercase tracking-[0.08em] text-[#A39382] font-medium block">
+                              FUNCTIONAL PORTFOLIO CONVERGENCE
+                            </span>
+                            <h3 className="text-base font-semibold text-[#FBF7F4] mt-0.5">
+                              4-Pillar Strategic Execution Matrix
+                            </h3>
+                          </div>
+                          <span className="text-xs font-mono text-[#E5DED2]">
+                            Total: ₹{convergenceResult.estimated_annual_combined_value_inr.toLocaleString()}
+                          </span>
+                        </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                           {convergenceResult.complementary_benefits.map((pillar, idx) => (
-                            <div key={idx} className="bg-ash-900 border border-ash-700 p-5 rounded-2xl flex flex-col justify-between hover:border-ember-500/50 transition-all">
+                            <div key={idx} className="bg-[#383634]/60 border border-[rgba(104,93,84,0.45)] p-5 rounded-[14px] flex flex-col justify-between hover:border-[#A39382]/50 transition-colors">
                               <div>
-                                <div className="flex items-center justify-between mb-3">
-                                  <span className="text-[10px] font-extrabold px-2 py-0.5 rounded font-mono" style={{ backgroundColor: `${pillar.color}25`, color: pillar.color }}>
+                                <div className="flex items-center justify-between mb-2">
+                                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-[4px] bg-[#E5DED2]/15 text-[#E5DED2] border border-[#E5DED2]/30">
                                     Pillar {idx + 1}
                                   </span>
-                                  <span className="text-xs font-bold text-white font-mono">
+                                  <span className="text-xs font-mono font-semibold text-[#FBF7F4]">
                                     ₹{pillar.combined_value_inr.toLocaleString()}
                                   </span>
                                 </div>
-                                <h4 className="text-xs font-extrabold text-ash-100">{pillar.pillar_id.toUpperCase()}</h4>
-                                <p className="text-[11px] text-ash-300 mt-1.5 leading-relaxed">{pillar.description}</p>
+                                <h4 className="text-xs font-semibold text-[#FBF7F4]">{pillar.pillar_id.toUpperCase()}</h4>
+                                <p className="text-[11px] text-[#E5DED2] mt-1.5 leading-relaxed">{pillar.description}</p>
                               </div>
 
-                              <div className="mt-4 pt-3 border-t border-ash-800">
-                                <span className="text-[10px] font-bold text-ash-400 uppercase tracking-wider block mb-1.5">
+                              <div className="mt-4 pt-3 border-t border-[rgba(104,93,84,0.45)]">
+                                <span className="text-[10px] uppercase tracking-[0.08em] text-[#A39382] font-medium block mb-1.5">
                                   Synchronized Schemes:
                                 </span>
                                 <div className="flex flex-wrap gap-1.5">
                                   {pillar.schemes.map((s, sIdx) => (
-                                    <span key={sIdx} className="text-[10px] px-2 py-0.5 rounded bg-ash-800 text-ash-200 font-mono font-bold border border-ash-700">
+                                    <span key={sIdx} className="text-[10px] px-2 py-0.5 rounded-[4px] bg-[#2B2A29] text-[#FBF7F4] font-mono border border-[rgba(104,93,84,0.45)]">
                                       {s.scheme_code}
                                     </span>
                                   ))}
@@ -855,35 +1042,38 @@
                         </div>
                       </div>
 
-                      {/* Common Eligibility & Safeguards Grid */}
+                      {/* Single Window Eligibility & Safeguards */}
                       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                         
                         {/* Common Intersecting Eligibility */}
-                        <div className="bg-ash-850 border border-ash-700 p-6 rounded-2xl shadow-xl">
-                          <h3 className="text-xs font-extrabold text-ash-200 uppercase tracking-wider mb-4 flex items-center gap-2">
-                            <Icon name="check" className="w-4 h-4 text-emerald-400" />
-                            <span>Common Intersecting Eligibility (Single-Window Camp)</span>
+                        <div className="card-institutional p-6 space-y-4">
+                          <span className="text-xs uppercase tracking-[0.08em] text-[#A39382] font-medium block">
+                            HARMONIZED CRITERIA
+                          </span>
+                          <h3 className="text-base font-semibold text-[#FBF7F4]">
+                            Common Intersecting Eligibility (Single-Window Camp)
                           </h3>
 
-                          <div className="space-y-3 text-xs bg-ash-900 p-4 rounded-xl border border-ash-700">
-                            <div className="flex justify-between py-1.5 border-b border-ash-800">
-                              <span className="text-ash-400">Harmonized Age Range:</span>
-                              <span className="text-ash-100 font-bold">{convergenceResult.common_eligibility.age_bracket}</span>
+                          <div className="space-y-3 text-xs bg-[#383634]/60 p-4 rounded-[10px] border border-[rgba(104,93,84,0.45)]">
+                            <div className="flex justify-between py-1 border-b border-[rgba(104,93,84,0.45)]">
+                              <span className="text-[#E5DED2]">Harmonized Age Range:</span>
+                              <span className="text-[#FBF7F4] font-medium">{convergenceResult.common_eligibility.age_bracket}</span>
                             </div>
-                            <div className="flex justify-between py-1.5 border-b border-ash-800">
-                              <span className="text-ash-400">Harmonized Income Ceiling:</span>
-                              <span className="text-ash-100 font-bold font-mono">Up to ₹{convergenceResult.common_eligibility.recommended_income_ceiling_inr.toLocaleString()}</span>
+                            <div className="flex justify-between py-1 border-b border-[rgba(104,93,84,0.45)]">
+                              <span className="text-[#E5DED2]">Income Ceiling:</span>
+                              <span className="text-[#FBF7F4] font-mono font-medium">Up to ₹{convergenceResult.common_eligibility.recommended_income_ceiling_inr.toLocaleString()}</span>
                             </div>
-                            <div className="flex justify-between py-1.5 border-b border-ash-800">
-                              <span className="text-ash-400">Cultivable Landholding Limit:</span>
-                              <span className="text-ash-100 font-bold">Up to {convergenceResult.common_eligibility.max_landholding_acres} Acres (Small & Marginal)</span>
+                            <div className="flex justify-between py-1 border-b border-[rgba(104,93,84,0.45)]">
+                              <span className="text-[#E5DED2]">Landholding Limit:</span>
+                              <span className="text-[#FBF7F4] font-medium">Up to {convergenceResult.common_eligibility.max_landholding_acres} Acres (Small & Marginal)</span>
                             </div>
-                            <div>
-                              <span className="text-ash-400 block mb-1.5 font-semibold">Universal Single-Window Documents Required:</span>
+                            <div className="pt-1">
+                              <span className="text-[#E5DED2] block mb-2 font-medium">Universal Single-Window Documents:</span>
                               <div className="flex flex-wrap gap-1.5">
                                 {convergenceResult.common_eligibility.common_documents.map((doc, dIdx) => (
-                                  <span key={dIdx} className="text-[11px] px-2.5 py-1 rounded bg-ash-800 text-amber-300 border border-ash-700 font-medium">
-                                    ✓ {doc}
+                                  <span key={dIdx} className="text-[11px] px-2.5 py-1 rounded-[6px] bg-[#2B2A29] text-[#E5DED2] border border-[#A39382]/40 font-medium flex items-center gap-1">
+                                    <Icon name="check" className="w-3 h-3 text-[#E5DED2]" />
+                                    <span>{doc}</span>
                                   </span>
                                 ))}
                               </div>
@@ -892,29 +1082,32 @@
                         </div>
 
                         {/* Duplication & Conflict Detection */}
-                        <div className="bg-ash-850 border border-ash-700 p-6 rounded-2xl shadow-xl">
-                          <h3 className="text-xs font-extrabold text-ash-200 uppercase tracking-wider mb-4 flex items-center gap-2">
-                            <Icon name="shield" className="w-4 h-4 text-amber-400" />
-                            <span>Conflict Detection & Safeguards ({convergenceResult.duplications_and_conflicts.length})</span>
+                        <div className="card-institutional p-6 space-y-4">
+                          <span className="text-xs uppercase tracking-[0.08em] text-[#A39382] font-medium block">
+                            POLICY FRICTIONS & DUPLICATION
+                          </span>
+                          <h3 className="text-base font-semibold text-[#FBF7F4]">
+                            Conflict Detection & Safeguards ({convergenceResult.duplications_and_conflicts.length})
                           </h3>
 
                           <div className="space-y-3">
                             {convergenceResult.duplications_and_conflicts.map((conf, cIdx) => (
-                              <div key={cIdx} className="bg-ash-900 border border-amber-600/40 p-3.5 rounded-xl text-xs space-y-1">
+                              <div key={cIdx} className="bg-[#383634]/60 border border-[rgba(104,93,84,0.45)] p-3.5 rounded-[10px] text-xs space-y-1">
                                 <div className="flex items-center justify-between">
-                                  <span className="font-extrabold text-amber-300">{conf.title}</span>
-                                  <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-amber-950 text-amber-400 border border-amber-700">
+                                  <span className="font-semibold text-[#E5DED2]">{conf.title}</span>
+                                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-[4px] bg-[#E5DED2]/15 text-[#E5DED2] border border-[#E5DED2]/30">
                                     {conf.severity}
                                   </span>
                                 </div>
-                                <p className="text-ash-300 text-[11px] leading-relaxed">{conf.details}</p>
-                                <p className="text-emerald-400 text-[11px] pt-1 font-semibold">
+                                <p className="text-[#E5DED2] text-[11px] leading-relaxed">{conf.details}</p>
+                                <p className="text-[#FBF7F4] text-[11px] pt-1 font-medium">
                                   <b>Mandated Safeguard:</b> {conf.safeguard_action}
                                 </p>
                               </div>
                             ))}
                           </div>
                         </div>
+
                       </div>
 
                     </div>
@@ -926,79 +1119,67 @@
               {/* TAB 2: EXECUTIVE DASHBOARD */}
               {activeTab === 'dashboard' && (
                 <div className="space-y-8">
-                  {/* Dashboard Header */}
-                  <div className="bg-ash-850 border border-ash-700 p-6 sm:p-8 rounded-3xl shadow-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                  <div className="card-institutional p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                     <div>
-                      <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                      <span className="text-xs uppercase tracking-[0.08em] text-[#A39382] font-medium block">
+                        ANALYTICS OVERVIEW
+                      </span>
+                      <h2 className="text-2xl font-semibold tracking-[-0.02em] text-[#FBF7F4] mt-0.5">
                         Executive Scheme & District Intelligence
                       </h2>
-                      <p className="text-xs sm:text-sm text-ash-400 mt-1">
+                      <p className="text-xs sm:text-sm text-[#E5DED2] mt-1">
                         High-level implementation indicators across Central ministries and Madhya Pradesh state departments.
                       </p>
                     </div>
-                    <div className="px-3.5 py-1.5 rounded-xl bg-ash-900 border border-ash-700 text-xs font-mono text-amber-300">
+                    <div className="px-3.5 py-1.5 rounded-[10px] bg-[#383634] border border-[rgba(104,93,84,0.45)] text-xs font-mono text-[#E5DED2]">
                       Pilot: Sehore, MP • Bhopal Division
                     </div>
                   </div>
 
-                  {/* 4 Metric Cards */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <div className="bg-ash-850 border border-ash-700 p-5 rounded-2xl shadow-xl">
-                      <span className="text-[10px] font-bold text-ash-400 uppercase tracking-wider">Active Verified Schemes</span>
-                      <div className="text-3xl font-extrabold text-white mt-1">25 Schemes</div>
-                      <p className="text-xs text-amber-400 mt-1 font-semibold">Central + MP State Gazetted</p>
+                    <div className="card-institutional p-5">
+                      <span className="text-[11px] uppercase tracking-[0.08em] text-[#A39382] font-medium block">Active Verified Schemes</span>
+                      <div className="text-2xl font-semibold text-[#FBF7F4] mt-1">25 Schemes</div>
+                      <p className="text-xs text-[#E5DED2] mt-1 font-medium">Central + MP State Gazetted</p>
                     </div>
 
-                    <div className="bg-ash-850 border border-ash-700 p-5 rounded-2xl shadow-xl">
-                      <span className="text-[10px] font-bold text-ash-400 uppercase tracking-wider">Convergence Links</span>
-                      <div className="text-3xl font-extrabold text-emerald-400 mt-1">13 Rules</div>
-                      <p className="text-xs text-ash-400 mt-1">Co-funding, complementary & sequential</p>
+                    <div className="card-institutional p-5">
+                      <span className="text-[11px] uppercase tracking-[0.08em] text-[#A39382] font-medium block">Convergence Rules</span>
+                      <div className="text-2xl font-semibold text-[#FBF7F4] mt-1">13 Rules</div>
+                      <p className="text-xs text-[#E5DED2] mt-1">Co-funding, complementary & sequential</p>
                     </div>
 
-                    <div className="bg-ash-850 border border-ash-700 p-5 rounded-2xl shadow-xl">
-                      <span className="text-[10px] font-bold text-ash-400 uppercase tracking-wider">Pilot District Readiness</span>
-                      <div className="text-3xl font-extrabold text-cyan-400 mt-1">94.5%</div>
-                      <p className="text-xs text-ash-400 mt-1">Sehore District, Madhya Pradesh</p>
+                    <div className="card-institutional p-5">
+                      <span className="text-[11px] uppercase tracking-[0.08em] text-[#A39382] font-medium block">Pilot Readiness Index</span>
+                      <div className="text-2xl font-semibold font-mono text-[#E5DED2] mt-1">94.5%</div>
+                      <p className="text-xs text-[#E5DED2] mt-1">Sehore District, Madhya Pradesh</p>
                     </div>
 
-                    <div className="bg-ash-850 border border-ash-700 p-5 rounded-2xl shadow-xl">
-                      <span className="text-[10px] font-bold text-ash-400 uppercase tracking-wider">Development Objectives</span>
-                      <div className="text-3xl font-extrabold text-purple-400 mt-1">4 Objectives</div>
-                      <p className="text-xs text-ash-400 mt-1">Farmer, Women, Habitat & Artisan</p>
+                    <div className="card-institutional p-5">
+                      <span className="text-[11px] uppercase tracking-[0.08em] text-[#A39382] font-medium block">Development Objectives</span>
+                      <div className="text-2xl font-semibold text-[#FBF7F4] mt-1">4 Objectives</div>
+                      <p className="text-xs text-[#E5DED2] mt-1">Farmer, Women, Habitat & Artisan</p>
                     </div>
                   </div>
 
-                  {/* Team SEG-6 Banner */}
-                  <div className="bg-ash-850 border border-ash-700 p-6 rounded-2xl shadow-xl">
-                    <h3 className="text-xs font-extrabold text-ash-300 uppercase tracking-wider mb-4">
-                      Project SEG-6 Team & Module Distribution
-                    </h3>
+                  <div className="card-institutional p-6">
+                    <span className="text-xs uppercase tracking-[0.08em] text-[#A39382] font-medium block mb-3">
+                      PROJECT SEG-6 TEAM & CORE MODULE ROSTER
+                    </span>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 text-xs">
-                      <div className="bg-ash-900 border border-ash-700 p-3 rounded-xl">
-                        <div className="font-extrabold text-white">Aryan Lohri</div>
-                        <div className="text-ember-400 text-[11px] font-bold">Frontend Development</div>
-                        <p className="text-ash-400 text-[11px] mt-1">Dashboard & search UI</p>
-                      </div>
-                      <div className="bg-ash-900 border border-ash-700 p-3 rounded-xl">
-                        <div className="font-extrabold text-white">Abhiraj Kumar</div>
-                        <div className="text-ember-400 text-[11px] font-bold">Backend Development</div>
-                        <p className="text-ash-400 text-[11px] mt-1">FastAPI & API schemas</p>
-                      </div>
-                      <div className="bg-ash-900 border border-ember-600/60 p-3 rounded-xl bg-ember-950/20">
-                        <div className="font-extrabold text-amber-300">Milan Kohli</div>
-                        <div className="text-amber-400 text-[11px] font-bold">ML / Data Science</div>
-                        <p className="text-ash-400 text-[11px] mt-1">Convergence logic & synergy</p>
-                      </div>
-                      <div className="bg-ash-900 border border-ash-700 p-3 rounded-xl">
-                        <div className="font-extrabold text-white">Kamal Gangwar</div>
-                        <div className="text-ember-400 text-[11px] font-bold">Database & Collection</div>
-                        <p className="text-ash-400 text-[11px] mt-1">Scheme dataset & cleaning</p>
-                      </div>
-                      <div className="bg-ash-900 border border-ash-700 p-3 rounded-xl">
-                        <div className="font-extrabold text-white">Arsalan</div>
-                        <div className="text-ember-400 text-[11px] font-bold">Visualization & Integration</div>
-                        <p className="text-ash-400 text-[11px] mt-1">Network graphs & PDF reports</p>
-                      </div>
+                      {[
+                        { name: 'Aryan Lohri', role: 'Frontend Architecture', focus: 'Dashboard & convergence UX' },
+                        { name: 'Abhiraj Kumar', role: 'Backend Engineering', focus: 'FastAPI & schema validation' },
+                        { name: 'Milan Kohli', role: 'Data Science / Logic', focus: 'Convergence scoring algorithms' },
+                        { name: 'Kamal Gangwar', role: 'Database & Registry', focus: 'Gazetted dataset & verification' },
+                        { name: 'Arsalan', role: 'Visualization & Reports', focus: 'Network topology & PDF reports' }
+                      ].map((member, i) => (
+                        <div key={i} className="bg-[#383634]/60 border border-[rgba(104,93,84,0.45)] p-3 rounded-[10px]">
+                          <div className="font-semibold text-[#FBF7F4]">{member.name}</div>
+                          <div className="text-[#E5DED2] text-[11px] font-medium">{member.role}</div>
+                          <p className="text-[#A39382] text-[11px] mt-1">{member.focus}</p>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -1008,23 +1189,23 @@
               {activeTab === 'database' && (
                 <div className="space-y-6">
                   {/* Search and Filters */}
-                  <div className="bg-ash-850 border border-ash-700 p-6 rounded-2xl shadow-xl space-y-4">
+                  <div className="card-institutional p-6 space-y-4">
                     <div className="flex flex-col sm:flex-row gap-3">
                       <div className="relative flex-1">
-                        <Icon name="search" className="w-4 h-4 absolute left-3.5 top-3.5 text-ash-400" />
+                        <Icon name="search" className="w-4 h-4 absolute left-3.5 top-3 text-[#A39382]" />
                         <input
                           type="text"
                           placeholder="Search schemes by name, keyword, department, or benefits..."
                           value={searchQuery}
                           onChange={e => setSearchQuery(e.target.value)}
-                          className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-ash-900 border border-ash-700 text-xs text-white placeholder-ash-400 focus:outline-none focus:border-ember-500"
+                          className="w-full h-10 pl-10 pr-4 rounded-[10px] bg-[#383634] border border-[rgba(104,93,84,0.45)] text-xs text-[#FBF7F4] placeholder-[#A39382] focus:outline-none focus:border-[#E5DED2]/60"
                         />
                       </div>
 
                       <select
                         value={filterSector}
                         onChange={e => setFilterSector(e.target.value)}
-                        className="px-3.5 py-2.5 rounded-xl bg-ash-900 border border-ash-700 text-xs text-ash-100 font-semibold focus:outline-none focus:border-ember-500"
+                        className="h-10 px-3.5 rounded-[10px] bg-[#383634] border border-[rgba(104,93,84,0.45)] text-xs text-[#FBF7F4] font-medium focus:outline-none focus:border-[#E5DED2]/60"
                       >
                         <option value="All">All Sectors</option>
                         <option value="Agriculture">Agriculture & Allied</option>
@@ -1037,7 +1218,7 @@
                       <select
                         value={filterLevel}
                         onChange={e => setFilterLevel(e.target.value)}
-                        className="px-3.5 py-2.5 rounded-xl bg-ash-900 border border-ash-700 text-xs text-ash-100 font-semibold focus:outline-none focus:border-ember-500"
+                        className="h-10 px-3.5 rounded-[10px] bg-[#383634] border border-[rgba(104,93,84,0.45)] text-xs text-[#FBF7F4] font-medium focus:outline-none focus:border-[#E5DED2]/60"
                       >
                         <option value="All">All Levels</option>
                         <option value="Central">Central Sector</option>
@@ -1046,9 +1227,9 @@
                       </select>
                     </div>
 
-                    <div className="flex items-center justify-between text-xs text-ash-400 pt-2 border-t border-ash-800">
+                    <div className="flex items-center justify-between text-xs text-[#E5DED2] pt-2 border-t border-[rgba(104,93,84,0.45)]">
                       <span>Showing <b>{filteredSchemes.length}</b> verified schemes</span>
-                      <span className="text-emerald-400 font-semibold">100% verified against Official Gazette & Open Data APIs</span>
+                      <span className="text-[#FBF7F4] font-medium">100% verified against Official Gazette & Open Data APIs</span>
                     </div>
                   </div>
 
@@ -1058,36 +1239,36 @@
                       <div
                         key={s.id}
                         onClick={() => setSelectedScheme(s)}
-                        className="bg-ash-850 border border-ash-700 hover:border-ember-500/60 p-5 rounded-2xl shadow-xl transition-all cursor-pointer flex flex-col justify-between group hover:scale-[1.01]"
+                        className="card-institutional card-institutional-hover p-5 cursor-pointer flex flex-col justify-between group"
                       >
                         <div>
                           <div className="flex items-center justify-between gap-2 mb-2">
-                            <span className="text-[10px] font-extrabold px-2 py-0.5 rounded bg-ash-900 text-ember-400 border border-ash-700 font-mono">
+                            <span className="text-[10px] font-mono px-2 py-0.5 rounded-[4px] bg-[#383634] text-[#E5DED2] border border-[rgba(104,93,84,0.45)] font-semibold">
                               {s.code}
                             </span>
-                            <span className="text-[10px] font-bold text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-800/60">
+                            <span className="text-[10px] font-medium text-[#E5DED2] bg-[#383634] px-2 py-0.5 rounded-[4px] border border-[rgba(104,93,84,0.45)]">
                               {s.level}
                             </span>
                           </div>
 
-                          <h3 className="text-sm font-extrabold text-white group-hover:text-amber-300 transition-colors">
+                          <h3 className="text-sm font-semibold text-[#FBF7F4] group-hover:text-[#E5DED2] transition-colors">
                             {s.name}
                           </h3>
                           {s.hindi_name && (
-                            <p className="text-[11px] text-ash-400 mt-0.5 font-sans">{s.hindi_name}</p>
+                            <p className="text-[11px] text-[#A39382] mt-0.5">{s.hindi_name}</p>
                           )}
 
-                          <p className="text-xs text-ash-300 mt-2 line-clamp-3 leading-relaxed">
+                          <p className="text-xs text-[#E5DED2] mt-2 line-clamp-3 leading-relaxed">
                             {s.description}
                           </p>
                         </div>
 
-                        <div className="mt-4 pt-3 border-t border-ash-700/70 text-xs">
-                          <div className="text-[11px] text-ash-400 truncate">
+                        <div className="mt-4 pt-3 border-t border-[rgba(104,93,84,0.45)] text-xs">
+                          <div className="text-[11px] text-[#A39382] truncate">
                             <b>Ministry:</b> {s.ministry}
                           </div>
                           {s.official_portal_domain && (
-                            <div className="text-[11px] text-cyan-400 mt-1 font-mono">
+                            <div className="text-[11px] text-[#E5DED2] mt-1 font-mono">
                               🌐 {s.official_portal_domain}
                             </div>
                           )}
@@ -1098,102 +1279,76 @@
                 </div>
               )}
 
-              {/* TAB 4: AUTHENTIC SOURCES & LIVE GOVT APIS (BRAND NEW MODULE) */}
+              {/* TAB 4: AUTHENTIC SOURCES & LIVE GOVT APIS */}
               {activeTab === 'sources' && (
                 <div className="space-y-8">
-                  {/* Module Header */}
-                  <div className="bg-ash-850 border border-ash-700 p-6 sm:p-8 rounded-3xl shadow-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                  <div className="card-institutional p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                     <div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-[11px] font-extrabold px-2.5 py-0.5 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-700 uppercase tracking-wider font-mono">
+                      <div className="flex items-center gap-2 mb-1.5">
+                        <span className="text-[10px] font-mono px-2 py-0.5 rounded-[4px] bg-[#383634] text-[#E5DED2] border border-[#A39382]/40 uppercase">
                           Authenticity & Verification Engine
                         </span>
-                        <span className="text-xs text-ash-400">Govt of India & MP State Portals</span>
+                        <span className="text-xs text-[#A39382]">Govt of India & MP State Portals</span>
                       </div>
-                      <h2 className="text-2xl sm:text-3xl font-extrabold text-white mt-2 tracking-tight">
+                      <h2 className="text-2xl font-semibold tracking-[-0.02em] text-[#FBF7F4]">
                         Live Government APIs & Gazette Reference Registry
                       </h2>
-                      <p className="text-xs sm:text-sm text-ash-300 mt-1.5 max-w-2xl leading-relaxed">
-                        CIVORA does not rely on hypothetical data. All eligibility criteria, benefit amounts, 
-                        and convergence directives are mapped directly to official Open Government Data endpoints, 
-                        National API Gateways, and Gazetted inter-ministerial circulars.
+                      <p className="text-xs sm:text-sm text-[#E5DED2] mt-1.5 max-w-2xl leading-relaxed">
+                        CIVORA maps eligibility criteria, benefit amounts, and convergence directives directly to official Open Government Data endpoints, National API Gateways, and Gazetted circulars.
                       </p>
                     </div>
 
                     <button
                       onClick={testApiConnectivity}
                       disabled={testingPing}
-                      className="px-5 py-3.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-extrabold shadow-xl shadow-emerald-950/60 flex items-center justify-center gap-2.5 transition-all hover:scale-[1.02] border border-emerald-400/40 shrink-0 disabled:opacity-50"
+                      className="px-4 py-2 rounded-[10px] border border-[#A39382]/70 text-[#E5DED2] bg-transparent hover:bg-[#E5DED2]/10 text-xs font-semibold flex items-center justify-center gap-2 transition-all shrink-0 disabled:opacity-50"
                     >
-                      <Icon name="zap" className="w-4 h-4 text-amber-300" />
+                      <Icon name="zap" className="w-3.5 h-3.5 text-[#E5DED2]" />
                       <span>{testingPing ? 'Pinging Endpoints...' : 'Test Live API Endpoints'}</span>
                     </button>
                   </div>
 
-                  {/* API Gateways Grid */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {(authenticSources?.primary_portals || authenticSources?.official_api_registries || []).map(api => (
-                      <div key={api.id} className="bg-ash-850 border border-ash-700 p-6 rounded-2xl shadow-xl space-y-4">
+                      <div key={api.id} className="card-institutional p-6 space-y-4">
                         <div className="flex items-start justify-between">
                           <div>
-                            <span className="text-[10px] font-extrabold px-2 py-0.5 rounded bg-ash-900 text-amber-400 border border-ash-700 font-mono">
+                            <span className="text-[10px] font-mono px-2 py-0.5 rounded-[4px] bg-[#383634] text-[#E5DED2] border border-[rgba(104,93,84,0.45)]">
                               {api.authority}
                             </span>
-                            <h3 className="text-base font-extrabold text-white mt-1.5">{api.name}</h3>
-                            <a href={api.base_url} target="_blank" rel="noreferrer" className="text-xs text-cyan-400 hover:underline font-mono">
+                            <h3 className="text-base font-semibold text-[#FBF7F4] mt-1.5">{api.name}</h3>
+                            <a href={api.base_url} target="_blank" rel="noreferrer" className="text-xs text-[#E5DED2] hover:underline font-mono">
                               {api.base_url} ↗
                             </a>
                           </div>
                           
-                          {/* Live Ping Badge */}
+                          {/* Live Status Indicators (Success Color) */}
                           {pingResults[api.id] ? (
-                            <div className="px-2.5 py-1 rounded-full bg-emerald-950 border border-emerald-700 text-emerald-400 text-[10px] font-bold font-mono">
-                              ● {pingResults[api.id].latency}
+                            <div className="px-2.5 py-1 rounded-[6px] bg-[#6FCF97]/10 border border-[#6FCF97]/30 text-[#6FCF97] text-[10px] font-mono font-medium flex items-center gap-1.5">
+                              <span className="w-1.5 h-1.5 rounded-full bg-[#6FCF97]"></span>
+                              <span>{pingResults[api.id].latency}</span>
                             </div>
                           ) : (
-                            <div className="px-2.5 py-1 rounded-full bg-ash-900 border border-ash-700 text-ash-400 text-[10px] font-mono">
+                            <div className="px-2.5 py-1 rounded-[6px] bg-[#383634] border border-[rgba(104,93,84,0.45)] text-[#A39382] text-[10px] font-mono">
                               Idle
                             </div>
                           )}
                         </div>
 
-                        <div className="space-y-2 pt-2 border-t border-ash-700">
-                          <span className="text-[10px] font-bold text-ash-400 uppercase tracking-wider block">
+                        <div className="space-y-2 pt-2 border-t border-[rgba(104,93,84,0.45)]">
+                          <span className="text-[10px] uppercase tracking-[0.08em] text-[#A39382] font-medium block">
                             Integrated Feed Endpoints:
                           </span>
                           {(api.endpoints || []).map((ep, idx) => (
-                            <div key={idx} className="bg-ash-900 p-2.5 rounded-xl border border-ash-750 text-xs">
-                              <div className="font-bold text-ash-100">{ep.title}</div>
-                              <div className="text-[11px] text-ash-400 font-mono mt-0.5 truncate">{ep.url}</div>
-                              <p className="text-[11px] text-amber-300/80 mt-1">{ep.description || ep.ministry || ep.update_cadence}</p>
+                            <div key={idx} className="bg-[#383634]/60 p-2.5 rounded-[10px] border border-[rgba(104,93,84,0.3)] text-xs">
+                              <div className="font-semibold text-[#FBF7F4]">{ep.title}</div>
+                              <div className="text-[11px] text-[#A39382] font-mono mt-0.5 truncate">{ep.url}</div>
+                              <p className="text-[11px] text-[#E5DED2] mt-1">{ep.description || ep.ministry || ep.update_cadence}</p>
                             </div>
                           ))}
                         </div>
                       </div>
                     ))}
-                  </div>
-
-                  {/* Gazetted Convergence Directives */}
-                  <div className="bg-ash-850 border border-ash-700 p-6 sm:p-8 rounded-2xl shadow-xl space-y-4">
-                    <h3 className="text-sm font-extrabold text-white uppercase tracking-wider flex items-center gap-2">
-                      <Icon name="shield" className="w-4 h-4 text-ember-400" />
-                      <span>Legally Binding Inter-Ministerial Convergence Directives</span>
-                    </h3>
-
-                    <div className="space-y-3">
-                      {(authenticSources?.official_convergence_policy_mandates || []).map((m, idx) => (
-                        <div key={idx} className="bg-ash-900 border border-ash-700 p-4 rounded-xl text-xs space-y-1">
-                          <div className="flex items-center justify-between">
-                            <span className="font-extrabold text-amber-300 text-sm">{m.directive}</span>
-                            <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-ash-800 text-ash-300 border border-ash-700">
-                              {m.gazette_id}
-                            </span>
-                          </div>
-                          <div className="text-ash-400 font-semibold">{m.issuing_authority}</div>
-                          <p className="text-ash-200 text-xs pt-1 leading-relaxed"><b>Mandate:</b> {m.core_mandate}</p>
-                        </div>
-                      ))}
-                    </div>
                   </div>
                 </div>
               )}
@@ -1201,33 +1356,36 @@
               {/* TAB 5: ELIGIBILITY CHECKER */}
               {activeTab === 'eligibility' && (
                 <div className="space-y-8">
-                  {/* Header */}
-                  <div className="bg-ash-850 border border-ash-700 p-6 sm:p-8 rounded-3xl shadow-2xl">
-                    <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                  <div className="card-institutional p-6 sm:p-8">
+                    <span className="text-xs uppercase tracking-[0.08em] text-[#A39382] font-medium block mb-1">
+                      CITIZEN & FIELD OFFICER DIAGNOSTICS
+                    </span>
+                    <h2 className="text-2xl font-semibold tracking-[-0.02em] text-[#FBF7F4]">
                       Beneficiary Eligibility Checker
                     </h2>
-                    <p className="text-xs sm:text-sm text-ash-300 mt-1 max-w-2xl leading-relaxed">
+                    <p className="text-xs sm:text-sm text-[#E5DED2] mt-1 max-w-2xl leading-relaxed">
                       Evaluate individual beneficiary parameters (landholding, income, social category, location) against verified Central & MP state scheme eligibility rules.
                     </p>
                   </div>
 
                   <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    {/* Input Profile Form */}
-                    <div className="bg-ash-850 border border-ash-700 p-6 rounded-2xl shadow-xl space-y-4">
-                      <h3 className="text-xs font-extrabold text-amber-300 uppercase tracking-wider">Beneficiary Parameters</h3>
+                    <div className="card-institutional p-6 space-y-4">
+                      <span className="text-xs uppercase tracking-[0.08em] text-[#A39382] font-medium block">
+                        BENEFICIARY PARAMETERS
+                      </span>
                       
                       <div className="space-y-3 text-xs">
                         <div>
-                          <label className="text-ash-400 block mb-1">State & District</label>
-                          <input type="text" disabled value="Madhya Pradesh • Sehore" className="w-full p-2.5 rounded-xl bg-ash-900 border border-ash-700 text-ash-300 font-bold" />
+                          <label className="text-xs uppercase tracking-[0.08em] text-[#A39382] font-medium block mb-1">State & District</label>
+                          <input type="text" disabled value="Madhya Pradesh • Sehore" className="w-full h-10 px-3 rounded-[10px] bg-[#383634] border border-[rgba(104,93,84,0.45)] text-[#E5DED2] font-medium" />
                         </div>
 
                         <div>
-                          <label className="text-ash-400 block mb-1">Occupation</label>
+                          <label className="text-xs uppercase tracking-[0.08em] text-[#A39382] font-medium block mb-1">Occupation</label>
                           <select
                             value={eligibilityForm.occupation}
                             onChange={e => setEligibilityForm({...eligibilityForm, occupation: e.target.value})}
-                            className="w-full p-2.5 rounded-xl bg-ash-900 border border-ash-700 text-white font-semibold"
+                            className="w-full h-10 px-3 rounded-[10px] bg-[#383634] border border-[rgba(104,93,84,0.45)] text-[#FBF7F4] font-medium focus:outline-none focus:border-[#E5DED2]"
                           >
                             <option value="Farmer">Farmer (Cultivator)</option>
                             <option value="Agricultural Laborer">Agricultural Laborer</option>
@@ -1237,33 +1395,33 @@
                         </div>
 
                         <div>
-                          <label className="text-ash-400 block mb-1">Cultivable Landholding (Acres)</label>
+                          <label className="text-xs uppercase tracking-[0.08em] text-[#A39382] font-medium block mb-1">Cultivable Landholding (Acres)</label>
                           <input
                             type="number"
                             step="0.5"
                             value={eligibilityForm.landholding_acres}
                             onChange={e => setEligibilityForm({...eligibilityForm, landholding_acres: parseFloat(e.target.value) || 0})}
-                            className="w-full p-2.5 rounded-xl bg-ash-900 border border-ash-700 text-white font-bold"
+                            className="w-full h-10 px-3 rounded-[10px] bg-[#383634] border border-[rgba(104,93,84,0.45)] text-[#FBF7F4] font-medium focus:outline-none focus:border-[#E5DED2]"
                           />
                         </div>
 
                         <div>
-                          <label className="text-ash-400 block mb-1">Annual Household Income (₹)</label>
+                          <label className="text-xs uppercase tracking-[0.08em] text-[#A39382] font-medium block mb-1">Annual Household Income (₹)</label>
                           <input
                             type="number"
                             step="5000"
                             value={eligibilityForm.annual_income}
                             onChange={e => setEligibilityForm({...eligibilityForm, annual_income: parseFloat(e.target.value) || 0})}
-                            className="w-full p-2.5 rounded-xl bg-ash-900 border border-ash-700 text-white font-bold font-mono"
+                            className="w-full h-10 px-3 rounded-[10px] bg-[#383634] border border-[rgba(104,93,84,0.45)] text-[#FBF7F4] font-mono font-medium focus:outline-none focus:border-[#E5DED2]"
                           />
                         </div>
 
                         <div>
-                          <label className="text-ash-400 block mb-1">Social Category</label>
+                          <label className="text-xs uppercase tracking-[0.08em] text-[#A39382] font-medium block mb-1">Social Category</label>
                           <select
                             value={eligibilityForm.social_category}
                             onChange={e => setEligibilityForm({...eligibilityForm, social_category: e.target.value})}
-                            className="w-full p-2.5 rounded-xl bg-ash-900 border border-ash-700 text-white font-semibold"
+                            className="w-full h-10 px-3 rounded-[10px] bg-[#383634] border border-[rgba(104,93,84,0.45)] text-[#FBF7F4] font-medium focus:outline-none focus:border-[#E5DED2]"
                           >
                             <option value="General">General</option>
                             <option value="OBC">OBC</option>
@@ -1275,27 +1433,26 @@
                         <button
                           onClick={runEligibilityCheck}
                           disabled={evaluatingEligibility}
-                          className="w-full py-3 rounded-xl bg-gradient-to-r from-ember-600 to-amber-600 hover:from-ember-500 text-white font-bold text-xs shadow-lg mt-2 transition-all"
+                          className="w-full h-10 rounded-[10px] border border-[#A39382]/70 text-[#E5DED2] bg-transparent hover:bg-[#E5DED2]/10 font-semibold text-xs transition-all mt-3"
                         >
                           {evaluatingEligibility ? 'Evaluating Rules...' : 'Re-Evaluate Eligibility'}
                         </button>
                       </div>
                     </div>
 
-                    {/* Results Display */}
                     <div className="lg:col-span-2 space-y-4">
                       {eligibilityResult && (
                         <div className="space-y-4">
-                          <div className="bg-ash-850 border border-ash-700 p-5 rounded-2xl shadow-xl flex items-center justify-between">
+                          <div className="card-institutional p-5 flex items-center justify-between">
                             <div>
-                              <span className="text-xs text-ash-400">Total Potentially Applicable Schemes:</span>
-                              <div className="text-2xl font-extrabold text-emerald-400">
+                              <span className="text-xs text-[#A39382]">Applicable Schemes:</span>
+                              <div className="text-xl font-semibold text-[#FBF7F4]">
                                 {eligibilityResult.summary?.fully_eligible_count ?? eligibilityResult.total_eligible_schemes ?? (eligibilityResult.recommendations?.filter(r => r.status === 'Eligible').length ?? 0)} Schemes
                               </div>
                             </div>
                             <div className="text-right">
-                              <span className="text-xs text-ash-400">Total Annual Direct Benefits:</span>
-                              <div className="text-2xl font-extrabold text-amber-300 font-mono">
+                              <span className="text-xs text-[#A39382]">Estimated Direct Benefits:</span>
+                              <div className="text-xl font-semibold font-mono text-[#E5DED2]">
                                 ₹{((eligibilityResult.summary?.total_potential_benefit_inr ?? eligibilityResult.total_estimated_annual_benefits_inr ?? 0)).toLocaleString()}
                               </div>
                             </div>
@@ -1303,39 +1460,31 @@
 
                           <div className="space-y-3">
                             {(eligibilityResult.recommendations || eligibilityResult.eligible_schemes || []).map((s, idx) => (
-                              <div key={s.scheme_id || idx} className="bg-ash-850 border border-ash-700 p-4 rounded-xl flex items-start justify-between gap-4">
+                              <div key={s.scheme_id || idx} className="card-institutional p-4 flex items-start justify-between gap-4">
                                 <div className="space-y-1">
                                   <div className="flex items-center gap-2">
-                                    <span className="text-[10px] font-extrabold px-1.5 py-0.5 rounded bg-ash-900 text-ember-400 border border-ash-700 font-mono">
+                                    <span className="text-[10px] font-mono px-1.5 py-0.5 rounded-[4px] bg-[#383634] text-[#E5DED2] border border-[rgba(104,93,84,0.45)]">
                                       {s.code || s.scheme_code}
                                     </span>
-                                    <h4 className="text-sm font-bold text-white">{s.name || s.scheme_name}</h4>
+                                    <h4 className="text-sm font-semibold text-[#FBF7F4]">{s.name || s.scheme_name}</h4>
                                     {(s.department || s.sector) && (
-                                      <span className="text-xs text-ash-400">({s.department || s.sector})</span>
+                                      <span className="text-xs text-[#A39382]">({s.department || s.sector})</span>
                                     )}
                                   </div>
-                                  <p className="text-xs text-ash-300">{s.benefit_description || s.benefit_summary}</p>
+                                  <p className="text-xs text-[#E5DED2]">{s.benefit_description || s.benefit_summary}</p>
                                   {s.reasons_eligible && s.reasons_eligible.length > 0 && (
-                                    <div className="text-[11px] text-emerald-400/90 pt-0.5">
-                                      ✓ {s.reasons_eligible.slice(0, 3).join(' • ')}
-                                    </div>
-                                  )}
-                                  {s.required_documents && s.required_documents.length > 0 && (
-                                    <div className="text-[10px] text-ash-400">
-                                      <b>Required:</b> {s.required_documents.join(', ')}
+                                    <div className="text-[11px] text-[#E5DED2] pt-0.5 flex items-center gap-1">
+                                      <Icon name="check" className="w-3 h-3 text-[#E5DED2]" />
+                                      <span>{s.reasons_eligible.slice(0, 3).join(' • ')}</span>
                                     </div>
                                   )}
                                 </div>
                                 <div className="text-right shrink-0">
-                                  <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold ${
-                                    s.status === 'Eligible' || (s.match_score >= 80)
-                                      ? 'bg-emerald-950 text-emerald-400 border border-emerald-700'
-                                      : 'bg-amber-950 text-amber-400 border border-amber-700'
-                                  }`}>
-                                    {s.status === 'Eligible' ? '✓ Matched' : `${s.match_score || 0}% Score`}
+                                  <span className="px-2.5 py-0.5 rounded-[6px] text-[10px] font-mono bg-[#383634] text-[#E5DED2] border border-[#A39382]/40">
+                                    {s.status === 'Eligible' ? 'Matched' : `${s.match_score || 0}%`}
                                   </span>
                                   {s.potential_benefit_inr > 0 && (
-                                    <div className="text-xs font-mono font-bold text-amber-300 mt-1">
+                                    <div className="text-xs font-mono font-semibold text-[#E5DED2] mt-1">
                                       ₹{Number(s.potential_benefit_inr).toLocaleString()}
                                     </div>
                                   )}
@@ -1353,40 +1502,43 @@
               {/* TAB 6: DISTRICT PILOT (SEHORE, MP) */}
               {activeTab === 'district' && (
                 <div className="space-y-8">
-                  <div className="bg-ash-850 border border-ash-700 p-6 sm:p-8 rounded-3xl shadow-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                  <div className="card-institutional p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                     <div>
-                      <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                      <span className="text-xs uppercase tracking-[0.08em] text-[#A39382] font-medium block mb-1">
+                        PILOT IMPLEMENTATION DATA
+                      </span>
+                      <h2 className="text-2xl font-semibold tracking-[-0.02em] text-[#FBF7F4]">
                         Sehore District Dashboard • Madhya Pradesh
                       </h2>
-                      <p className="text-xs sm:text-sm text-ash-400 mt-1">
+                      <p className="text-xs sm:text-sm text-[#E5DED2] mt-1">
                         High-resolution operational metrics, block-wise agricultural indicators, and convergence infrastructure.
                       </p>
                     </div>
-                    <span className="px-3.5 py-1.5 rounded-xl bg-emerald-950 text-emerald-400 border border-emerald-700 font-mono text-xs font-bold">
+                    <span className="px-3 py-1.5 rounded-[10px] bg-[#383634] text-[#E5DED2] border border-[#A39382]/40 font-mono text-xs font-semibold">
                       Readiness Score: 94.5 / 100
                     </span>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <div className="bg-ash-850 border border-ash-700 p-5 rounded-2xl shadow-xl">
-                      <span className="text-[10px] font-bold text-ash-400 uppercase tracking-wider">Farming Families</span>
-                      <div className="text-2xl font-extrabold text-white mt-1">1,38,400</div>
-                      <p className="text-xs text-amber-400 mt-1">76.8% Small &amp; Marginal (&lt; 2 Ha)</p>
+                    <div className="card-institutional p-5">
+                      <span className="text-[11px] uppercase tracking-[0.08em] text-[#A39382] font-medium block">Farming Families</span>
+                      <div className="text-2xl font-semibold text-[#FBF7F4] mt-1">1,38,400</div>
+                      <p className="text-xs text-[#E5DED2] mt-1">76.8% Small &amp; Marginal (&lt; 2 Ha)</p>
                     </div>
-                    <div className="bg-ash-850 border border-ash-700 p-5 rounded-2xl shadow-xl">
-                      <span className="text-[10px] font-bold text-ash-400 uppercase tracking-wider">Administrative Blocks</span>
-                      <div className="text-2xl font-extrabold text-white mt-1">5 Blocks</div>
-                      <p className="text-xs text-ash-400 mt-1">Ashta, Ichhawar, Sehore, Budhni, Bherunda</p>
+                    <div className="card-institutional p-5">
+                      <span className="text-[11px] uppercase tracking-[0.08em] text-[#A39382] font-medium block">Administrative Blocks</span>
+                      <div className="text-2xl font-semibold text-[#FBF7F4] mt-1">5 Blocks</div>
+                      <p className="text-xs text-[#E5DED2] mt-1">Ashta, Ichhawar, Sehore, Budhni, Bherunda</p>
                     </div>
-                    <div className="bg-ash-850 border border-ash-700 p-5 rounded-2xl shadow-xl">
-                      <span className="text-[10px] font-bold text-ash-400 uppercase tracking-wider">PM-KISAN Enrolled</span>
-                      <div className="text-2xl font-extrabold text-emerald-400 mt-1">1,18,420</div>
-                      <p className="text-xs text-ash-400 mt-1">99.2% Aadhaar Seeded Parity</p>
+                    <div className="card-institutional p-5">
+                      <span className="text-[11px] uppercase tracking-[0.08em] text-[#A39382] font-medium block">PM-KISAN Enrolled</span>
+                      <div className="text-2xl font-semibold text-[#E5DED2] mt-1">1,18,420</div>
+                      <p className="text-xs text-[#E5DED2] mt-1">99.2% Aadhaar Seeded Parity</p>
                     </div>
-                    <div className="bg-ash-850 border border-ash-700 p-5 rounded-2xl shadow-xl">
-                      <span className="text-[10px] font-bold text-ash-400 uppercase tracking-wider">Annual State Top-up</span>
-                      <div className="text-2xl font-extrabold text-cyan-400 mt-1">₹70.13 Cr</div>
-                      <p className="text-xs text-ash-400 mt-1">MMKKY 100% SAARA Integrated</p>
+                    <div className="card-institutional p-5">
+                      <span className="text-[11px] uppercase tracking-[0.08em] text-[#A39382] font-medium block">Annual State Top-up</span>
+                      <div className="text-2xl font-semibold font-mono text-[#FBF7F4] mt-1">₹70.13 Cr</div>
+                      <p className="text-xs text-[#E5DED2] mt-1">MMKKY 100% SAARA Integrated</p>
                     </div>
                   </div>
                 </div>
@@ -1397,11 +1549,11 @@
                 <div className="space-y-8">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div>
-                      <h2 className="text-2xl font-extrabold text-white tracking-tight flex items-center gap-2">
-                        <Icon name="settings" className="w-6 h-6 text-ember-400" />
+                      <h2 className="text-2xl font-semibold tracking-[-0.02em] text-[#FBF7F4] flex items-center gap-2">
+                        <Icon name="settings" className="w-5 h-5 text-[#E5DED2]" />
                         <span>Admin Control Panel & Policy Engine</span>
                       </h2>
-                      <p className="text-xs text-ash-400 mt-0.5">Manage scheme database, audit gazette citations, and verify database integrity</p>
+                      <p className="text-xs text-[#E5DED2] mt-0.5">Manage scheme database, audit gazette citations, and verify database integrity</p>
                     </div>
 
                     <button
@@ -1412,35 +1564,35 @@
                           window.location.reload();
                         }
                       }}
-                      className="px-4 py-2.5 rounded-xl bg-ash-800 hover:bg-ash-700 text-ash-100 text-xs font-bold border border-ash-700 transition-all"
+                      className="px-3.5 py-2 rounded-[10px] bg-[#383634] hover:bg-[#403E3C] text-[#FBF7F4] text-xs font-semibold border border-[rgba(104,93,84,0.45)] transition-all"
                     >
                       Reset to Official Baseline DB
                     </button>
                   </div>
 
-                  <div className="bg-ash-850 border border-ash-700 p-6 rounded-2xl shadow-xl">
-                    <h3 className="text-xs font-extrabold text-ash-300 uppercase tracking-wider mb-4">
+                  <div className="card-institutional p-6">
+                    <span className="text-xs uppercase tracking-[0.08em] text-[#A39382] font-medium block mb-4">
                       Active Schemes in Database ({schemes.length})
-                    </h3>
+                    </span>
                     <div className="overflow-x-auto">
                       <table className="w-full text-left text-xs">
                         <thead>
-                          <tr className="border-b border-ash-700 text-ash-400">
-                            <th className="pb-3 font-semibold">Code</th>
-                            <th className="pb-3 font-semibold">Name</th>
-                            <th className="pb-3 font-semibold">Gazette Reference</th>
-                            <th className="pb-3 font-semibold">Official Domain</th>
-                            <th className="pb-3 font-semibold">Sector</th>
+                          <tr className="border-b border-[rgba(104,93,84,0.45)] text-[#A39382]">
+                            <th className="pb-3 font-medium">Code</th>
+                            <th className="pb-3 font-medium">Name</th>
+                            <th className="pb-3 font-medium">Gazette Reference</th>
+                            <th className="pb-3 font-medium">Official Domain</th>
+                            <th className="pb-3 font-medium">Sector</th>
                           </tr>
                         </thead>
-                        <tbody className="divide-y divide-ash-800">
+                        <tbody className="divide-y divide-[rgba(104,93,84,0.25)]">
                           {schemes.map(s => (
-                            <tr key={s.id} className="hover:bg-ash-900/50">
-                              <td className="py-2.5 font-bold font-mono text-ember-400">{s.code}</td>
-                              <td className="py-2.5 text-ash-100 font-semibold">{s.name}</td>
-                              <td className="py-2.5 text-ash-400 max-w-xs truncate">{s.gazette_ref || 'Official Gazette Notice'}</td>
-                              <td className="py-2.5 text-cyan-400 font-mono">{s.official_portal_domain}</td>
-                              <td className="py-2.5 text-emerald-400 font-medium">{s.sector}</td>
+                            <tr key={s.id} className="hover:bg-[#383634]/40">
+                              <td className="py-2.5 font-mono text-[#E5DED2] font-semibold">{s.code}</td>
+                              <td className="py-2.5 text-[#FBF7F4] font-medium">{s.name}</td>
+                              <td className="py-2.5 text-[#A39382] max-w-xs truncate">{s.gazette_ref || 'Official Gazette Notice'}</td>
+                              <td className="py-2.5 text-[#E5DED2] font-mono">{s.official_portal_domain}</td>
+                              <td className="py-2.5 text-[#E5DED2]">{s.sector}</td>
                             </tr>
                           ))}
                         </tbody>
@@ -1452,67 +1604,54 @@
 
             </main>
 
-            {/* Scheme Details Modal (Authentic Gazette & Empirical Data) */}
+            {/* Scheme Details Modal */}
             {selectedScheme && (
-              <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ash-950/85 backdrop-blur-md">
-                <div className="bg-ash-850 border border-ash-700 rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-6 sm:p-8 shadow-2xl space-y-4">
+              <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#232323]/85 backdrop-blur-sm">
+                <div className="card-institutional bg-[#2B2A29] rounded-[14px] w-full max-w-2xl max-h-[90vh] overflow-y-auto p-6 sm:p-8 space-y-4">
                   <div className="flex items-start justify-between">
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="text-[10px] font-extrabold px-2 py-0.5 rounded bg-ash-900 text-ember-400 border border-ash-700 font-mono">{selectedScheme.code}</span>
-                        <span className="text-[10px] text-emerald-400 font-bold bg-emerald-950 px-2 py-0.5 rounded border border-emerald-800">{selectedScheme.sector}</span>
+                        <span className="text-[10px] font-mono px-2 py-0.5 rounded-[4px] bg-[#383634] text-[#E5DED2] border border-[rgba(104,93,84,0.45)]">{selectedScheme.code}</span>
+                        <span className="text-[10px] text-[#E5DED2] bg-[#383634] px-2 py-0.5 rounded-[4px] border border-[rgba(104,93,84,0.45)]">{selectedScheme.sector}</span>
                       </div>
-                      <h2 className="text-xl font-extrabold text-white mt-1.5">{selectedScheme.name}</h2>
+                      <h2 className="text-lg font-semibold text-[#FBF7F4] mt-1.5">{selectedScheme.name}</h2>
                       {selectedScheme.hindi_name && (
-                        <p className="text-sm text-amber-300 font-sans">{selectedScheme.hindi_name}</p>
+                        <p className="text-xs text-[#A39382]">{selectedScheme.hindi_name}</p>
                       )}
                     </div>
-                    <button onClick={() => setSelectedScheme(null)} className="text-ash-400 hover:text-white font-bold p-1">✕</button>
+                    <button onClick={() => setSelectedScheme(null)} className="text-[#A39382] hover:text-[#FBF7F4] font-medium p-1">✕</button>
                   </div>
 
-                  <p className="text-xs text-ash-200 bg-ash-900 p-4 rounded-xl border border-ash-700 leading-relaxed">
+                  <p className="text-xs text-[#E5DED2] bg-[#383634]/60 p-4 rounded-[10px] border border-[rgba(104,93,84,0.45)] leading-relaxed">
                     {selectedScheme.description}
                   </p>
 
-                  {/* Gazette Citation & Open Data API */}
-                  <div className="text-xs bg-ash-900 p-4 rounded-xl border border-ash-700 space-y-2">
+                  <div className="text-xs bg-[#383634]/60 p-4 rounded-[10px] border border-[rgba(104,93,84,0.45)] space-y-2">
                     <div>
-                      <span className="text-ash-400 block text-[10px] uppercase font-bold">Official Gazette Citation / PIB PRID:</span>
-                      <span className="text-amber-300 font-mono text-[11px]">{selectedScheme.gazette_ref || 'Official Ministry Gazette Notification'}</span>
+                      <span className="text-[#A39382] block text-[10px] uppercase tracking-[0.08em] font-medium">Official Gazette Citation / PIB PRID:</span>
+                      <span className="text-[#E5DED2] font-mono text-[11px]">{selectedScheme.gazette_ref || 'Official Ministry Gazette Notification'}</span>
                     </div>
                     {selectedScheme.open_data_api_url && (
                       <div>
-                        <span className="text-ash-400 block text-[10px] uppercase font-bold">Open Government Data API Endpoint:</span>
-                        <span className="text-cyan-400 font-mono text-[11px] truncate block">{selectedScheme.open_data_api_url}</span>
+                        <span className="text-[#A39382] block text-[10px] uppercase tracking-[0.08em] font-medium">Open Government Data API Endpoint:</span>
+                        <span className="text-[#E5DED2] font-mono text-[11px] truncate block">{selectedScheme.open_data_api_url}</span>
                       </div>
                     )}
                     {selectedScheme.official_portal_domain && (
                       <div>
-                        <span className="text-ash-400 block text-[10px] uppercase font-bold">Official Government Domain:</span>
-                        <span className="text-emerald-400 font-mono text-[11px]">https://{selectedScheme.official_portal_domain}</span>
+                        <span className="text-[#A39382] block text-[10px] uppercase tracking-[0.08em] font-medium">Official Government Domain:</span>
+                        <span className="text-[#E5DED2] font-mono text-[11px]">https://{selectedScheme.official_portal_domain}</span>
                       </div>
                     )}
                   </div>
 
-                  {/* Empirical Ground Metrics (Sehore) */}
-                  {selectedScheme.empirical_data_json && selectedScheme.empirical_data_json !== '{}' && (
-                    <div className="text-xs bg-ash-900/80 p-4 rounded-xl border border-ember-600/30 space-y-1.5">
-                      <span className="text-[10px] font-extrabold text-amber-400 uppercase tracking-wider block">
-                        Sehore District Empirical Ground Telemetry:
-                      </span>
-                      <pre className="text-[11px] font-mono text-ash-300 overflow-x-auto p-2 bg-ash-950 rounded-lg">
-                        {JSON.stringify(JSON.parse(selectedScheme.empirical_data_json), null, 2)}
-                      </pre>
-                    </div>
-                  )}
-
-                  <div className="flex justify-end gap-2 pt-3 border-t border-ash-700">
+                  <div className="flex justify-end gap-2 pt-3 border-t border-[rgba(104,93,84,0.45)]">
                     {selectedScheme.application_url && (
-                      <a href={selectedScheme.application_url} target="_blank" rel="noreferrer" className="px-4 py-2 rounded-xl bg-gradient-to-r from-ember-600 to-amber-600 text-white text-xs font-bold hover:from-ember-500">
+                      <a href={selectedScheme.application_url} target="_blank" rel="noreferrer" className="px-3.5 py-2 rounded-[10px] border border-[#A39382]/70 text-[#E5DED2] hover:bg-[#E5DED2]/10 text-xs font-semibold">
                         Visit Official Portal ↗
                       </a>
                     )}
-                    <button onClick={() => setSelectedScheme(null)} className="px-4 py-2 rounded-xl bg-ash-800 text-ash-200 text-xs font-semibold">
+                    <button onClick={() => setSelectedScheme(null)} className="px-3.5 py-2 rounded-[10px] bg-[#383634] text-[#E5DED2] text-xs font-medium hover:text-[#FBF7F4]">
                       Close
                     </button>
                   </div>
@@ -1522,41 +1661,41 @@
 
             {/* Edge Policy Citation Modal */}
             {selectedEdgeData && (
-              <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ash-950/85 backdrop-blur-md">
-                <div className="bg-ash-850 border border-ash-700 rounded-3xl w-full max-w-lg p-6 shadow-2xl space-y-4">
-                  <div className="flex items-center justify-between border-b border-ash-700 pb-3">
-                    <span className="text-xs font-extrabold text-amber-400 uppercase tracking-wider">
+              <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#232323]/85 backdrop-blur-sm">
+                <div className="card-institutional bg-[#2B2A29] rounded-[14px] w-full max-w-lg p-6 space-y-4">
+                  <div className="flex items-center justify-between border-b border-[rgba(104,93,84,0.45)] pb-3">
+                    <span className="text-xs uppercase tracking-[0.08em] text-[#A39382] font-medium">
                       Convergence Relationship & Policy Citation
                     </span>
-                    <button onClick={() => setSelectedEdgeData(null)} className="text-ash-400 hover:text-white font-bold">✕</button>
+                    <button onClick={() => setSelectedEdgeData(null)} className="text-[#A39382] hover:text-[#FBF7F4]">✕</button>
                   </div>
 
                   <div className="space-y-3 text-xs">
                     <div>
-                      <span className="text-ash-400 font-bold block">Relationship Type:</span>
-                      <span className="text-emerald-400 font-extrabold text-sm">{selectedEdgeData.relationship} (Synergy: {(selectedEdgeData.synergy_score * 100).toFixed(0)}%)</span>
+                      <span className="text-[#A39382] block mb-0.5">Relationship Type:</span>
+                      <span className="text-[#E5DED2] font-semibold text-sm">{selectedEdgeData.relationship} (Synergy: {(selectedEdgeData.synergy_score * 100).toFixed(0)}%)</span>
                     </div>
 
                     <div>
-                      <span className="text-ash-400 font-bold block">Inter-Ministerial Convergence Policy Directive:</span>
-                      <p className="text-amber-300 font-mono text-[11px] bg-ash-900 p-2.5 rounded-lg border border-ash-700 leading-relaxed">
+                      <span className="text-[#A39382] block mb-0.5">Inter-Ministerial Convergence Directive:</span>
+                      <p className="text-[#E5DED2] font-mono text-[11px] bg-[#383634] p-2.5 rounded-[8px] border border-[rgba(104,93,84,0.45)] leading-relaxed">
                         {selectedEdgeData.policy_citation || 'Ministry of Rural Development & Agriculture Joint Convergence Directives'}
                       </p>
                     </div>
 
                     <div>
-                      <span className="text-ash-400 font-bold block">Operational Rationale:</span>
-                      <p className="text-ash-200 leading-relaxed">{selectedEdgeData.reason}</p>
+                      <span className="text-[#A39382] block mb-0.5">Operational Rationale:</span>
+                      <p className="text-[#E5DED2] leading-relaxed">{selectedEdgeData.reason}</p>
                     </div>
 
                     <div>
-                      <span className="text-ash-400 font-bold block">Joint Implementation SOP:</span>
-                      <p className="text-ash-300 leading-relaxed bg-ash-900/60 p-2.5 rounded-lg border border-ash-800">{selectedEdgeData.sop}</p>
+                      <span className="text-[#A39382] block mb-0.5">Joint Implementation SOP:</span>
+                      <p className="text-[#E5DED2] leading-relaxed bg-[#383634]/60 p-2.5 rounded-[8px] border border-[rgba(104,93,84,0.3)]">{selectedEdgeData.sop}</p>
                     </div>
                   </div>
 
-                  <div className="flex justify-end pt-2 border-t border-ash-700">
-                    <button onClick={() => setSelectedEdgeData(null)} className="px-4 py-2 rounded-xl bg-ash-800 text-ash-200 text-xs font-semibold">
+                  <div className="flex justify-end pt-2 border-t border-[rgba(104,93,84,0.45)]">
+                    <button onClick={() => setSelectedEdgeData(null)} className="px-3.5 py-2 rounded-[10px] bg-[#383634] text-[#E5DED2] text-xs font-medium hover:text-[#FBF7F4]">
                       Close
                     </button>
                   </div>
@@ -1564,14 +1703,14 @@
               </div>
             )}
 
-            {/* Footer */}
-            <footer className="border-t border-ash-800 bg-ash-950 py-6 mt-12 text-ash-500 text-xs">
+            {/* Institutional Footer */}
+            <footer className="border-t border-[rgba(104,93,84,0.45)] bg-[#232323] py-6 mt-12 text-[#A39382] text-xs">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-ember-500" />
-                  <span className="font-extrabold text-ash-300">CIVORA • SchemeConnect AI | SEG-6 Final Deliverable</span>
+                  <span className="w-2 h-2 rounded-full bg-[#E5DED2]" />
+                  <span className="font-semibold text-[#E5DED2]">CIVORA • SchemeConnect AI | SEG-6 Final Deliverable</span>
                 </div>
-                <div className="text-ash-400 font-medium">
+                <div className="text-[#A39382]">
                   Team: Aryan Lohri, Abhiraj Kumar, Milan Kohli, Kamal Gangwar, Arsalan
                 </div>
               </div>
