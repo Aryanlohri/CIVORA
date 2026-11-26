@@ -1,0 +1,151 @@
+/**
+ * CIVORA: SchemeConnect AI - Design Tokens
+ * Palette Specification (from User Swatches):
+ * - Milk:     #FBF7F4 (Porcelain / Soft Ivory text & highlights)
+ * - Oat:      #E5DED2 (Warm Sand / Primary Action Accent / Key Figures)
+ * - Taupe:    #A39382 (Earthy Accent / Active Indicators / Section Headers)
+ * - Mocha:    #685D54 (Deep Umber / Structural Borders & Dividers)
+ * - Charcoal: #232323 (Rich Dark Canvas Background & Elevated Surfaces)
+ *
+ * Design Architecture:
+ * - 60/30/10 Rule: 60% Charcoal Canvas (#232323), 30% Mocha/Charcoal Surfaces & Oat/Milk Text, 10% Oat/Taupe Accent.
+ * - Exactly one solid-filled primary button per screen ("Download Official PDF Report").
+ * - Radius: 14px for cards/containers, 10px for interactive controls (buttons, inputs, selects).
+ */
+
+:root {
+  /* Swatch Colors */
+  --milk: #FBF7F4;
+  --oat: #E5DED2;
+  --taupe: #A39382;
+  --mocha: #685D54;
+  --charcoal: #232323;
+
+  /* 60% Canvas & Base Ground */
+  --bg: #232323;                      /* Charcoal */
+  
+  /* 30% Surfaces & Structural Layers */
+  --surface: #2B2A29;                 /* Elevated Charcoal */
+  --surface-hover: #323130;
+  --elevated: #383634;                 /* Interactive Control Background */
+  --elevated-hover: #403E3C;
+  
+  /* Borders & Dividers */
+  --border: rgba(104, 93, 84, 0.45);  /* Mocha subtle border */
+  --border-subtle: rgba(251, 247, 244, 0.05);
+  --border-strong: #685D54;           /* Mocha strong border */
+  --border-accent: rgba(163, 147, 130, 0.45); /* Taupe accent border */
+  
+  /* Typography & Information Hierarchy */
+  --text: #FBF7F4;                    /* Milk (Headings & crisp primary text) */
+  --text-2: #E5DED2;                  /* Oat (Body text & secondary figures) */
+  --text-muted: #A39382;              /* Taupe (Section labels & muted metadata) */
+  
+  /* 10% Brand Accent (Primary Actions, Active States, Selected States) */
+  --accent: #E5DED2;                  /* Oat (Primary high-contrast button & highlight) */
+  --accent-taupe: #A39382;            /* Taupe (Secondary accent) */
+  --accent-soft: rgba(229, 222, 210, 0.12);
+  --accent-hover: #FBF7F4;            /* Milk hover */
+  --accent-hairline: rgba(163, 147, 130, 0.35);
+  
+  /* Key Figures & Numbers */
+  --sand: #E5DED2;                    /* Oat for key aggregate metrics */
+  --figure-light: #FBF7F4;            /* Milk for primary digits */
+  
+  /* Status Indicators (Strictly for system status: FastAPI Online, Verified) */
+  --success: #6FCF97;
+  --success-soft: rgba(111, 207, 151, 0.12);
+  
+  /* Radii */
+  --radius: 14px;
+  --radius-sm: 10px;
+  --radius-xs: 6px;
+  
+  /* Depth & Atmospheric Lighting */
+  --card-gradient: linear-gradient(180deg, #2B2A29 0%, #232323 100%);
+  --card-highlight: inset 0 1px 0 rgba(251, 247, 244, 0.06);
+  --card-highlight-hover: inset 0 1px 0 rgba(251, 247, 244, 0.10);
+  --hero-glow: radial-gradient(600px at 20% 0%, rgba(163, 147, 130, 0.09), transparent);
+  
+  /* Animation Timing */
+  --transition-fast: 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-base: 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Institutional Card Surfaces */
+.card-institutional {
+  background: var(--card-gradient);
+  border: 1px solid var(--border);
+  box-shadow: var(--card-highlight);
+  border-radius: var(--radius);
+  transition: transform var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.card-institutional-hover:hover {
+  transform: translateY(-1.5px);
+  border-color: rgba(163, 147, 130, 0.35);
+  box-shadow: var(--card-highlight-hover), 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+
+/* Selected Objective Card: 1px accent border at ~40% opacity with a soft glow, no thick bright outline */
+.card-objective-selected {
+  background: var(--card-gradient);
+  border: 1px solid var(--border-accent) !important;
+  box-shadow: var(--card-highlight), 0 0 20px rgba(163, 147, 130, 0.12) !important;
+  border-radius: var(--radius);
+}
+
+/* Standard Inputs & Controls (Consistent 10px radius, 40px height) */
+.control-field {
+  height: 40px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background-color: var(--elevated);
+  color: var(--text);
+  font-size: 0.75rem; /* 12px */
+  transition: border-color var(--transition-fast);
+}
+
+.control-field:focus {
+  border-color: var(--border-accent);
+  outline: none;
+}
+
+/* Section Label Styling */
+.section-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* Number Count-Up Display */
+.metric-sand {
+  color: var(--sand);
+  font-feature-settings: "tnum" 1, "zero" 1;
+}
+
+/* Skeleton Loading Animation */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton-box {
+  background: linear-gradient(90deg, #2B2A29 25%, #383634 50%, #2B2A29 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.8s infinite ease-in-out;
+  border-radius: var(--radius-sm);
+}
+
+/* Accessibility: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+    transform: none !important;
+  }
+}
