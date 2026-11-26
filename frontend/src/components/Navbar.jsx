@@ -1,93 +1,89 @@
 import React from 'react';
 import { 
-  Layers, Search, CheckCircle, Network, MapPin, 
-  Settings, Zap, ShieldCheck, FileText, Activity 
+  Layers, Search, Check, Network, MapPin, 
+  Settings, Zap, Shield, Database 
 } from 'lucide-react';
 
 export default function Navbar({ activeTab, setActiveTab, onLaunchDemo, apiOnline }) {
   const navItems = [
-    { id: 'dashboard', label: 'Dashboard', icon: Layers, badge: null },
     { id: 'convergence', label: 'Convergence Studio', icon: Network, badge: 'Core MVP' },
+    { id: 'dashboard', label: 'Executive Dashboard', icon: Layers, badge: null },
     { id: 'database', label: 'Scheme Database', icon: Search, badge: '25 Schemes' },
-    { id: 'eligibility', label: 'Eligibility Checker', icon: CheckCircle, badge: null },
-    { id: 'district', label: 'District (Sehore, MP)', icon: MapPin, badge: 'Pilot' },
+    { id: 'eligibility', label: 'Eligibility Checker', icon: Check, badge: null },
+    { id: 'district', label: 'District Pilot (Sehore)', icon: MapPin, badge: null },
     { id: 'admin', label: 'Admin Panel', icon: Settings, badge: null }
   ];
 
   return (
-    <header className="border-b border-slate-800 bg-slate-900/90 backdrop-blur-md sticky top-0 z-50">
-      {/* Top National Strip */}
-      <div className="h-1 w-full bg-gradient-to-r from-amber-500 via-white to-emerald-600" />
+    <header className="border-b border-[rgba(104,93,84,0.45)] bg-[#232323]/95 backdrop-blur-md sticky top-0 z-50">
+      {/* 1px Taupe Accent Hairline at ~35% Opacity */}
+      <div className="h-[1px] w-full bg-[#A39382]/35" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           
           {/* Logo & Brand */}
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-800 flex items-center justify-center shadow-lg shadow-blue-500/20 border border-blue-400/30">
-              <Network className="w-5 h-5 text-white" />
+            <div className="w-9 h-9 rounded-[10px] bg-[#383634] border border-[#685D54]/70 flex items-center justify-center text-[#E5DED2] shrink-0">
+              <Network className="w-4 h-4" strokeWidth={1.5} />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-extrabold text-xl tracking-tight bg-gradient-to-r from-blue-400 via-indigo-200 to-emerald-400 bg-clip-text text-transparent">
-                  SchemeConnect AI
+                <span className="font-semibold text-lg tracking-[-0.02em] text-[#FBF7F4]">
+                  CIVORA
                 </span>
-                <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-blue-950 text-blue-400 border border-blue-800 font-mono">
+                <span className="text-xs text-[#A39382] font-normal hidden sm:inline">
+                  • SchemeConnect AI
+                </span>
+                <span className="text-[10px] px-1.5 py-0.5 rounded-[4px] bg-[#383634] text-[#E5DED2] border border-[rgba(104,93,84,0.45)] font-mono">
                   SEG-6
                 </span>
               </div>
-              <p className="text-[11px] text-slate-400 leading-tight">
-                Government Scheme Intelligence & Convergence Engine
+              <p className="text-[11px] text-[#A39382] leading-none mt-0.5">
+                Centralized Scheme Intelligence & Strategic Convergence
               </p>
             </div>
           </div>
 
-          {/* Quick Demo Scenario Trigger */}
-          <div className="hidden lg:flex items-center gap-3">
+          {/* Quick Demo Scenario Trigger & Status */}
+          <div className="flex items-center gap-4">
+            {/* Ghost Button: Sehore Farmer Live Convergence */}
             <button
               onClick={onLaunchDemo}
-              className="flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-semibold shadow-md shadow-emerald-900/40 border border-emerald-400/30 transition-all hover:scale-[1.02] active:scale-[0.98]"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[10px] border border-[#A39382]/70 text-[#E5DED2] bg-transparent hover:bg-[#E5DED2]/10 hover:border-[#E5DED2] text-xs font-medium transition-all"
               title="Launch Live Demonstration: Sehore Agricultural Convergence"
             >
-              <Zap className="w-3.5 h-3.5 text-amber-300 animate-pulse" />
-              <span>⚡ Live Demo: Sehore Farmer Convergence</span>
+              <Zap className="w-3.5 h-3.5 text-[#E5DED2]" strokeWidth={1.5} />
+              <span>Sehore Farmer Live Convergence</span>
             </button>
 
-            {/* API Status Pill */}
-            <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium border ${
-              apiOnline 
-                ? 'bg-emerald-950/60 text-emerald-400 border-emerald-800/60' 
-                : 'bg-amber-950/60 text-amber-400 border-amber-800/60'
-            }`}>
-              <span className={`w-2 h-2 rounded-full ${apiOnline ? 'bg-emerald-500 animate-ping' : 'bg-amber-500'}`} />
-              <span>{apiOnline ? 'Engine Online' : 'Connecting Engine...'}</span>
+            {/* API Status: Small Dot + Text, No Pill Border */}
+            <div className="flex items-center gap-2 text-xs font-mono text-[#E5DED2]">
+              <span className={`w-2 h-2 rounded-full ${apiOnline ? 'bg-[#6FCF97]' : 'bg-[#A39382]'} animate-pulse`} />
+              <span>{apiOnline ? 'FastAPI Online (Port 8000)' : 'Connecting...'}</span>
             </div>
           </div>
         </div>
 
-        {/* Tab Navigation */}
-        <div className="flex space-x-1 overflow-x-auto py-2 scrollbar-none border-t border-slate-800/60">
+        {/* Tab Navigation: Underline-style with Accent Underline, Scrollbar Hidden */}
+        <div className="flex space-x-6 overflow-x-auto scrollbar-none border-t border-[rgba(104,93,84,0.45)]">
           {navItems.map((item) => {
-            const Icon = item.icon;
+            const IconComponent = item.icon;
             const isActive = activeTab === item.id;
             return (
               <button
                 key={item.id}
                 onClick={() => setActiveTab(item.id)}
-                className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-semibold transition-all whitespace-nowrap ${
+                className={`flex items-center gap-2 pb-3 pt-3 text-xs whitespace-nowrap transition-colors border-b-2 -mb-[1px] ${
                   isActive
-                    ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
+                    ? 'border-[#E5DED2] text-[#FBF7F4] font-semibold'
+                    : 'border-transparent text-[#A39382] hover:text-[#E5DED2] font-normal'
                 }`}
               >
-                <Icon className={`w-4 h-4 ${isActive ? 'text-white' : 'text-slate-400'}`} />
+                <IconComponent className={`w-3.5 h-3.5 ${isActive ? 'text-[#E5DED2]' : 'text-[#A39382]'}`} strokeWidth={1.5} />
                 <span>{item.label}</span>
                 {item.badge && (
-                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-bold ${
-                    isActive 
-                      ? 'bg-blue-800 text-blue-100' 
-                      : 'bg-slate-800 text-slate-300 border border-slate-700'
-                  }`}>
+                  <span className="text-[11px] text-[#A39382] font-normal ml-0.5">
                     {item.badge}
                   </span>
                 )}
@@ -95,7 +91,6 @@ export default function Navbar({ activeTab, setActiveTab, onLaunchDemo, apiOnlin
             );
           })}
         </div>
-
       </div>
     </header>
   );
