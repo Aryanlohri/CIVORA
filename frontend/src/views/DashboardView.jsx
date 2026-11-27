@@ -217,42 +217,6 @@ export default function DashboardView({ summaryData, onLaunchDemo, onNavigateTab
 
       </div>
 
-      {/* Team Division & Deliverables Banner */}
-      <div className="bg-slate-900/60 border border-slate-800/80 p-6 rounded-2xl shadow-lg">
-        <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4 flex items-center gap-2">
-          <Users className="w-4 h-4 text-blue-400" />
-          Project Team Structure & Core Deliverables (5 Members)
-        </h3>
-        
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 text-xs">
-          <div className="bg-slate-950/60 border border-slate-800 p-3.5 rounded-xl">
-            <div className="font-bold text-white">Aryan Lohri</div>
-            <div className="text-blue-400 font-medium text-[11px]">Frontend Development</div>
-            <p className="text-slate-400 mt-1 text-[11px]">Unified Dashboard, search & interactive UI</p>
-          </div>
-          <div className="bg-slate-950/60 border border-slate-800 p-3.5 rounded-xl">
-            <div className="font-bold text-white">Abhiraj Kumar</div>
-            <div className="text-blue-400 font-medium text-[11px]">Backend Development</div>
-            <p className="text-slate-400 mt-1 text-[11px]">FastAPI endpoints, REST schemas & security</p>
-          </div>
-          <div className="bg-slate-950/60 border border-emerald-800/60 p-3.5 rounded-xl bg-emerald-950/10">
-            <div className="font-bold text-emerald-400">Milan Kohli</div>
-            <div className="text-emerald-300 font-medium text-[11px]">ML / Data Science</div>
-            <p className="text-slate-400 mt-1 text-[11px]">Convergence engine, synergy logic & conflict detector</p>
-          </div>
-          <div className="bg-slate-950/60 border border-slate-800 p-3.5 rounded-xl">
-            <div className="font-bold text-white">Kamal Gangwar</div>
-            <div className="text-blue-400 font-medium text-[11px]">Database & Data Collection</div>
-            <p className="text-slate-400 mt-1 text-[11px]">25+ verified schemes, PostgreSQL & cleaning</p>
-          </div>
-          <div className="bg-slate-950/60 border border-slate-800 p-3.5 rounded-xl">
-            <div className="font-bold text-white">Arsalan</div>
-            <div className="text-blue-400 font-medium text-[11px]">Visualization & Integration</div>
-            <p className="text-slate-400 mt-1 text-[11px]">Convergence graph, maps & PDF reports</p>
-          </div>
-        </div>
-      </div>
-
     </div>
   );
 }

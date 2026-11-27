@@ -52,7 +52,7 @@
   --sand: #E5DED2;                    /* Oat for key aggregate metrics */
   --figure-light: #FBF7F4;            /* Milk for primary digits */
   
-  /* Status Indicators (Strictly for system status: FastAPI Online, Verified) */
+  /* Status Indicators (Strictly for system status: System Online, Verified) */
   --success: #6FCF97;
   --success-soft: rgba(111, 207, 151, 0.12);
   

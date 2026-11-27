@@ -35,9 +35,6 @@ export default function Navbar({ activeTab, setActiveTab, onLaunchDemo, apiOnlin
                 <span className="text-xs text-[#A39382] font-normal hidden sm:inline">
                   • SchemeConnect AI
                 </span>
-                <span className="text-[10px] px-1.5 py-0.5 rounded-[4px] bg-[#383634] text-[#E5DED2] border border-[rgba(104,93,84,0.45)] font-mono">
-                  SEG-6
-                </span>
               </div>
               <p className="text-[11px] text-[#A39382] leading-none mt-0.5">
                 Centralized Scheme Intelligence & Strategic Convergence
@@ -60,7 +57,7 @@ export default function Navbar({ activeTab, setActiveTab, onLaunchDemo, apiOnlin
             {/* API Status: Small Dot + Text, No Pill Border */}
             <div className="flex items-center gap-2 text-xs font-mono text-[#E5DED2]">
               <span className={`w-2 h-2 rounded-full ${apiOnline ? 'bg-[#6FCF97]' : 'bg-[#A39382]'} animate-pulse`} />
-              <span>{apiOnline ? 'FastAPI Online (Port 8000)' : 'Connecting...'}</span>
+              <span>{apiOnline ? 'System Online' : 'Connecting...'}</span>
             </div>
           </div>
         </div>

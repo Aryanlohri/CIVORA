@@ -1,7 +1,7 @@
 @echo off
 echo =====================================================================
 echo  SchemeConnect AI - Centralized Scheme Intelligence & Convergence
-echo  SEG-6 Final Deliverable | Team: Aryan, Abhiraj, Milan, Kamal, Arsalan
+echo  CIVORA - Centralized Scheme Intelligence & Strategic Convergence
 echo =====================================================================
 echo.
 echo [1/2] Initializing SQLite database and loading 25+ verified schemes...

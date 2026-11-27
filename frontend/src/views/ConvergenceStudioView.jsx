@@ -74,7 +74,7 @@ export default function ConvergenceStudioView({ onSelectScheme, initialObjective
       });
     } catch (err) {
       console.error("PDF download error:", err);
-      alert("Failed to generate PDF. Make sure FastAPI backend is running.");
+      alert("Failed to generate PDF. Please ensure the backend service is running.");
     } finally {
       setDownloadingPdf(false);
     }
