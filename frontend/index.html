@@ -227,7 +227,9 @@
     <script type="text/babel">
       const { useState, useEffect, useRef } = React;
 
-      const API_BASE = 'http://localhost:8000/api';
+      const API_BASE = (window.location.protocol.startsWith('http') && window.location.port === '8000')
+        ? `${window.location.origin}/api`
+        : 'http://localhost:8000/api';
 
       // --- LUCIDE ICONS (Consistent 1.5px stroke width and 16px geometry) ---
       const Icon = ({ name, className = "w-4 h-4" }) => {
@@ -569,9 +571,6 @@
                         <span className="text-xs text-[#A39382] font-normal hidden sm:inline">
                           • SchemeConnect AI
                         </span>
-                        <span className="text-[10px] px-1.5 py-0.5 rounded-[4px] bg-[#383634] text-[#E5DED2] border border-[rgba(104,93,84,0.45)] font-mono">
-                          SEG-6
-                        </span>
                       </div>
                       <p className="text-[11px] text-[#A39382] leading-none mt-0.5">
                         Centralized Scheme Intelligence & Strategic Convergence
@@ -600,7 +599,7 @@
                     {/* Status Indicator: Small Dot + Text, No Pill Border */}
                     <div className="flex items-center gap-2 text-xs font-mono text-[#E5DED2]">
                       <span className={`w-2 h-2 rounded-full ${apiOnline ? 'bg-[#6FCF97]' : 'bg-[#A39382]'} animate-pulse`} />
-                      <span>{apiOnline ? 'FastAPI Online (Port 8000)' : 'Connecting...'}</span>
+                      <span>{apiOnline ? 'System Online' : 'Connecting...'}</span>
                     </div>
                   </div>
                 </div>
@@ -1164,20 +1163,19 @@
 
                   <div className="card-institutional p-6">
                     <span className="text-xs uppercase tracking-[0.08em] text-[#A39382] font-medium block mb-3">
-                      PROJECT SEG-6 TEAM & CORE MODULE ROSTER
+                      STRATEGIC CONVERGENCE ARCHITECTURE
                     </span>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 text-xs">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
                       {[
-                        { name: 'Aryan Lohri', role: 'Frontend Architecture', focus: 'Dashboard & convergence UX' },
-                        { name: 'Abhiraj Kumar', role: 'Backend Engineering', focus: 'FastAPI & schema validation' },
-                        { name: 'Milan Kohli', role: 'Data Science / Logic', focus: 'Convergence scoring algorithms' },
-                        { name: 'Kamal Gangwar', role: 'Database & Registry', focus: 'Gazetted dataset & verification' },
-                        { name: 'Arsalan', role: 'Visualization & Reports', focus: 'Network topology & PDF reports' }
-                      ].map((member, i) => (
-                        <div key={i} className="bg-[#383634]/60 border border-[rgba(104,93,84,0.45)] p-3 rounded-[10px]">
-                          <div className="font-semibold text-[#FBF7F4]">{member.name}</div>
-                          <div className="text-[#E5DED2] text-[11px] font-medium">{member.role}</div>
-                          <p className="text-[#A39382] text-[11px] mt-1">{member.focus}</p>
+                        { pillar: 'Pillar 01 • Liquidity', title: 'Direct Cash Buffer', desc: 'Synchronizes Central & State DBT transfers to eliminate non-institutional debt.' },
+                        { pillar: 'Pillar 02 • Capital', title: 'Productive Assets', desc: 'Bundles micro-irrigation & solar pump subsidies for long-term water security.' },
+                        { pillar: 'Pillar 03 • Shield', title: 'Actuarial Risk Cover', desc: 'Pairs subsidized crop & health insurance against climate and income shocks.' },
+                        { pillar: 'Pillar 04 • Advisory', title: 'Precision Diagnostics', desc: 'Integrates soil health & skill registries to optimize input efficiency.' }
+                      ].map((item, i) => (
+                        <div key={i} className="bg-[#383634]/60 border border-[rgba(104,93,84,0.45)] p-3.5 rounded-[10px]">
+                          <div className="text-[#A39382] font-mono text-[10px] uppercase tracking-wider">{item.pillar}</div>
+                          <div className="font-semibold text-[#FBF7F4] mt-1">{item.title}</div>
+                          <p className="text-[#E5DED2] text-[11px] mt-1 leading-relaxed">{item.desc}</p>
                         </div>
                       ))}
                     </div>
@@ -1708,10 +1706,10 @@
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div className="flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-[#E5DED2]" />
-                  <span className="font-semibold text-[#E5DED2]">CIVORA • SchemeConnect AI | SEG-6 Final Deliverable</span>
+                  <span className="font-semibold text-[#E5DED2]">CIVORA • SchemeConnect AI</span>
                 </div>
                 <div className="text-[#A39382]">
-                  Team: Aryan Lohri, Abhiraj Kumar, Milan Kohli, Kamal Gangwar, Arsalan
+                  Centralized Government Scheme Intelligence &amp; Strategic Convergence Platform
                 </div>
               </div>
             </footer>
